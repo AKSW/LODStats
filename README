@@ -1,0 +1,10 @@
+# apt-get install python-librdf python-virtualenv gcc python-dev
+$ virtualenv $HOME/lodstats-env
+$ cp -r lodstats $HOME/lodstats-env/lib/python2.6/site-packages/lodstats
+$ cp lodstats/lodstats.py $HOME/lodstats-env/bin/lodstats
+$ . $HOME/lodstats-env/bin/activate
+(lodstats-env) $ pip install -r lodstats/pip-install.txt
+(lodstats-env) $ lodstats --help
+Usage: lodstats [options] [-m model.{rdf,nt,...}] file/URI
+[...]
+(lodstats-env) $ lodstats -vp some_rdf_file.nt

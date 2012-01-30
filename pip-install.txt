@@ -1,0 +1,4 @@
+bitarray
+requests
+sparqlwrapper
+
