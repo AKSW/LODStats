@@ -1,3 +1,9 @@
+LODStats uses Redland (librdf) to access files adhering to the Resource
+Description Framework (RDF) and compute various configurable statistics
+about them.
+Extending LODStats with custom statistics is easily accomplished.
+
+Installation instructions:
 # apt-get install python-librdf python-virtualenv gcc python-dev \
    python-setuptools
 $ virtualenv $HOME/lodstats-env
