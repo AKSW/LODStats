@@ -1,0 +1,21 @@
+# generic
+*.pyc
+*.pyo
+*.swp
+*.swo
+.DS_Store
+*.orig
+.project
+.pydevproject
+
+# other
+pip-requirements-local.txt
+migrate/*
+build/*
+tmp/*
+dist/*
+lodstats.egg-info/*
+*.ini
+.noseids
+*~
+pyenv/
