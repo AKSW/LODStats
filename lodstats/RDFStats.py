@@ -28,8 +28,8 @@ import tempfile
 import urllib2
 import requests # FIXME: kick out urllib2 and only use requests
 import warnings
-import stats as custom_stats
-import util
+import lodstats.stats as custom_stats
+import lodstats.util as util
 import exceptions
 
 class RDFStats(object):

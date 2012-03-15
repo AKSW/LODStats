@@ -18,18 +18,18 @@ along with LODStats.  If not, see <http://www.gnu.org/licenses/>.
 """
 import RDF
 from RDFStatInterface import RDFStatInterface
-from ..util.namespace import ns_xs, ns_void, ns_rdf, ns_stats, ns_qb
+from lodstats.util.namespace import ns_xs, ns_void, ns_rdf, ns_stats, ns_qb
 
-class PropertyHierarchy(RDFStatInterface):
-    """gather hierarchy of properties seen"""
-    # FIXME: hier wie bei class hierarchy
+class ClassHierarchy(RDFStatInterface):
+    """gather hierarchy of classes seen"""
+    
     def __init__(self, results):
-        super(PropertyHierarchy, self).__init__(results)
+        super(ClassHierarchy, self).__init__(results)
     
     def count(self, s, p, o, s_blank, o_l, o_blank, statement):
-        if p == 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' and o == 'http://www.w3.org/1999/02/22-rdf-syntax-ns#Property':
+        if p == 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' and o == 'http://www.w3.org/2000/01/rdf-schema#Class':
             self.results[s] = 0
-        if p == 'http://www.w3.org/2000/01/rdf-schema#subPropertyOf':
+        if p == 'http://www.w3.org/2000/01/rdf-schema#subClassOf':
             if self.results.has_key(o):
                 self.results[s] = self.results[o] + 1
             else:

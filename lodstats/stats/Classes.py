@@ -18,7 +18,7 @@ along with LODStats.  If not, see <http://www.gnu.org/licenses/>.
 """
 from RDFStatInterface import RDFStatInterface
 import RDF
-from ..util.namespace import ns_xs, ns_void
+from lodstats.util.namespace import ns_xs, ns_void
 import distincthelper as dh
 
 class Classes(RDFStatInterface):

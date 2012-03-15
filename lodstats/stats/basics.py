@@ -19,7 +19,7 @@ along with LODStats.  If not, see <http://www.gnu.org/licenses/>.
 from RDFStatInterface import RDFStatInterface
 import RDF
 import distincthelper as dh
-from ..util.namespace import ns_xs, ns_void
+from lodstats.util.namespace import ns_xs, ns_void
 
 class Entities(RDFStatInterface):
     """count entities (triple has an URI as subject, distinct)"""

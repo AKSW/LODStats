@@ -19,8 +19,8 @@ along with LODStats.  If not, see <http://www.gnu.org/licenses/>.
 import RDF
 from os.path import realpath, dirname
 from RDFStatInterface import RDFStatInterface
-from ..util.format import get_parser
-from ..util.namespace import ns_xs, ns_void, ns_rdf, ns_stats, ns_qb
+from lodstats.util.format import get_parser
+from lodstats.util.namespace import ns_xs, ns_void, ns_rdf, ns_stats, ns_qb
 
 class ParsedVocabulary(RDFStatInterface):
     """count usage of everything that #isDefinedBy some vocabulary"""

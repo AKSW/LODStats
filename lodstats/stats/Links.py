@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with LODStats.  If not, see <http://www.gnu.org/licenses/>.
 """
 from RDFStatInterface import RDFStatInterface
-from ..util.namespace import get_namespace
+from lodstats.util.namespace import get_namespace
 
 class Links(RDFStatInterface):
     """count links (object vocabulary != subject vocabulary)"""

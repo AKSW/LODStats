@@ -20,7 +20,7 @@ import hashlib
 import RDF
 from LimitedSizeDict import LimitedSizeDict
 from RDFStatInterface import RDFStatInterface
-from ..util.namespace import ns_xs, ns_void
+from lodstats.util.namespace import ns_xs, ns_void
 import distincthelper as dh
 
 class PropertiesDefined(RDFStatInterface):

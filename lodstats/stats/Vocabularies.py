@@ -18,7 +18,7 @@ along with LODStats.  If not, see <http://www.gnu.org/licenses/>.
 """
 import RDF
 from RDFStatInterface import RDFStatInterface
-from ..util.namespace import get_namespace, ns_void
+from lodstats.util.namespace import get_namespace, ns_void
 
 class Vocabularies(RDFStatInterface):
     """count usage of vocabularies"""
