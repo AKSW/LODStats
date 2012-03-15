@@ -8,7 +8,7 @@ Installation instructions:
    python-setuptools
 $ virtualenv $HOME/lodstats-env
 $ . $HOME/lodstats-env/bin/activate
-$ cd lodstats
+(lodstats-env) $ cd lodstats
 (lodstats-env) $ python setup.py install
 (lodstats-env) $ lodstats --help
 Usage: lodstats [options] [-m model.{rdf,nt,...}] file/URI
