@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 setup(name='lodstats',
-      version='0.3',
+      version='0.3.1',
       author = 'Jan Demter',
       author_email = 'jan@demter.de',
       url = 'http://aksw.org/projects/LODStats',
