@@ -365,7 +365,7 @@ class RDFStats(object):
         dataset = RDF.Uri(self.url)
         dataset_ns = RDF.NS("%s#" % self.url)
         # we're talking about datasets here
-        void_model.append(RDF.Statement(dataset,ns_rdf.type,ns_void.dataset))
+        void_model.append(RDF.Statement(dataset,ns_rdf.type,ns_void.Dataset))
         
         # basic stuff: no of triples, ...
         result_node = RDF.Node(literal=str(self.no_of_statements), datatype=ns_xs.integer.uri)
