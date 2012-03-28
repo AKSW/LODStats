@@ -34,10 +34,16 @@ def get_namespace(uri):
     for sep in ['#', ':', '/']:
         split_uri = uri_no_http.rsplit(sep, 1)
         if len(split_uri) == 2:
-            # base_uri is uri minus non-namepsace-part and separator
-            return uri[:-(len(split_uri[1])+1)]
+            # base_uri is uri minus non-namepsace-part
+            # and separator if it's not a slash
+            if sep != '/':
+                return uri[:-(len(split_uri[1])+1)]
+            else:
+                return uri[:-len(split_uri[1])]
     return None
     
 def remove_namespace(uri):
     namespace = get_namespace(uri)
+    if namespace.endswith('/'):
+        return uri[len(namespace):]
     return uri[len(namespace)+1:]
