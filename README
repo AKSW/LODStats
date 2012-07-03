@@ -6,7 +6,7 @@ Extending LODStats with custom statistics is easily accomplished.
 Installation instructions:
 # apt-get install python-librdf python-virtualenv gcc python-dev \
    python-setuptools
-$ virtualenv $HOME/lodstats-env
+$ virtualenv --system-site-packages $HOME/lodstats-env
 $ . $HOME/lodstats-env/bin/activate
 (lodstats-env) $ cd lodstats
 (lodstats-env) $ python setup.py install

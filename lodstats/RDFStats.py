@@ -31,16 +31,20 @@ import warnings
 import lodstats.stats as custom_stats
 import lodstats.util as util
 import exceptions
+import logging
+
+logger = logging.getLogger("lodstats")
 
 class RDFStats(object):
     """Get some interesting numbers from RDFish resources"""
-    def __init__(self, rdfurl, format = None, do_custom_stats = True,
+    def __init__(self, rdfurl=None, format = None, do_custom_stats = True,
             compression = None, callback_delay_seconds = 2, stats=None,
             new_stats=None):
         self.url = rdfurl
         self.tempurl = None
-        self.lowerurl = self.url.lower()
-        self.format = format
+        if self.url is not None:
+            self.lowerurl = self.url.lower()
+        self.format = self.general_format = format
         self.parser = None
         self.stream = None
         self.no_of_statements = 0
@@ -53,7 +57,7 @@ class RDFStats(object):
             self.stats_results = custom_stats.init_stats(stats)
         if new_stats:
             custom_stats.stats_to_do.append(new_stats[0](self.stats_results, new_stats[1]))
-        self.compression = compression
+        self.compression = self.general_compression = compression
         self.warnings = 0
         self.last_warning = None
         self.start_time = None
@@ -64,6 +68,9 @@ class RDFStats(object):
         self.bytes_download = 0
         # bytes after decompression
         self.bytes = 0
+        # callback functions
+        self.callback_parse = None
+        self.callback_stats = None
         # when last callback was done
         self.last_callback = None
         self.callback_delay = callback_delay_seconds
@@ -78,9 +85,41 @@ class RDFStats(object):
     
     """file extensions that will be processed"""
     rdf_extensions = ('.nt', '.rdf', '.ttl', '.n3', '.nq', '.owl', '.rdfs')
+
+    def next_file(self, rdfurl, format=None, compression=None):
+        """process another file/URL, compression and type currently have
+            to be the same for all processed files"""
+        logger.debug("next_file(%s, %s, %s)" % (rdfurl, format, compression))
+        self.url = rdfurl
+        self.tempurl = None
+        self.lowerurl = self.url.lower()
+        if self.general_format is None and format is not None:
+            self.format = format
+        else:
+            self.format = self.general_format
+        if self.general_compression is None and compression is not None:
+            self.compression = compression
+        else:
+            self.compression = self.general_compression
+    
+    def sitemap(self, sitemapurl, callback_parse=None, callback_stats=None):
+        """process datadumps from a sitemap.xml as per http://XXX"""
+        logger.debug("processing sitemap %s" % self.url)
+        datadumps = util.format.parse_sitemap(sitemapurl)
+        
+        if callback_parse is None:
+            callback_parse = self.callback_parse
+        if callback_stats is None:
+            callback_stats = self.callback_stats
+        
+        for datadump in datadumps:
+            self.next_file(datadump)
+            self.parse(callback_parse)
+            self.do_stats(callback_stats)
     
     def get_compression(self):
         """guess compression of resource"""
+        logger.debug("get_compression()")
         if self.compression is None:
             # archives first
             if any(self.lowerurl.endswith(x) for x in ('.tgz', '.tar.gz', '.tar.bz2')):
@@ -95,6 +134,7 @@ class RDFStats(object):
                 self.compression = 'bz2'
     
     def get_format(self):
+        logger.debug("get_format()")
         # guess format
         if self.format is None:
             self.format = util.format.get_format(self.lowerurl)
@@ -103,9 +143,13 @@ class RDFStats(object):
     
     def parse(self, callback_fun = None, if_modified_since = None):
         """parse to redland::Stream"""
+        logger.debug("parsing url %s, format %s" % (self.url, self.format))
         self.start_time = datetime.datetime.now()
+        self.callback_parse = callback_fun
         if self.format == 'sparql':
             # FIXME: check availability and support for count() of SPARQL endpoint here
+            return
+        if self.format == 'sitemap':
             return
         # local/remote, decompress
         self.get_compression()
@@ -197,8 +241,11 @@ class RDFStats(object):
         self.parse_tempurl()
     
     def parse_tempurl(self):
+        logger.debug("parse_tempurl()")
         self.get_format()
         if self.format == 'sparql':
+            return
+        if self.format == 'sitemap':
             return
         self.stream = self.parser.parse_as_stream(self.tempurl)
 
@@ -208,8 +255,13 @@ class RDFStats(object):
     
     def do_stats(self, callback_fun = None):
         """do the real work"""
+        logger.debug("do_stats()")
+        self.callback_stats = callback_fun
         if self.compression in ('tar', 'zip'):
             self.do_archive_stats(callback_fun)
+        if self.format == 'sitemap':
+            self.sitemap(self.url)
+            return
         if self.format != 'sparql':
             with warnings.catch_warnings():
                 warnings.showwarning = self.warn_handler
@@ -237,12 +289,14 @@ class RDFStats(object):
     
     def do_archive_stats(self, callback_fun):
         """do stats for archives"""
+        logger.debug("do_archive_stats()")
         if self.compression == 'tar':
             for tar_entry in self.file_entries:
                 if tar_entry.isfile():
                     # skip files with unknown extensions unless format is known
                     if self.format is None and not any(tar_entry.name.lower().endswith(x) for x in self.rdf_extensions):
                         continue
+                    supplied_format = self.format
                     tar_content = self.archive.extractfile(tar_entry)
                     self.tempfile = tempfile.NamedTemporaryFile(prefix='lodstats_tar_entry')
                     for data in tar_content:
@@ -260,6 +314,7 @@ class RDFStats(object):
                     self.do_stats(callback_fun)
                     self.tempfile.close()
                     self.compression = 'tar'
+                    self.format = supplied_format
                     self.files_handled += 1
             if self.files_handled == 0:
                 raise Exception, "no RDF-ish files found in archive"
@@ -272,6 +327,7 @@ class RDFStats(object):
                     # skip files with unknown extensions unless format is known
                     if self.format is None and not any(zip_entry.filename.lower().endswith(x) for x in self.rdf_extensions):
                         continue
+                    supplied_format = self.format
                     zip_content = self.archive.open(zip_entry)
                     self.tempfile = tempfile.NamedTemporaryFile(prefix='lodstats_zip_entry')
                     for data in zip_content:
@@ -289,6 +345,7 @@ class RDFStats(object):
                     self.do_stats(callback_fun)
                     self.tempfile.close()
                     self.compression = 'zip'
+                    self.format = supplied_format
                     self.files_handled += 1
             if self.files_handled == 0:
                 raise Exception, "no RDF-ish files found in archive"
@@ -299,11 +356,14 @@ class RDFStats(object):
     
     def do_sparql_stats(self):
         """do stats via SPARQL"""
+        logger.debug("do_sparql_stats()")
         from SPARQLWrapper import SPARQLWrapper, JSON
         sparql = SPARQLWrapper(self.url)
         sparql.setQuery("SELECT (count(*) AS ?triples) WHERE { ?s ?p ?o }")
         sparql.setReturnFormat(JSON)
         results = sparql.query().convert()
+        if not isinstance(results, dict):
+            raise Exception, "unknown response content type"
         self.no_of_statements = int(results['results']['bindings'][0]['triples']['value'])
         
         custom_stats.run_stats_sparql(self.url)

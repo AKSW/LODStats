@@ -17,8 +17,11 @@ You should have received a copy of the GNU General Public License
 along with LODStats.  If not, see <http://www.gnu.org/licenses/>.
 """
 import RDF
+import logging
+logger = logging.getLogger("lodstats.format")
 
 def get_format(url):
+    logger.debug("get_format(%s)" % url)
     lowerurl = url.lower()
     # guess serialization format from URL
     if lowerurl.endswith("ttl"):
@@ -33,6 +36,8 @@ def get_format(url):
         format = 'nq'
     elif any(lowerurl.endswith(x) for x in ('sparql', 'sparql/')):
         format = 'sparql'
+    elif lowerurl.endswith('sitemap.xml'):
+        format = 'sitemap'
     else:
         raise NameError("could not guess format")
     return format
@@ -50,7 +55,28 @@ def get_parser(url, format=None):
     elif format == 'rdf':
         parser = RDF.Parser(name="rdfxml")
     elif format == 'sparql':
-        pass
+        return None
+    elif format == 'sitemap':
+        return None
     else:
         raise NameError("unsupported format")
     return parser
+
+def parse_sitemap(url):
+    from xml.etree import ElementTree as etree
+    from cStringIO import StringIO
+    import requests
+    
+    sitemap = requests.get(url)
+    stringio = StringIO(sitemap.text)
+    
+    tree = etree.parse(stringio)
+    context = tree.getiterator()
+
+    datadumps = []
+    
+    for elem in context:
+        if elem.tag == '{http://sw.deri.org/2007/07/sitemapextension/scschema.xsd}dataDumpLocation':
+            datadumps.append(elem.text)
+    
+    return datadumps

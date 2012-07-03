@@ -31,7 +31,7 @@ class Classes(RDFStatInterface):
     def count(self, s, p, o, s_blank, o_l, o_blank, statement):
         # mimic make-void, count every class usage
         count_it = False
-        if p == 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' and statement.predicate.is_resource():
+        if p == 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' and statement.object.is_resource():
             self.histogram[o] = self.histogram.get(o, 0) + 1
             count_it = True
         # distinct per subject
