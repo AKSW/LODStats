@@ -4,14 +4,35 @@ about them.
 Extending LODStats with custom statistics is easily accomplished.
 
 Installation instructions:
-# apt-get install python-librdf python-virtualenv gcc python-dev \
-   python-setuptools
-$ virtualenv --system-site-packages $HOME/lodstats-env
-$ . $HOME/lodstats-env/bin/activate
-(lodstats-env) $ cd lodstats
-(lodstats-env) $ python setup.py install
-(lodstats-env) $ lodstats --help
+
+sudo apt-get update
+sudo apt-get install python-pip python-dev librdf0-dev python-librdf
+sudo apt-get install git raptor2-utils
+
+sudo pip install virtualenvwrapper
+mkdir $HOME/.virtualenvs
+mkdir $HOME/Devel
+
+echo '' >> $HOME/.bashrc
+echo '#python virtualenvwrapper configuration' >> $HOME/.bashrc 
+echo 'export WORKON_HOME=$HOME/.virtualenvs' >> $HOME/.bashrc
+echo 'export PROJECT_HOME=$HOME/Devel' >> $HOME/.bashrc
+echo 'source /usr/local/bin/virtualenvwrapper.sh' >> $HOME/.bashrc
+
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Devel
+source /usr/local/bin/virtualenvwrapper.sh
+
+mkvirtualenv --system-site-packages lodstats
+cdvirtualenv
+mkdir src
+cd src/
+git clone git://github.com/AKSW/LODStats.git
+
+cd LODStats/
+python setup.py install
+
+(lodstats) $ lodstats --help
 Usage: lodstats [options] [-m model.{rdf,nt,...}] file/URI
 [...]
-(lodstats-env) $ lodstats -vp some_rdf_file.nt
-
+(lodstats) $ lodstats -vp some_rdf_file.nt
