@@ -29,16 +29,18 @@ class Classes(RDFStatInterface):
         self.subject_distinct = self.results['distinct'] = {} # FIXME: namen aendern, ist spo-distinct, nicht nur subj
         
     def count(self, s, p, o, s_blank, o_l, o_blank, statement):
-        # mimic make-void, count every class usage
-        count_it = False
+        #count class usage
+        #Criterion "used classed" - self.histogram.keys()
+        #"Class usage count" - self.histogram[o]
         if p == 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' and statement.object.is_resource():
             self.histogram[o] = self.histogram.get(o, 0) + 1
-            count_it = True
-        # distinct per subject
-        spo = s+p+o
-        if count_it and not dh.query_distinct_spo(spo, 1):
-            dh.set_distinct_spo(spo, 1)
-            self.subject_distinct[o] = self.subject_distinct.get(o, 0) + 1
+
+            # distinct per subject
+            # do not understand this - ask Jan?
+            spo = s+p+o
+            if not dh.query_distinct_spo(spo, 1):
+                dh.set_distinct_spo(spo, 1)
+                self.subject_distinct[o] = self.subject_distinct.get(o, 0) + 1
     
     def voidify(self, void_model, dataset):
         # no of classes
@@ -51,6 +53,12 @@ class Classes(RDFStatInterface):
             void_model.append(RDF.Statement(clid, ns_void['class'], RDF.Uri(class_uri)))
             result_node = RDF.Node(literal=str(result), datatype=ns_xs.integer.uri)
             void_model.append(RDF.Statement(clid, ns_void.entities, result_node))
+
+    #def qbify(self, void_model):
+        ##generate observation id
+        #numberOfClasses_node = RDF.Node(literal=str(len(self.histogram)), datatype=ns_xs.integer.uri)
+        #void_model.append(RDF.Statement(dataset, ns_void.classes, result_node))
+        #pass
     
     def sparql(sparql, endpoint):
         pass
@@ -63,10 +71,12 @@ class ClassesDefined(RDFStatInterface):
         self.subject_distinct = self.results['distinct'] = {}
         
     def count(self, s, p, o, s_blank, o_l, o_blank, statement):
-        # count all class definitions
-        if p == 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' and o == 'http://www.w3.org/2000/01/rdf-schema#Class':
+        # "classes defined" criterion filter
+        if (p == 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' and o == 'http://www.w3.org/2000/01/rdf-schema#Class') or\
+           (p == 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' and o == 'http://www.w3.org/2002/07/owl#Class'):
             self.histogram[s] = 0
         # count usage of defined classes
+        # if class is used as object
         if p == 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' and self.histogram.has_key(o):
             self.histogram[o] += 1
         # distinct per subject
