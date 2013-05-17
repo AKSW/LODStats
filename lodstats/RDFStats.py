@@ -415,37 +415,156 @@ class RDFStats(object):
     def voidify(self, serialize_as = "ntriples"):
         """present stats in VoID (http://www.w3.org/TR/void/)"""
         results = self.stats_results
-        void_model = RDF.Model()
-        ns_void = RDF.NS("http://rdfs.org/ns/void#")
-        ns_rdf = RDF.NS("http://www.w3.org/1999/02/22-rdf-syntax-ns#")
-        ns_xs = RDF.NS("http://www.w3.org/2001/XMLSchema#")
-        ns_qb = RDF.NS("http://purl.org/linked-data/cube#")
-        ns_stats = RDF.NS("http://example.org/XStats#")
+        
+        #Namespaces
+        rdf = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        void = "http://rdfs.org/ns/void#"
+        void_ext = "http://stats.lod2.eu/rdf/void-ext/"
+        qb = "http://purl.org/linked-data/cube#"
+        dcterms = "http://purl.org/dc/terms/"
+        ls_void = "http://stats.lod2.eu/rdf/void/"
+        ls_qb = "http://stats.lod2.eu/rdf/qb/"
+        ls_cr = "http://stats.lod2.eu/rdf/qb/criteria/"
+        xsd = "http://www.w3.org/2001/XMLSchema#"
+        stats = "http://example.org/XStats#"
+
+        # setup serializar
+        serializer = RDF.Serializer(name=serialize_as)
+        serializer.set_namespace("rdf", rdf)
+        serializer.set_namespace("void", void)
+        serializer.set_namespace("void-ext", void_ext)
+        serializer.set_namespace("qb", qb)
+        serializer.set_namespace("dcterms", dcterms)
+        serializer.set_namespace("ls-void", ls_void)
+        serializer.set_namespace("ls-qb", ls_qb)
+        serializer.set_namespace("ls-cr", ls_cr)
+        serializer.set_namespace("xsd", xsd)
+        serializer.set_namespace("xstats", stats)
+
+        #Define namespaces with Redland
+        ns_rdf = RDF.NS(rdf)
+        ns_void = RDF.NS(void)
+        ns_void_ext = RDF.NS(void_ext)
+        ns_qb = RDF.NS(qb)
+        ns_dcterms = RDF.NS(dcterms)
+        ns_ls_void = RDF.NS(ls_void)
+        ns_ls_qb = RDF.NS(ls_qb)
+        ns_ls_cr = RDF.NS(ls_cr)
+        ns_xsd = RDF.NS(xsd)
+        ns_stats = RDF.NS(stats)
+
         # FIXME?: our dataset
-        dataset = RDF.Uri(self.url)
         dataset_ns = RDF.NS("%s#" % self.url)
-        # we're talking about datasets here
-        void_model.append(RDF.Statement(dataset,ns_rdf.type,ns_void.Dataset))
-        
-        # basic stuff: no of triples, ...
-        result_node = RDF.Node(literal=str(self.no_of_statements), datatype=ns_xs.integer.uri)
-        void_model.append(RDF.Statement(dataset, ns_void.triples, result_node))
-        
-        # void:observation extension stuff
-        void_model.append(RDF.Statement(ns_stats.value, ns_rdf.type, ns_qb.MeasureProperty))
-        void_model.append(RDF.Statement(ns_stats.subjectsOfType, ns_rdf.type, ns_qb.DimensonProperty))
-        void_model.append(RDF.Statement(ns_stats.schema, ns_rdf.type, ns_qb.AttributeProperty))
+
+        void_model = RDF.Model()
+
+        #Defining the Dataset
+        source_uri = self.url
+        dataset_uri = ls_void + "?source=" + source_uri
+        dataset_entity = RDF.Uri(dataset_uri)
+        source_entity = RDF.Uri(source_uri)
+
+        void_model.append(RDF.Statement(dataset_entity,ns_rdf.type,ns_void.Dataset))
+        void_model.append(RDF.Statement(dataset_entity,ns_dcterms.source,source_entity))
+        #void-ext:observation ls-qb:hash1; ...hash2 etc.
+
+        #Statistics from the stat
+        number_of_triples_node = RDF.Node(literal=str(self.no_of_statements), datatype=ns_xsd.integer.uri)
+        void_model.append(RDF.Statement(dataset_entity, ns_void.triples, number_of_triples_node))
         
         # voidify results from custom stats
         for stat in custom_stats.stats_to_do:
-            stat.voidify(void_model, dataset)
+            stat.voidify(void_model, dataset_entity)
 
-        # serialize to string and return
-        serializer = RDF.Serializer(name=serialize_as)
-        serializer.set_namespace("void", "http://rdfs.org/ns/void#")
-        serializer.set_namespace("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#")
-        serializer.set_namespace("qb", "http://purl.org/linked-data/cube#")
-        serializer.set_namespace("xstats", "http://example.org/XStats#")
+        # qb dataset
+        lodstats_qb_dataset_label = "LODStats DataCube Dataset"
+        lodstats_qb_dataset_label_node = RDF.Node(literal=lodstats_qb_dataset_label, datatype=ns_xsd.string.uri) 
+        void_model.append(RDF.Statement(ns_ls_qb.LODStats, ns_rdf.type, ns_qb.Dataset))
+        void_model.append(RDF.Statement(ns_ls_qb.LODStats, ns_qb.structure, ns_ls_qb.LODStatsStructure))
+        void_model.append(RDF.Statement(ns_ls_qb.LODStats, ns_rdf.label, lodstats_qb_dataset_label_node))
+
+        #qb datastructure
+        lodstats_qb_dsd_label = "LODStats DataCube Structure Definition"
+        lodstats_qb_dsd_label_node = RDF.Node(literal=lodstats_qb_dsd_label, datatype=ns_xsd.string.uri)
+        void_model.append(RDF.Statement(ns_ls_qb.LODStatsStructure, ns_rdf.type, ns_qb.DataStructureDefinition))
+        void_model.append(RDF.Statement(ns_ls_qb.LODStatsStructure, ns_qb.component, ns_ls_qb.timeOfMeasureSpec))
+        void_model.append(RDF.Statement(ns_ls_qb.LODStatsStructure, ns_qb.component, ns_ls_qb.sourceDatasetSpec))
+        void_model.append(RDF.Statement(ns_ls_qb.LODStatsStructure, ns_qb.component, ns_ls_qb.statisticalCriterionSpec))
+        void_model.append(RDF.Statement(ns_ls_qb.LODStatsStructure, ns_qb.component, ns_ls_qb.valueSpec))
+        void_model.append(RDF.Statement(ns_ls_qb.LODStatsStructure, ns_qb.component, ns_ls_qb.unitSpec))
+        void_model.append(RDF.Statement(ns_ls_qb.LODStatsStructure, ns_qb.component, lodstats_qb_dsd_label_node))
+
+        #qb components
+        timeOfMeasureSpec_label = "Time of Measure (Component Specification)"
+        timeOfMeasureSpec_label_node = RDF.Node(literal=timeOfMeasureSpec_label, datatype=ns_xsd.string.uri)
+        void_model.append(RDF.Statement(ns_ls_qb.timeOfMeasureSpec, ns_rdf.type, ns_qb.ComponentSpecification))
+        void_model.append(RDF.Statement(ns_ls_qb.timeOfMeasureSpec, ns_qb.dimension, ns_ls_qb.timeOfMeasure))
+        void_model.append(RDF.Statement(ns_ls_qb.timeOfMeasureSpec, ns_rdf.label, timeOfMeasureSpec_label_node))
+
+        sourceDatasetSpec_label = "Source Dataset which is observerd (Component Specification)"
+        sourceDatasetSpec_label_node = RDF.Node(literal=sourceDatasetSpec_label, datatype=ns_xsd.string.uri)
+        void_model.append(RDF.Statement(ns_ls_qb.sourceDatasetSpec, ns_rdf.type, ns_qb.ComponentSpecification))
+        void_model.append(RDF.Statement(ns_ls_qb.sourceDatasetSpec, ns_qb.dimension, ns_ls_qb.sourceDataset))
+        void_model.append(RDF.Statement(ns_ls_qb.sourceDatasetSpec, ns_rdf.label, sourceDatasetSpec_label_node))
+
+        statisticalCriterionSpec_label = "Statistical Criterion (Component Specification)"
+        statisticalCriterionSpec_label_node = RDF.Node(literal=statisticalCriterionSpec_label, datatype=ns_xsd.string.uri)
+        void_model.append(RDF.Statement(ns_ls_qb.statisticalCriterionSpec, ns_rdf.type, ns_qb.ComponentSpecification))
+        void_model.append(RDF.Statement(ns_ls_qb.statisticalCriterionSpec, ns_qb.dimension, ns_ls_qb.statisticalCriterion))
+        void_model.append(RDF.Statement(ns_ls_qb.statisticalCriterionSpec, ns_rdf.label, statisticalCriterionSpec_label_node))
+
+        valueSpec_label = "Measure of Observation (Component Specification)"
+        valueSpec_label_node = RDF.Node(literal=valueSpec_label, datatype=ns_xsd.string.uri)
+        void_model.append(RDF.Statement(ns_ls_qb.valueSpec, ns_rdf.type, ns_qb.ComponentSpecification))
+        void_model.append(RDF.Statement(ns_ls_qb.valueSpec, ns_qb.measure, ns_ls_qb.value))
+        void_model.append(RDF.Statement(ns_ls_qb.valueSpec, ns_rdf.label, valueSpec_label_node))
+
+        unitSpec_label = "Unit of Measure (Component Specification)"
+        unitSpec_label_node = RDF.Node(literal=unitSpec_label, datatype=ns_xsd.string.uri)
+        void_model.append(RDF.Statement(ns_ls_qb.unitSpec, ns_rdf.type, ns_qb.ComponentSpecification))
+        void_model.append(RDF.Statement(ns_ls_qb.unitSpec, ns_qb.attribute, ns_ls_qb.unit))
+        void_model.append(RDF.Statement(ns_ls_qb.unitSpec, ns_rdf.label, unitSpec_label_node))
+
+        # dimention properties
+        timeOfMeasure_label = "Time of Measure"
+        timeOfMeasure_label_node = RDF.Node(literal=timeOfMeasure_label, datatype=ns_xsd.string.uri)
+        void_model.append(RDF.Statement(ns_ls_qb.timeOfMeasure, ns_rdf.type, ns_qb.DimensionProperty))
+        void_model.append(RDF.Statement(ns_ls_qb.timeOfMeasure, ns_rdf.label, timeOfMeasure_label_node))
+
+        sourceDataset_label = "Source Dataset"
+        sourceDataset_label_node = RDF.Node(literal=sourceDataset_label, datatype=ns_xsd.string.uri)
+        void_model.append(RDF.Statement(ns_ls_qb.sourceDataset, ns_rdf.type, ns_qb.DimensionProperty))
+        void_model.append(RDF.Statement(ns_ls_qb.sourceDataset, ns_rdf.label, sourceDataset_label_node))
+
+        statisticalCriterion_label = "Statistical Criterion"
+        statisticalCriterion_label_node = RDF.Node(literal=statisticalCriterion_label, datatype=ns_xsd.string.uri)
+        void_model.append(RDF.Statement(ns_ls_qb.statisticalCriterion, ns_rdf.type, ns_qb.DimensionProperty))
+        void_model.append(RDF.Statement(ns_ls_qb.statisticalCriterion, ns_rdf.label, statisticalCriterion_label_node))
+
+        value_label = "Measure of Observation"
+        value_label_node = RDF.Node(literal=value_label, datatype=ns_xsd.string.uri)
+        void_model.append(RDF.Statement(ns_ls_qb.value, ns_rdf.type, ns_qb.MeasureProperty))
+        void_model.append(RDF.Statement(ns_ls_qb.value, ns_rdf.label, value_label_node))
+
+        unit_label = "Unit of Measure"
+        unit_label_node = RDF.Node(literal=unit_label, datatype=ns_xsd.string.uri)
+        void_model.append(RDF.Statement(ns_ls_qb.unit, ns_rdf.type, ns_qb.AttributeProperty))
+        void_model.append(RDF.Statement(ns_ls_qb.unit, ns_rdf.label, unit_label_node))
+
+        StatisticalCriterion_label = "Statistical Criterion"
+        StatisticalCriterion_label_node = RDF.Node(literal=StatisticalCriterion_label, datatype=ns_xsd.string.uri)
+        void_model.append(RDF.Statement(ns_ls_qb.StatisticalCriterion, ns_rdf.type, ns_qb.AttributeProperty))
+        void_model.append(RDF.Statement(ns_ls_qb.StatisticalCriterion, ns_rdf.label, StatisticalCriterion_label_node))
+
+        # voidify results from custom stats
+        #for stat in custom_stats.stats_to_do:
+            #stat.qbify(void_model, dataset_entity)
+
+        # void:observation extension stuff
+        #void_model.append(RDF.Statement(ns_stats.value, ns_rdf.type, ns_qb.MeasureProperty))
+        #void_model.append(RDF.Statement(ns_stats.subjectsOfType, ns_rdf.type, ns_qb.DimensonProperty))
+        #void_model.append(RDF.Statement(ns_stats.schema, ns_rdf.type, ns_qb.AttributeProperty))
+        
         #serializer.set_namespace("thisdataset", dataset_ns._prefix)
         return serializer.serialize_model_to_string(void_model)
 
