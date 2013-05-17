@@ -36,11 +36,11 @@ def query_distinct_subject(s, num_id):
     else:
         return False
         
-def set_distinct_subject(s, num_id):
-    if len(s) > 16:
-        s_hash = md5(s).digest()
+def set_distinct_subject(subject, num_id):
+    if len(subject) > 16:
+        s_hash = md5(subject).digest()
     else:
-        s_hash = s
+        s_hash = subject
     if distinct_subjects.has_key(s_hash):
         distinct_subjects[s_hash][num_id] = True
     else:
