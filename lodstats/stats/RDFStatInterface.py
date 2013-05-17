@@ -27,6 +27,10 @@ class RDFStatInterface(object):
     
     def voidify(self, void_model, dataset):
         raise NotImplementedError
+
+    #def qbify(self, void_model, dataset):
+        #pass
+        ##raise NotImplementedError
     
     def sparql(self, endpoint):
         raise NotImplementedError
