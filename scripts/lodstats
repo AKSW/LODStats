@@ -28,7 +28,6 @@ from lodstats import RDFStats
 from lodstats.stats import available_stats, vocab_stats, lodstats, ParsedVocabulary
 
 parser = OptionParser(usage="usage: %prog [options] [-m model.{rdf,nt,...}] file/URI [file/URI ...]")
-parser.add_option('-f', '--format', help='format (nt/rdf/ttl/n3/nq, guessed by default)')
 parser.add_option('-v', '--void', action='store_true', help='generate VoID')
 parser.add_option('-c', '--count', action='store_true', help='just count triples, no statistics')
 parser.add_option('-p', '--progress', action='store_true', help='show progress')
@@ -52,17 +51,22 @@ if options.rdf_model:
     options.count = False
     options.void = False
     model_stats = [ParsedVocabulary, options.rdf_model]
-    a = RDFStats(format=options.format, stats=[], new_stats=model_stats)
+    stats = []
+    new_stats = model_stats
 elif options.schema_syntax_owl:
-    a = RDFStats(format=options.format, stats=vocab_stats)
+    stats = vocab_stats
+    new_stats = []
 elif options.all_stats:
     options.count = False
-    a = RDFStats(format=options.format, stats=available_stats)
+    stats = available_stats
+    new_stats = []
 elif options.lod_stats:
     options.count = False
-    a = RDFStats(format=options.format, stats=lodstats)
+    stats = lodstats
+    new_stats = []
 else:
-    a = RDFStats(format=options.format, do_custom_stats=not options.count)
+    stats = []
+    new_stats = []
 
 start_time = datetime.datetime.now()
 
@@ -74,7 +78,7 @@ for resource in args:
     if not is_remote:
         resource = "file://%s" % os.path.realpath(resource)
 
-    a.next_file(resource)
+    a = RDFStats(resource, stats=stats, new_stats=new_stats)
     
     def callback_parser(rdfdocstat):
         now = datetime.datetime.now()
