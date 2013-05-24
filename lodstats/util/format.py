@@ -22,29 +22,27 @@ logger = logging.getLogger("lodstats.format")
 
 def get_format(url):
     logger.debug("get_format(%s)" % url)
-    lowerurl = url.lower()
-    # guess serialization format from URL
-    if lowerurl.endswith("ttl"):
-        format = "ttl"
-    elif lowerurl.endswith("nt"):
-        format = "nt"
-    elif lowerurl.endswith('n3'):
-        format = 'n3'
-    elif any(lowerurl.endswith(x) for x in ('rdf', 'owl', 'rdfs')):
-        format = 'rdf'
-    elif lowerurl.endswith('.nq'):
-        format = 'nq'
-    elif any(lowerurl.endswith(x) for x in ('sparql', 'sparql/')):
-        format = 'sparql'
-    elif lowerurl.endswith('sitemap.xml'):
-        format = 'sitemap'
-    else:
-        raise NameError("could not guess format")
-    return format
+    process_url = url.split('/')[-1]
+    process_url = process_url.split('.')
 
-def get_parser(url, format=None):
-    if format is None:
-        format = get_format(url)
+    for item in process_url:
+        if(item == 'ttl'):
+            return 'ttl'
+        if(item == 'nt'):
+            return 'nt'
+        if(item == 'n3'):
+            return 'n3'
+        if(item == 'rdf' or item == 'owl' or item == 'rdfs'):
+            return 'rdf'
+        if(item == 'nq'):
+            return 'nq'
+        if(item == 'sparql' or item == 'sparql/'):
+            return 'sparql'
+        if(item == 'sitemap'):
+            return 'sitemap'
+    raise NameError("could not guess format")
+
+def get_parser(format):
     
     if format == 'ttl':
         parser = RDF.TurtleParser()
@@ -60,6 +58,7 @@ def get_parser(url, format=None):
         return None
     else:
         raise NameError("unsupported format")
+
     return parser
 
 def parse_sitemap(url):

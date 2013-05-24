@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-Copyright 2012 Jan Demter <jan@demter.de>
+Copyright 2013 AKSW Research Group http://aksw.org/
 
 This file is part of LODStats.
 
@@ -25,7 +25,7 @@ from optparse import OptionParser
 import logging
 
 from lodstats import RDFStats
-from lodstats.stats import available_stats, vocab_stats, lodstats, ParsedVocabulary
+from lodstats.stats import available_stats, vocab_stats, lodstats, ParsedVocabulary, test_stats
 
 parser = OptionParser(usage="usage: %prog [options] [-m model.{rdf,nt,...}] file/URI [file/URI ...]")
 parser.add_option('-v', '--void', action='store_true', help='generate VoID')
@@ -33,11 +33,14 @@ parser.add_option('-c', '--count', action='store_true', help='just count triples
 parser.add_option('-p', '--progress', action='store_true', help='show progress')
 parser.add_option('-a', '--all-stats', action='store_true', help='do all available statistics')
 parser.add_option('-l', '--lod-stats', action='store_true', help='do statistics for lodstats')
+parser.add_option('-t', '--test-stats', action='store_true', help='do statistics for test')
 parser.add_option('-i', '--intermediate-stats', action='store_true', help='print intermediate statistics every 100k triples')
 parser.add_option('-m', '--rdf-model', help='parse and do stats for everything that isDefinedBy supplied model')
 parser.add_option('-s', '--schema-syntax-owl', action='store_true', help='do stats for RDF-Schema, -Syntax, Owl')
 parser.add_option('-d', '--debug', action='store_true', help='print debugging output')
 (options, args) = parser.parse_args()
+
+print options
 
 if len(args) == 0:
     parser.print_help()
@@ -63,6 +66,9 @@ elif options.all_stats:
 elif options.lod_stats:
     options.count = False
     stats = lodstats
+    new_stats = []
+elif options.test_stats:
+    stats = test_stats
     new_stats = []
 else:
     stats = []
@@ -160,11 +166,11 @@ if not options.void:
             print("\t%s" % stat_name)
             for subname, result in stat_dict.iteritems():
                 if type(result) == dict or type(result) == list:
-                    if subname in ('s','p','o', 'namespacelinks'):
+                    if subname in ('usage_count'):
                         print("\t\t%s:" % subname)
                         for subsubname, subresult in result.iteritems():
-                            if subresult > 0:
-                                print("\t\t%s: %s" % (subsubname, subresult))
+                            #if subresult > 0:
+                            print("\t\t\t%s: %s" % (subsubname, subresult))
                     else:
                         print("\t\tlen(%s): %d" % (subname, len(result)))
                 else:

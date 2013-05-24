@@ -25,11 +25,10 @@ import bz2
 import tarfile
 import zipfile
 import tempfile
-import urllib2
-import requests # FIXME: kick out urllib2 and only use requests
+import requests 
 import warnings
-import lodstats.stats as custom_stats
-import lodstats.util as util
+import lodstats.stats
+import lodstats.util
 import exceptions
 import logging
 
@@ -52,14 +51,14 @@ class RDFStats(object):
 
         # RDF format (n3, nt, rdf/xml etc.)
         # Format will be autodetected
-        self.format = None 
+        self.format = self.get_format(self.url) 
 
         # compression of the file .tar, .gz etc.
         # compression is also autodetected
         self.compression_format = self.get_compression()
 
         # Redland Parser Object
-        self.parser = None
+        self.parser = self.get_parser(self.format)
 
         # Stream Object from Redland Parser
         self.stream = None
@@ -73,14 +72,14 @@ class RDFStats(object):
 
         # stats=available_stats object - from lodstats.stats import available_stats, vocab_stats, lodstats, ParsedVocabulary 
         if stats is None:
-            self.stats_results = custom_stats.init_stats()
+            self.stats_results = lodstats.stats.init_stats()
         else:
-            self.stats_results = custom_stats.init_stats(stats)
+            self.stats_results = lodstats.stats.init_stats(stats)
 
         # this is a hook for parsing vocabulary
         # new_stats = [ParsedVocabulary, options.rdf_model]
         if new_stats:
-            custom_stats.stats_to_do.append(new_stats[0](self.stats_results, new_stats[1]))
+            lodstats.stats.stats_to_do.append(new_stats[0](self.stats_results, new_stats[1]))
 
         # used by warn_handler
         self.warnings = 0
@@ -122,7 +121,7 @@ class RDFStats(object):
     def sitemap(self, sitemapurl, callback_parse=None, callback_stats=None):
         """process datadumps from a sitemap.xml as per http://XXX"""
         logger.debug("processing sitemap %s" % sitemapurl)
-        datadumps = util.format.parse_sitemap(sitemapurl)
+        datadumps = lodstats.util.format.parse_sitemap(sitemapurl)
         
         if callback_parse is None:
             callback_parse = self.callback_parse
@@ -137,26 +136,23 @@ class RDFStats(object):
     def get_compression(self):
         """guess compression of resource"""
         logger.debug("get_compression()")
-        compression_format = 'tar' if self.is_tar() else None
-        compression_format = 'zip' if self.is_zip() else None
-        compression_format = 'gz' if self.is_gzip() else None
-        compression_format = 'bz2' if self.is_bzip2() else None
+        compression_format = None
+        if self.is_tar():
+            compression_format = 'tar' 
+        if self.is_zip():
+            compression_format = 'zip' 
+        if self.is_gzip():
+            compression_format = 'gz' 
+        if self.is_bzip2():
+            compression_format = 'bz2' 
         return compression_format
-
-            #elif self.is_gzip():
-                #self.lowerurl = self.lowerurl[:-len('.gz')]
-                #self.compression_format = 'gz'
-            #elif self.is_bzip2():
-                #self.lowerurl = self.lowerurl[:-len('.bz2')]
-                #self.compression_format = 'bz2'
     
-    def get_format(self):
+    def get_format(self, url):
         logger.debug("get_format()")
-        if self.format is None:
-            self.format = util.format.get_format(self.url.lower())
+        return lodstats.util.format.get_format(url)
 
-    def get_parser(self):
-        self.parser = util.format.get_parser(self.url.lower(), self.format)
+    def get_parser(self, format):
+        return lodstats.util.format.get_parser(format)
     
     def is_remote(self):
         return any(self.url.lower().startswith(x) for x in ('http://', 'https://'))
@@ -173,12 +169,81 @@ class RDFStats(object):
     def is_bzip2(self):
         return self.url.lower().endswith('.bz2')
 
-    def get_freespace(self, p):
+    def get_free_diskspace(self, p):
         """
             Returns the number of free bytes on the drive that p is on
         """
         s = os.statvfs(p)
         return s.f_bsize * s.f_bavail
+
+    def get_local_free_diskspace(self):
+        return self.get_free_diskspace(tempfile.tempdir)
+
+    def download_remote_file(self, url, if_modified_since, callback_function):
+        tf = tempfile.NamedTemporaryFile(prefix='lodstats', delete=False)
+        r = requests.get(url)
+
+        last_modified = r.headers.get('last-modified')
+        if last_modified is not None:
+            self.last_modified = datetime.datetime.strptime(last_modified, '%a, %d %b %Y %H:%M:%S %Z')
+            if if_modified_since is not None and last_modified == if_modified_since:
+                raise exceptions.NotModified, 'resource has not been modified'
+
+        content_length = r.headers['content-length']
+        if content_length is not None:
+            self.content_length = int(content_length)
+
+        free_diskspace = self.get_local_free_diskspace()
+        if self.content_length > free_diskspace:
+            raise Exception, "file too large (> free space)"
+
+        if callback_function is not None:
+            callback_function(self)
+
+        #Download file
+        for data in r.content:
+            self.bytes_download += len(data)
+            tf.write(data)
+            self.ratelimited_callback_caller(callback_function)
+        tf.seek(0)
+
+        return tf
+
+    def decompress_file(self, url, callback_function):
+        filename = url[7:]
+        f = open(filename, 'rU') #omitting file://
+        decompressed_tf = tempfile.NamedTemporaryFile(prefix='lodstats_decompressed', delete=False)
+        if self.compression_format == 'gz':
+            gzip_file = gzip.GzipFile(filename, mode='rb')
+            for data in gzip_file.read():
+                #self.bytes += len(data)
+                decompressed_tf.write(data)
+                self.ratelimited_callback_caller(callback_function)
+            gzip_file.close()
+        elif self.compression_format == 'bz2':
+            bz2_file = bz2.BZ2File(filename)
+            for data in bz2_file.read():
+                #self.bytes_download += len(data)
+                #self.bytes += len(data)
+                decompressed_tf.write(data)
+                self.ratelimited_callback_caller(callback_function)
+            bz2_file.close()
+
+        #TODO: Refactor tar and zip processing
+        elif self.compression_format == 'tar':
+            self.archive = tarfile.open(fileobj=f, mode='r')
+            self.file_entries = self.archive.getmembers()
+        elif self.compression_format == 'zip':
+            self.archive = zipfile.ZipFile(f, 'r')
+            self.file_entries = self.archive.infolist()
+        decompressed_tf.flush()
+        f.close()
+        decompressed_tf.close()
+        # call back one last time to push final numbers
+        if callback_function is not None:
+            callback_function(self)
+
+        return "file://%s" % decompressed_tf.name
 
     def parse(self, callback_function = None, if_modified_since = None):
         """parse to redland::Stream"""
@@ -186,7 +251,8 @@ class RDFStats(object):
 
         self.measure_execution_time_start()
         self.callback_parse = callback_function
-        self.tempurl = self.url #changes if file is archive
+
+        tempurl = self.url #changes if file is archive
 
         if self.format == 'sparql':
             return
@@ -195,79 +261,14 @@ class RDFStats(object):
 
         # check if modified since last visit, 
         # TODO: really use http if-modified-since, etags
-        last_modified = None
+        # if file is remote - download it
         if self.is_remote():
-            r = requests.get(self.url)
+            tf = self.download_remote_file(self.url, if_modified_since, callback_function)
+            tempurl = "file://%s" % tf.name
+        if self.compression_format is not None:
+            tempurl = self.decompress_file(tempurl, callback_function)
 
-            last_modified = r.headers.get('last-modified')
-            if last_modified is not None:
-                self.last_modified = datetime.datetime.strptime(last_modified, '%a, %d %b %Y %H:%M:%S %Z')
-                if if_modified_since is not None and last_modified == if_modified_since:
-                        raise exceptions.NotModified, 'resource has not been modified'
-
-            content_length = r.headers.get('Content-Length')
-            if content_length is not None:
-                self.content_length = int(content_length)
-
-            tempfile = tempfile.NamedTemporaryFile(prefix='lodstats')
-
-            # do not download files bigger than freespace
-            freespace = self.get_freespace(tempfile.tempdir)
-            if self.content_length > freespace:
-                raise Exception, "file too large (> free space)"
-
-            if callback_function is not None:
-                callback_function(self)
-
-            #Download file
-            for data in r:
-                self.bytes_download += len(data)
-                tempfile.write(data)
-                self.ratelimited_callback_caller(callback_function)
-            tempfile.seek(0)
-
-            if self.compression_format is not None:
-                if self.compression_format == 'gz':
-                    gz_temp_decomp = gzip.GzipFile(fileobj=tempfile, mode='rb')
-                    for data in gz_temp_decomp:
-                        self.bytes += len(data)
-
-                        tempfile.write(data)
-                        self.ratelimited_callback_caller(callback_function)
-                    gz_temp_decomp.close()
-                elif self.compression_format == 'bz2':
-                    decompressor = bz2.BZ2Decompressor()
-                    for data in tempfile:
-                        decompressed_data = decompressor.decompress(data)
-
-                        self.bytes_download += len(data)
-                        self.bytes += len(decompressed_data)
-
-                        tempfile.write(decompressed_data)
-                        self.ratelimited_callback_caller(callback_function)
-                elif self.compression_format == 'tar':
-                    self.archive = tarfile.open(fileobj=tempfile, mode='r')
-                    self.file_entries = self.archive.getmembers()
-                elif self.compression_format == 'zip':
-                    self.archive = zipfile.ZipFile(tempfile, 'r')
-                    self.file_entries = self.archive.infolist()
-                tempfile.flush()
-                self.tempurl = "file://%s" % tempfile.name
-                # call back one last time to push final numbers
-                if callback_function is not None:
-                    callback_function(self)
-            tempfile.close()
-        self.parse_tempurl()
-    
-    def parse_tempurl(self):
-        logger.debug("parse_tempurl()")
-        self.get_format()
-        self.get_parser()
-        if self.format == 'sparql':
-            return
-        if self.format == 'sitemap':
-            return
-        self.stream = self.parser.parse_as_stream(self.tempurl)
+        self.stream = self.parser.parse_as_stream(tempurl)
 
     def warn_handler(self, message, category, filename, lineno, file=None, line=None):
         self.warnings += 1
@@ -299,7 +300,7 @@ class RDFStats(object):
             self.do_sparql_stats()
         
         # post-processing
-        custom_stats.postproc()
+        lodstats.stats.postproc()
         
         self.measure_execution_time_stop()
 
@@ -317,21 +318,21 @@ class RDFStats(object):
                         continue
                     supplied_format = self.format
                     tar_content = self.archive.extractfile(tar_entry)
-                    tempfile = tempfile.NamedTemporaryFile(prefix='lodstats_tar_entry')
+                    tf = tempfile.NamedTemporaryFile(prefix='lodstats_tar_entry')
                     for data in tar_content:
                          self.bytes += len(data)
-                         tempfile.write(data)
+                         tf.write(data)
                          self.ratelimited_callback_caller(callback_function)
                     # guess format later if necessary
                     if self.format is None:
                         self.lowerurl = tar_entry.name.lower()
                     # parse and to stats
-                    tempfile.flush()
+                    tf.flush()
                     self.compression_format = None
-                    self.tempurl = "file://%s" % tempfile.name
+                    self.tempurl = "file://%s" % tf.name
                     self.parse_tempurl()
                     self.do_stats(callback_function)
-                    tempfile.close()
+                    tf.close()
                     self.compression_format = 'tar'
                     self.format = supplied_format
                     self.files_handled += 1
@@ -348,21 +349,21 @@ class RDFStats(object):
                         continue
                     supplied_format = self.format
                     zip_content = self.archive.open(zip_entry)
-                    tempfile = tempfile.NamedTemporaryFile(prefix='lodstats_zip_entry')
+                    tf = tempfile.NamedTemporaryFile(prefix='lodstats_zip_entry')
                     for data in zip_content:
                         self.bytes += len(data)
-                        tempfile.write(data)
+                        tf.write(data)
                         self.ratelimited_callback_caller(callback_function)
                     # guess format later if necessary
                     if self.format is None:
                         self.lowerurl = zip_entry.filename.lower()
                     # parse and to stats
-                    tempfile.flush()
+                    tf.flush()
                     self.compression_format = None
-                    self.tempurl = "file://%s" % tempfile.name
+                    self.tempurl = "file://%s" % tf.name
                     self.parse_tempurl()
                     self.do_stats(callback_function)
-                    tempfile.close()
+                    tf.close()
                     self.compression_format = 'zip'
                     self.format = supplied_format
                     self.files_handled += 1
@@ -385,7 +386,7 @@ class RDFStats(object):
             raise Exception, "unknown response content type"
         self.no_of_statements = int(results['results']['bindings'][0]['triples']['value'])
         
-        custom_stats.run_stats_sparql(self.url)
+        lodstats.stats.run_stats_sparql(self.url)
     
     def do_custom_stats(self, statement):
         """call custom stats"""
@@ -404,7 +405,7 @@ class RDFStats(object):
         else:
             o = str(statement.object.uri)
         
-        custom_stats.run_stats(s, p, o, s_blank, o_l, o_blank, statement)
+        lodstats.stats.run_stats(s, p, o, s_blank, o_l, o_blank, statement)
     
     def ratelimited_callback_caller(self, callback_function):
         """helper for callbacks that should only fire every self.callback_delay seconds"""
@@ -436,7 +437,6 @@ class RDFStats(object):
 
     def measure_execution_time_stop(self):
         self.end_time = datetime.datetime.now()
-        pass
     
     def voidify(self, serialize_as = "ntriples"):
         """present stats in VoID (http://www.w3.org/TR/void/)"""
@@ -499,7 +499,7 @@ class RDFStats(object):
         void_model.append(RDF.Statement(dataset_entity, ns_void.triples, number_of_triples_node))
         
         # voidify results from custom stats
-        for stat in custom_stats.stats_to_do:
+        for stat in lodstats.stats.stats_to_do:
             stat.voidify(void_model, dataset_entity)
 
         # qb dataset
@@ -583,7 +583,7 @@ class RDFStats(object):
         void_model.append(RDF.Statement(ns_ls_qb.StatisticalCriterion, ns_rdf.label, StatisticalCriterion_label_node))
 
         # voidify results from custom stats
-        #for stat in custom_stats.stats_to_do:
+        #for stat in lodstats.stats.stats_to_do:
             #stat.qbify(void_model, dataset_entity)
 
         # void:observation extension stuff

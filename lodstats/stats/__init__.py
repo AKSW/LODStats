@@ -16,8 +16,12 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with LODStats.  If not, see <http://www.gnu.org/licenses/>.
 """
-from Classes import Classes, ClassesDefined
-from Properties import PropertiesDefined, PropertiesAll
+from UsedClasses import UsedClasses
+from ClassesDefined import ClassesDefined
+from ClassHierarchyDepth import *
+from PropertyUsage import PropertyUsage
+from PropertyUsageDistinctPerSubject import PropertyUsageDistinctPerSubject
+from PropertyUsageDistinctPerObject import PropertyUsageDistinctPerObject
 from Vocabularies import *
 from basics import Entities, Literals, Blanks, Subclasses, TypedSubjects, LabeledSubjects, SameAs, LiteralsList
 from CookieCounter import *
@@ -29,25 +33,27 @@ from Links import *
 from RDFSyntax import *
 from RDFSchema import *
 from Owl import *
-from ClassHierarchy import *
 from PropertyHierarchy import *
 
 # add Python-classes for doing stats here after importing them above:
-available_stats = [Classes, ClassesDefined, PropertiesDefined, PropertiesAll, Vocabularies, VocabulariesPerNode, Entities, Literals, Blanks,\
-    Subclasses, TypedSubjects, LabeledSubjects, Languages, StringLength, PropertiesPerEntity,\
-    RDFSyntax, RDFSchema, Owl, ClassHierarchy, PropertyHierarchy, Links, Datatypes, SameAs]
+available_stats = [UsedClasses, ClassesDefined, ClassHierarchyDepth, PropertyUsage,\
+        Vocabularies, VocabulariesPerNode, Entities, Literals, Blanks,\
+        Subclasses, TypedSubjects, LabeledSubjects, Languages, StringLength, PropertiesPerEntity,\
+        RDFSyntax, RDFSchema, Owl, PropertyHierarchy, Links, Datatypes, SameAs]
 # stuff usually run for lodstats/web
-lodstats = [Classes, ClassesDefined, PropertiesAll, Vocabularies, Entities, Literals, Blanks,\
+lodstats = [UsedClasses, ClassesDefined, Vocabularies, Entities, Literals, Blanks,\
     Subclasses, TypedSubjects, LabeledSubjects, Languages, StringLength, PropertiesPerEntity,\
-    ClassHierarchy, PropertyHierarchy, Links, Datatypes]
+    ClassHierarchyDepth, PropertyHierarchy, Links, Datatypes]
 # not so useful/redundant optional stuff
 stupid_stats = [LiteralsList, CookieCounter]
 # stats for owl, rdf-schema, -syntax
 vocab_stats = [RDFSyntax, RDFSchema, Owl]
 # stats necessary for VoiD
-void_stats = [Classes, PropertiesAll, Vocabularies, Entities]
+void_stats = [UsedClasses, Vocabularies, Entities]
 # links only
 link_stats = [Links]
+# test
+test_stats = [PropertyUsageDistinctPerObject]
 
 # will hold the objects doing the stats, initialized in init_stats()
 stats_to_do = []
