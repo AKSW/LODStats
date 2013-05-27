@@ -1,5 +1,5 @@
 """
-Copyright 2012 Jan Demter <jan@demter.de>
+Copyright 2013 AKSW Research Group http://aksw.org
 
 This file is part of LODStats.
 

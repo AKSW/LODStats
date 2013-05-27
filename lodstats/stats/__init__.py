@@ -22,8 +22,14 @@ from ClassHierarchyDepth import *
 from PropertyUsage import PropertyUsage
 from PropertyUsageDistinctPerSubject import PropertyUsageDistinctPerSubject
 from PropertyUsageDistinctPerObject import PropertyUsageDistinctPerObject
+from Outdegree import Outdegree
+from Indegree import Indegree
+from PropertyHierarchyDepth import PropertyHierarchyDepth
+from SubclassUsage import SubclassUsage
+from Entities import Entities
+
 from Vocabularies import *
-from basics import Entities, Literals, Blanks, Subclasses, TypedSubjects, LabeledSubjects, SameAs, LiteralsList
+from basics import Literals, Blanks, Subclasses, TypedSubjects, LabeledSubjects, SameAs, LiteralsList
 from CookieCounter import *
 from StringLength import *
 from Languages import *
@@ -35,6 +41,8 @@ from RDFSchema import *
 from Owl import *
 from PropertyHierarchy import *
 
+# test
+test_stats = [Indegree, Outdegree, PropertyHierarchyDepth, SubclassUsage, Entities]
 # add Python-classes for doing stats here after importing them above:
 available_stats = [UsedClasses, ClassesDefined, ClassHierarchyDepth, PropertyUsage,\
         Vocabularies, VocabulariesPerNode, Entities, Literals, Blanks,\
@@ -52,8 +60,6 @@ vocab_stats = [RDFSyntax, RDFSchema, Owl]
 void_stats = [UsedClasses, Vocabularies, Entities]
 # links only
 link_stats = [Links]
-# test
-test_stats = [PropertyUsageDistinctPerObject]
 
 # will hold the objects doing the stats, initialized in init_stats()
 stats_to_do = []

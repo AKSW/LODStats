@@ -18,14 +18,29 @@ along with LODStats.  If not, see <http://www.gnu.org/licenses/>.
 """
 from RDFStatInterface import RDFStatInterface
 
-class PropertyUsage(RDFStatInterface):
+class Entities(RDFStatInterface):
+    """
+        Distinct number of entities
+        Entity - triple, where ?s is iri (not blank)
+    """
     def __init__(self, results):
-        super(PropertyUsage, self).__init__(results)
-        self.usage_count = self.results['usage_count'] = {}
+        super(Entities, self).__init__(results)
+        self.triples = []
+        self.c = 0
         
     def count(self, s, p, o, s_blank, o_l, o_blank, statement):
-        self.usage_count[p] = self.usage_count.get(p, 0) + 1
+        if statement.object.is_resource() and\
+           statement.subject.is_resource() and\
+           statement.predicate.is_resource():
+               self.triples.append( (s,p,o) )
+               self.c += 1
     
+    def postproc(self):
+        #Entities mentioned
+        self.results['count'] = self.c
+        #Distinct entities
+        self.results['triples'] = self.triples
+
     def voidify(self, void_model, dataset):
         pass
     

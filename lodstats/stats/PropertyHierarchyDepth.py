@@ -18,18 +18,18 @@ along with LODStats.  If not, see <http://www.gnu.org/licenses/>.
 """
 from RDFStatInterface import RDFStatInterface
 
-class ClassHierarchyDepth(RDFStatInterface):
+class PropertyHierarchyDepth(RDFStatInterface):
     """gather hierarchy of classes seen"""
     
     def __init__(self, results):
-        super(ClassHierarchyDepth, self).__init__(results)
+        super(PropertyHierarchyDepth, self).__init__(results)
         self.graph = self.results['graph'] = {}
         self.c = self.results['count'] = 0
     
     def count(self, s, p, o, s_blank, o_l, o_blank, statement):
         if statement.object.is_resource() and \
                 statement.subject.is_resource() and \
-                p == 'http://www.w3.org/2000/01/rdf-schema#subClassOf':
+                p == 'http://www.w3.org/2000/01/rdf-schema#subPropertyOf':
             self.graph[s] = o
     
     def voidify(self, void_model, dataset):

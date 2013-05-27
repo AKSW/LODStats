@@ -1,5 +1,5 @@
 """
-Copyright 2013 AKSW Research Group http://aksw.org
+Copyright 2012 Jan Demter <jan@demter.de>
 
 This file is part of LODStats.
 
@@ -18,14 +18,21 @@ along with LODStats.  If not, see <http://www.gnu.org/licenses/>.
 """
 from RDFStatInterface import RDFStatInterface
 
-class PropertyUsage(RDFStatInterface):
+class Outdegree(RDFStatInterface):
     def __init__(self, results):
-        super(PropertyUsage, self).__init__(results)
-        self.usage_count = self.results['usage_count'] = {}
+        super(Outdegree, self).__init__(results)
+        self.usage_count = {}
         
     def count(self, s, p, o, s_blank, o_l, o_blank, statement):
-        self.usage_count[p] = self.usage_count.get(p, 0) + 1
+        self.usage_count[s] = self.usage_count.get(s, 0) + 1
     
+    def postproc(self):
+        usage_overall = 0
+        for usage in self.usage_count:
+            usage_overall += self.usage_count[usage]
+        outdegree = float(usage_overall) / float(len(self.usage_count))
+        self.count = self.results['count'] = outdegree
+
     def voidify(self, void_model, dataset):
         pass
     

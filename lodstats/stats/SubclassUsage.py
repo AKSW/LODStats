@@ -18,14 +18,18 @@ along with LODStats.  If not, see <http://www.gnu.org/licenses/>.
 """
 from RDFStatInterface import RDFStatInterface
 
-class PropertyUsage(RDFStatInterface):
+class SubclassUsage(RDFStatInterface):
     def __init__(self, results):
-        super(PropertyUsage, self).__init__(results)
-        self.usage_count = self.results['usage_count'] = {}
+        super(SubclassUsage, self).__init__(results)
+        self.c = 0
         
     def count(self, s, p, o, s_blank, o_l, o_blank, statement):
-        self.usage_count[p] = self.usage_count.get(p, 0) + 1
+        if p == 'http://www.w3.org/2000/01/rdf-schema#subClassOf':
+            self.c += 1
     
+    def postproc(self):
+        self.results['count'] = self.c
+
     def voidify(self, void_model, dataset):
         pass
     
