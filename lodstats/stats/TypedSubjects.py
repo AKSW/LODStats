@@ -17,34 +17,21 @@ You should have received a copy of the GNU General Public License
 along with LODStats.  If not, see <http://www.gnu.org/licenses/>.
 """
 from RDFStatInterface import RDFStatInterface
+import distincthelper as dh
 
-class PropertiesPerEntity(RDFStatInterface):
-    """count all properties"""
+class TypedSubjects(RDFStatInterface):
+    """number of typed subjects"""
     def __init__(self, results):
-        super(PropertiesPerEntity, self).__init__(results)
-        self.current_subject = ''
-        self.properties = {}
-        self.subjects = 0
-        self.results['avg'] = 0
-        self.sum = 0
-
-#FIXME: vielleicht immer die letzen 10-100 props merken, um bei "out of order" serialisierung besser zu performen
+        super(TypedSubjects, self).__init__(results)
+        self.results['count'] = 0
+        
     def count(self, s, p, o, s_blank, o_l, o_blank, statement):
-        if not s_blank and self.current_subject != s:
-            self.sum += len(self.properties)
-            if self.subjects > 0:
-                self.results['avg'] = self.sum/float(self.subjects)
-            else:
-                self.results['avg'] = self.sum
-            self.current_subject = s
-            self.subjects += 1
-            self.properties = {}
-        # count all properties
-        self.properties[p] = self.properties.get(p, 0) + 1
+        if p == 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' and not dh.query_distinct_subject(s, 1):
+            self.results['count'] += 1
+            dh.set_distinct_subject(s, 1)
     
     def voidify(self, void_model, dataset):
         pass
     
     def sparql(self, endpoint):
         pass
-

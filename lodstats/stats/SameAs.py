@@ -17,26 +17,19 @@ You should have received a copy of the GNU General Public License
 along with LODStats.  If not, see <http://www.gnu.org/licenses/>.
 """
 from RDFStatInterface import RDFStatInterface
-import re
 
-class DbpediaSameAs(RDFStatInterface):
-    """count links (object vocabulary != subject vocabulary)"""
+class SameAs(RDFStatInterface):
+    """number of triples with owl#sameAs as predicate"""
     def __init__(self, results):
-        super(DbpediaSameAs, self).__init__(results)
+        super(SameAs, self).__init__(results)
         self.results['count'] = 0
     
     def count(self, s, p, o, s_blank, o_l, o_blank, statement):
-        
-        #if triple has owl:sameAs property
-        if(re.search('owl.*sameAs', p)):
-            if(o.startswith('http://dbpedia.org')):
-                self.results['count'] += 1
-        else:
-            return
-
+        if p == 'http://www.w3.org/2002/07/owl#sameAs':
+            self.results['count'] +=1
+    
     def voidify(self, void_model, dataset):
         pass
     
     def sparql(self, endpoint):
         pass
-

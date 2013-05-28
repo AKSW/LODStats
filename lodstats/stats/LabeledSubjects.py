@@ -16,25 +16,19 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with LODStats.  If not, see <http://www.gnu.org/licenses/>.
 """
-import RDF
 from RDFStatInterface import RDFStatInterface
-from lodstats.util.namespace import ns_xs, ns_void, ns_rdf, ns_stats, ns_qb
+import distincthelper as dh
 
-class PropertyHierarchy(RDFStatInterface):
-    """gather hierarchy of properties seen"""
-    # FIXME: hier wie bei class hierarchy
+class LabeledSubjects(RDFStatInterface):
+    """number of labeled subjects"""
     def __init__(self, results):
-        super(PropertyHierarchy, self).__init__(results)
-    
+        super(LabeledSubjects, self).__init__(results)
+        self.results['count'] = 0
+        
     def count(self, s, p, o, s_blank, o_l, o_blank, statement):
-        if p == 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' and o == 'http://www.w3.org/1999/02/22-rdf-syntax-ns#Property':
-            self.results[s] = 0
-        if p == 'http://www.w3.org/2000/01/rdf-schema#subPropertyOf':
-            if self.results.has_key(o):
-                self.results[s] = self.results[o] + 1
-            else:
-                self.results[o] = 0
-                self.results[s] = 1
+        if p == 'http://www.w3.org/2000/01/rdf-schema#label' and not dh.query_distinct_subject(s, 2):
+            self.results['count'] += 1
+            dh.set_distinct_subject(s, 2)
     
     def voidify(self, void_model, dataset):
         pass
