@@ -27,31 +27,36 @@ from Indegree import Indegree
 from PropertyHierarchyDepth import PropertyHierarchyDepth
 from SubclassUsage import SubclassUsage
 from Entities import Entities
+from Literals import Literals
+from BlanksAsSubject import BlanksAsSubject
+from BlanksAsObject import BlanksAsObject
+from Datatypes import Datatypes
+from Languages import Languages
+from StringLength import StringLength
+from TypedSubjects import TypedSubjects
+from LabeledSubjects import LabeledSubjects
+from SameAs import SameAs
+from Links import Links
+# max per property
+# avg per property
+from Vocabularies import Vocabularies, VocabulariesPerNode
 
-from Vocabularies import *
-from basics import Literals, Blanks, Subclasses, TypedSubjects, LabeledSubjects, SameAs, LiteralsList
+from basics import LiteralsList
 from CookieCounter import *
-from StringLength import *
-from Languages import *
-from Datatypes import *
-from PropertiesPerEntity import *
-from Links import *
 from RDFSyntax import *
 from RDFSchema import *
 from Owl import *
-from PropertyHierarchy import *
 
 # test
 test_stats = [Indegree, Outdegree, PropertyHierarchyDepth, SubclassUsage, Entities]
 # add Python-classes for doing stats here after importing them above:
-available_stats = [UsedClasses, ClassesDefined, ClassHierarchyDepth, PropertyUsage,\
-        Vocabularies, VocabulariesPerNode, Entities, Literals, Blanks,\
-        Subclasses, TypedSubjects, LabeledSubjects, Languages, StringLength, PropertiesPerEntity,\
-        RDFSyntax, RDFSchema, Owl, PropertyHierarchy, Links, Datatypes, SameAs]
+available_stats = [UsedClasses, ClassesDefined, ClassHierarchyDepth, PropertyUsage, PropertyUsageDistinctPerSubject, PropertyUsageDistinctPerObject,\
+        Outdegree, Indegree, PropertyHierarchyDepth, SubclassUsage, Entities, Literals, BlanksAsSubject, BlanksAsObject, Datatypes,\
+        Languages, StringLength, TypedSubjects, LabeledSubjects, SameAs, Links, Vocabularies, VocabulariesPerNode]
 # stuff usually run for lodstats/web
-lodstats = [UsedClasses, ClassesDefined, Vocabularies, Entities, Literals, Blanks,\
-    Subclasses, TypedSubjects, LabeledSubjects, Languages, StringLength, PropertiesPerEntity,\
-    ClassHierarchyDepth, PropertyHierarchy, Links, Datatypes]
+lodstats = [UsedClasses, ClassesDefined, ClassHierarchyDepth, PropertyUsage, PropertyUsageDistinctPerSubject, PropertyUsageDistinctPerObject,\
+        Outdegree, Indegree, PropertyHierarchyDepth, SubclassUsage, Entities, Literals, BlanksAsSubject, BlanksAsObject, Datatypes,\
+        Languages, StringLength, TypedSubjects, LabeledSubjects, SameAs, Links, Vocabularies, VocabulariesPerNode]
 # not so useful/redundant optional stuff
 stupid_stats = [LiteralsList, CookieCounter]
 # stats for owl, rdf-schema, -syntax

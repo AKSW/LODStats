@@ -40,8 +40,6 @@ parser.add_option('-s', '--schema-syntax-owl', action='store_true', help='do sta
 parser.add_option('-d', '--debug', action='store_true', help='print debugging output')
 (options, args) = parser.parse_args()
 
-print options
-
 if len(args) == 0:
     parser.print_help()
     exit(2)
