@@ -35,6 +35,7 @@ python setup.py install
 cd ../
 git clone git://github.com/earthquakesan/CSV2RDF-WIKI.git
 cd CSV2RDF-WIKI/
+add2virtualenv ./
 ./deploy-for-lodstats
 
 (lodstats) $ lodstats --help
