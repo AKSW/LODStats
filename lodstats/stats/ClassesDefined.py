@@ -17,6 +17,8 @@ You should have received a copy of the GNU General Public License
 along with LODStats.  If not, see <http://www.gnu.org/licenses/>.
 """
 from RDFStatInterface import RDFStatInterface
+import lodstats.util.rdf_namespaces
+import RDF
 
 class ClassesDefined(RDFStatInterface):
     """
@@ -29,7 +31,6 @@ class ClassesDefined(RDFStatInterface):
         self.usage_count = self.results['usage_count'] = {}
         
     def count(self, s, p, o, s_blank, o_l, o_blank, statement):
-
         # "classes defined" criterion filter
         if (p == 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' and o == 'http://www.w3.org/2000/01/rdf-schema#Class') or\
            (p == 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' and o == 'http://www.w3.org/2002/07/owl#Class'):
@@ -40,7 +41,14 @@ class ClassesDefined(RDFStatInterface):
             self.usage_count[o] += 1
     
     def voidify(self, void_model, dataset):
-        pass
+        namespaces = lodstats.util.rdf_namespaces.RDFNamespaces()
+        datatype_uri = namespaces.get_rdf_namespace("xsd").integer.uri
+        number_of_distinct_classes = str(self.results['count'])
+        number_of_distinct_classes_node = RDF.Node(literal=number_of_distinct_classes, 
+                                          datatype=datatype_uri)
+        void_model.append(RDF.Statement(dataset,
+                                        namespaces.get_rdf_namespace("void").classes,
+                                        number_of_distinct_classes_node))
 
     def postproc(self):
         self.count = self.results['count'] = len(self.usage_count)

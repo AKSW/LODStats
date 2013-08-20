@@ -16,3 +16,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with LODStats.  If not, see <http://www.gnu.org/licenses/>.
 """
+
+"""file extensions that will be processed"""
+rdf_extensions = ('.nt', '.rdf', '.ttl', '.n3', '.nq', '.owl', '.rdfs')
+

@@ -41,14 +41,20 @@ from Links import Links
 # avg per property
 from Vocabularies import Vocabularies, VocabulariesPerNode
 
+#Void specific
+from DistinctSubjects import DistinctSubjects
+from DistinctObjects import DistinctObjects
+
 from basics import LiteralsList
 from CookieCounter import *
-from RDFSyntax import *
-from RDFSchema import *
-from Owl import *
+
+#vocabulary count
+from RDFSyntax import RDFSyntax
+from RDFSchema import RDFSchema
+from Owl import Owl
 
 # test
-test_stats = [Indegree, Outdegree, PropertyHierarchyDepth, SubclassUsage, Entities]
+test_stats = [PropertyUsageDistinctPerSubject]
 # add Python-classes for doing stats here after importing them above:
 available_stats = [UsedClasses, ClassesDefined, ClassHierarchyDepth, PropertyUsage, PropertyUsageDistinctPerSubject, PropertyUsageDistinctPerObject,\
         Outdegree, Indegree, PropertyHierarchyDepth, SubclassUsage, Entities, Literals, BlanksAsSubject, BlanksAsObject, Datatypes,\
@@ -62,7 +68,7 @@ stupid_stats = [LiteralsList, CookieCounter]
 # stats for owl, rdf-schema, -syntax
 vocab_stats = [RDFSyntax, RDFSchema, Owl]
 # stats necessary for VoiD
-void_stats = [UsedClasses, Vocabularies, Entities]
+void_stats = [Vocabularies, Entities, ClassesDefined, PropertyUsage, DistinctSubjects, DistinctObjects]
 # links only
 link_stats = [Links]
 
@@ -71,6 +77,7 @@ stats_to_do = []
 results = {}
 # init stats-objects, only do void by default
 def init_stats(stats_list=void_stats):
+    #stats_to_do = []
     """init classes from stats_list, those necessary for VoID per default"""
     for stat_class in stats_list:
         stats_to_do.append(stat_class(results))

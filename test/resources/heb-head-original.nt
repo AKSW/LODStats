@@ -1,0 +1,500 @@
+<http://lod.hebis.de/resource/05051128> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/vocab/frbr/core#Manifestation> .
+<http://lod.hebis.de/resource/05051128> <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051128> .
+<http://lod.hebis.de/resource/05051128> <http://purl.org/dc/terms/medium> "paper" .
+<http://lod.hebis.de/resource/05051128> <http://purl.org/dc/terms/format> "print" .
+<http://lod.hebis.de/resource/05051128> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/dc/terms/BibliographicResource> .
+<http://lod.hebis.de/resource/05051128> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/bibo/Book> .
+<http://lod.hebis.de/resource/05051128> <http://purl.org/dc/terms/identifier> "050511289" .
+<http://lod.hebis.de/resource/05051128> <http://purl.org/ontology/bibo/oclcnum> "35919757" .
+<http://lod.hebis.de/resource/05051128> <http://www.w3.org/2002/07/owl#sameAs> "http://d-nb.info/948112298" .
+<http://lod.hebis.de/resource/05051128> <http://iflastandards.info/ns/isbd/elements/P1018> "1996" .
+<http://lod.hebis.de/resource/05051128> <http://purl.org/dc/terms/issued> "1996" .
+<http://lod.hebis.de/resource/05051128> <http://purl.org/dc/terms/title> "Melanchthon und die Reformation" .
+<http://lod.hebis.de/resource/05051128> <http://iflastandards.info/ns/isbd/elements/P1004> "Melanchthon und die Reformation" .
+<http://lod.hebis.de/resource/05051128> <http://iflastandards.info/ns/isbd/elements/P1006> "Forschungsbeitr\u00E4ge" .
+<http://lod.hebis.de/resource/05051128> <http://purl.org/dc/terms/creator> "http://d-nb.info/gnd/123087988" .
+<http://lod.hebis.de/resource/05051128> <http://purl.org/dc/terms/contributor> "http://d-nb.info/gnd/130599832" .
+<http://lod.hebis.de/resource/05051128> <http://purl.org/dc/terms/contributor> "http://d-nb.info/gnd/10895787X" .
+<http://lod.hebis.de/resource/05051128> <http://iflastandards.info/ns/isbd/elements/P1016> "Mainz" .
+<http://lod.hebis.de/resource/05051128> <http://iflastandards.info/ns/isbd/elements/P1017> "von Zabern" .
+<http://lod.hebis.de/resource/05051128> <http://purl.org/dc/terms/publisher> "von Zabern" .
+<http://lod.hebis.de/resource/05051128> <http://purl.org/dc/terms/subject> "http://d-nb.info/gnd/118580485" .
+<http://lod.hebis.de/resource/05051128> <http://purl.org/dc/terms/subject> "http://d-nb.info/gnd/4048946-2" .
+<http://lod.hebis.de/resource/05051129> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/vocab/frbr/core#Manifestation> .
+<http://lod.hebis.de/resource/05051129> <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051129> .
+<http://lod.hebis.de/resource/05051129> <http://purl.org/dc/terms/medium> "paper" .
+<http://lod.hebis.de/resource/05051129> <http://purl.org/dc/terms/format> "print" .
+<http://lod.hebis.de/resource/05051129> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/dc/terms/BibliographicResource> .
+<http://lod.hebis.de/resource/05051129> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/bibo/Book> .
+<http://lod.hebis.de/resource/05051129> <http://purl.org/dc/terms/identifier> "050511297" .
+<http://lod.hebis.de/resource/05051129> <http://purl.org/ontology/bibo/oclcnum> "10216004" .
+<http://lod.hebis.de/resource/05051129> <http://iflastandards.info/ns/isbd/elements/P1018> "1967" .
+<http://lod.hebis.de/resource/05051129> <http://purl.org/dc/terms/issued> "1967" .
+<http://lod.hebis.de/resource/05051129> <http://purl.org/dc/terms/title> "Die Rationalit\u00E4t der europ\u00E4ischen Agrarpolitik" .
+<http://lod.hebis.de/resource/05051129> <http://iflastandards.info/ns/isbd/elements/P1004> "Die @Rationalit\u00E4t der europ\u00E4ischen Agrarpolitik" .
+<http://lod.hebis.de/resource/05051129> <http://purl.org/dc/terms/creator> "http://d-nb.info/gnd/106959247" .
+<http://lod.hebis.de/resource/05051129> <http://iflastandards.info/ns/isbd/elements/P1016> "G\u00F6ttingen" .
+<http://lod.hebis.de/resource/05051129> <http://iflastandards.info/ns/isbd/elements/P1017> "Vandenhoeck & Ruprecht" .
+<http://lod.hebis.de/resource/05051129> <http://purl.org/dc/terms/publisher> "Vandenhoeck & Ruprecht" .
+<http://lod.hebis.de/resource/05051130> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/vocab/frbr/core#Manifestation> .
+<http://lod.hebis.de/resource/05051130> <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051130> .
+<http://lod.hebis.de/resource/05051130> <http://purl.org/dc/terms/medium> "paper" .
+<http://lod.hebis.de/resource/05051130> <http://purl.org/dc/terms/format> "print" .
+<http://lod.hebis.de/resource/05051130> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/dc/terms/BibliographicResource> .
+<http://lod.hebis.de/resource/05051130> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/bibo/Book> .
+<http://lod.hebis.de/resource/05051130> <http://purl.org/dc/terms/identifier> "050511300" .
+<http://lod.hebis.de/resource/05051130> <http://purl.org/ontology/bibo/oclcnum> "33664695" .
+<http://lod.hebis.de/resource/05051130> <http://iflastandards.info/ns/isbd/elements/P1018> "1995" .
+<http://lod.hebis.de/resource/05051130> <http://purl.org/dc/terms/issued> "1995" .
+<http://lod.hebis.de/resource/05051130> <http://purl.org/dc/terms/title> "Att uppt\u00E4cka systemn\u00E4tverk i edukativ sl\u00F6jd" .
+<http://lod.hebis.de/resource/05051130> <http://iflastandards.info/ns/isbd/elements/P1004> "Att uppt\u00E4cka systemn\u00E4tverk i edukativ sl\u00F6jd" .
+<http://lod.hebis.de/resource/05051130> <http://iflastandards.info/ns/isbd/elements/P1006> "analyser av elevens sl\u00F6jdhandlingar i en kontext ; en paradigmutvecklande ansats" .
+<http://lod.hebis.de/resource/05051130> <http://iflastandards.info/ns/isbd/elements/P1016> "\u00C5bo" .
+<http://lod.hebis.de/resource/05051130> <http://iflastandards.info/ns/isbd/elements/P1017> "\u00C5bo Akad. F\u00F6rlag" .
+<http://lod.hebis.de/resource/05051130> <http://purl.org/dc/terms/publisher> "\u00C5bo Akad. F\u00F6rlag" .
+<http://lod.hebis.de/resource/05051131> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/vocab/frbr/core#Manifestation> .
+<http://lod.hebis.de/resource/05051131> <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051131> .
+<http://lod.hebis.de/resource/05051131> <http://purl.org/dc/terms/medium> "paper" .
+<http://lod.hebis.de/resource/05051131> <http://purl.org/dc/terms/format> "print" .
+<http://lod.hebis.de/resource/05051131> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/dc/terms/BibliographicResource> .
+<http://lod.hebis.de/resource/05051131> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/bibo/Book> .
+<http://lod.hebis.de/resource/05051131> <http://purl.org/dc/terms/identifier> "050511319" .
+<http://lod.hebis.de/resource/05051131> <http://purl.org/ontology/bibo/oclcnum> "174337787" .
+<http://lod.hebis.de/resource/05051131> <http://iflastandards.info/ns/isbd/elements/P1018> "1932" .
+<http://lod.hebis.de/resource/05051131> <http://purl.org/dc/terms/issued> "1932" .
+<http://lod.hebis.de/resource/05051131> <http://purl.org/dc/terms/title> "Unter Indianern" .
+<http://lod.hebis.de/resource/05051131> <http://iflastandards.info/ns/isbd/elements/P1004> "Unter Indianern" .
+<http://lod.hebis.de/resource/05051131> <http://iflastandards.info/ns/isbd/elements/P1006> "Abenteuer eines deutschen Jungen" .
+<http://lod.hebis.de/resource/05051131> <http://iflastandards.info/ns/isbd/elements/P1016> "Reutlingen" .
+<http://lod.hebis.de/resource/05051131> <http://iflastandards.info/ns/isbd/elements/P1017> "En\u00DFlin & Laiblin" .
+<http://lod.hebis.de/resource/05051131> <http://purl.org/dc/terms/publisher> "En\u00DFlin & Laiblin" .
+<http://lod.hebis.de/resource/05051132> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/vocab/frbr/core#Manifestation> .
+<http://lod.hebis.de/resource/05051132> <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051132> .
+<http://lod.hebis.de/resource/05051132> <http://purl.org/dc/terms/medium> "paper" .
+<http://lod.hebis.de/resource/05051132> <http://purl.org/dc/terms/format> "print" .
+<http://lod.hebis.de/resource/05051132> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/dc/terms/BibliographicResource> .
+<http://lod.hebis.de/resource/05051132> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/bibo/Book> .
+<http://lod.hebis.de/resource/05051132> <http://purl.org/dc/terms/identifier> "050511327" .
+<http://lod.hebis.de/resource/05051132> <http://purl.org/ontology/bibo/oclcnum> "31243045" .
+<http://lod.hebis.de/resource/05051132> <http://iflastandards.info/ns/isbd/elements/P1018> "1996" .
+<http://lod.hebis.de/resource/05051132> <http://purl.org/dc/terms/issued> "1996" .
+<http://lod.hebis.de/resource/05051132> <http://purl.org/dc/terms/title> "The Oxford history of world cinema" .
+<http://lod.hebis.de/resource/05051132> <http://iflastandards.info/ns/isbd/elements/P1004> "The @Oxford history of world cinema" .
+<http://lod.hebis.de/resource/05051132> <http://purl.org/dc/terms/contributor> "http://d-nb.info/gnd/136378595" .
+<http://lod.hebis.de/resource/05051132> <http://purl.org/ontology/bibo/edition> "1. [Dr.]" .
+<http://lod.hebis.de/resource/05051132> <http://iflastandards.info/ns/isbd/elements/P1008> "1. [Dr.]" .
+<http://lod.hebis.de/resource/05051132> <http://iflastandards.info/ns/isbd/elements/P1016> "Oxford {[u.a.]" .
+<http://lod.hebis.de/resource/05051132> <http://iflastandards.info/ns/isbd/elements/P1017> "Oxford Univ. Press" .
+<http://lod.hebis.de/resource/05051132> <http://purl.org/dc/terms/publisher> "Oxford Univ. Press" .
+<http://lod.hebis.de/resource/05051133> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/vocab/frbr/core#Manifestation> .
+<http://lod.hebis.de/resource/05051133> <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051133> .
+<http://lod.hebis.de/resource/05051133> <http://purl.org/dc/terms/medium> "paper" .
+<http://lod.hebis.de/resource/05051133> <http://purl.org/dc/terms/format> "print" .
+<http://lod.hebis.de/resource/05051133> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/dc/terms/BibliographicResource> .
+<http://lod.hebis.de/resource/05051133> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/bibo/Book> .
+<http://lod.hebis.de/resource/05051133> <http://purl.org/dc/terms/identifier> "050511335" .
+<http://lod.hebis.de/resource/05051133> <http://purl.org/ontology/bibo/oclcnum> "32467926" .
+<http://lod.hebis.de/resource/05051133> <http://iflastandards.info/ns/isbd/elements/P1018> "1995" .
+<http://lod.hebis.de/resource/05051133> <http://purl.org/dc/terms/issued> "1995" .
+<http://lod.hebis.de/resource/05051133> <http://purl.org/dc/terms/title> "Analytic element modeling of groundwater flow" .
+<http://lod.hebis.de/resource/05051133> <http://iflastandards.info/ns/isbd/elements/P1004> "Analytic element modeling of groundwater flow" .
+<http://lod.hebis.de/resource/05051133> <http://purl.org/ontology/bibo/edition> "1. [Dr.]" .
+<http://lod.hebis.de/resource/05051133> <http://iflastandards.info/ns/isbd/elements/P1008> "1. [Dr.]" .
+<http://lod.hebis.de/resource/05051133> <http://iflastandards.info/ns/isbd/elements/P1016> "San Diego, Calif. {[u.a.]" .
+<http://lod.hebis.de/resource/05051133> <http://iflastandards.info/ns/isbd/elements/P1017> "Acad. Press" .
+<http://lod.hebis.de/resource/05051133> <http://purl.org/dc/terms/publisher> "Acad. Press" .
+<http://lod.hebis.de/resource/05051134> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/vocab/frbr/core#Manifestation> .
+<http://lod.hebis.de/resource/05051134> <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051134> .
+<http://lod.hebis.de/resource/05051134> <http://purl.org/dc/terms/medium> "paper" .
+<http://lod.hebis.de/resource/05051134> <http://purl.org/dc/terms/format> "print" .
+<http://lod.hebis.de/resource/05051134> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/dc/terms/BibliographicResource> .
+<http://lod.hebis.de/resource/05051134> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/bibo/Book> .
+<http://lod.hebis.de/resource/05051134> <http://purl.org/dc/terms/identifier> "050511343" .
+<http://lod.hebis.de/resource/05051134> <http://purl.org/ontology/bibo/oclcnum> "76383556" .
+<http://lod.hebis.de/resource/05051134> <http://iflastandards.info/ns/isbd/elements/P1018> "1993" .
+<http://lod.hebis.de/resource/05051134> <http://purl.org/dc/terms/issued> "1993" .
+<http://lod.hebis.de/resource/05051134> <http://purl.org/dc/terms/title> "Was w\u00E4re wenn wir planen w\u00FCrden ..." .
+<http://lod.hebis.de/resource/05051134> <http://iflastandards.info/ns/isbd/elements/P1004> "Was w\u00E4re wenn wir planen w\u00FCrden ..." .
+<http://lod.hebis.de/resource/05051134> <http://iflastandards.info/ns/isbd/elements/P1006> "Stadtplanung aus der Sicht von Frauen" .
+<http://lod.hebis.de/resource/05051134> <http://purl.org/dc/terms/creator> "http://d-nb.info/gnd/123547466" .
+<http://lod.hebis.de/resource/05051134> <http://purl.org/dc/terms/creator> "http://d-nb.info/gnd/123547474" .
+_:genid1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq> .
+_:genid1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#_1> <http://d-nb.info/gnd/123547482> .
+<http://lod.hebis.de/resource/05051134> <http://purl.org/ontology/bibo/authorlist> _:genid1 .
+<http://lod.hebis.de/resource/05051134> <http://iflastandards.info/ns/isbd/elements/P1016> "Wetzlar" .
+<http://lod.hebis.de/resource/05051135> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/vocab/frbr/core#Manifestation> .
+<http://lod.hebis.de/resource/05051135> <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051135> .
+<http://lod.hebis.de/resource/05051135> <http://purl.org/dc/terms/medium> "paper" .
+<http://lod.hebis.de/resource/05051135> <http://purl.org/dc/terms/format> "print" .
+<http://lod.hebis.de/resource/05051135> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/dc/terms/BibliographicResource> .
+<http://lod.hebis.de/resource/05051135> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/bibo/Book> .
+<http://lod.hebis.de/resource/05051135> <http://purl.org/dc/terms/identifier> "050511351" .
+<http://lod.hebis.de/resource/05051135> <http://purl.org/ontology/bibo/oclcnum> "174337788" .
+<http://lod.hebis.de/resource/05051135> <http://iflastandards.info/ns/isbd/elements/P1018> "1932" .
+<http://lod.hebis.de/resource/05051135> <http://purl.org/dc/terms/issued> "1932" .
+<http://lod.hebis.de/resource/05051135> <http://purl.org/dc/terms/title> "Motorradjagden mit Film und B\u00FCchse" .
+<http://lod.hebis.de/resource/05051135> <http://iflastandards.info/ns/isbd/elements/P1004> "Motorradjagden mit Film und B\u00FCchse" .
+<http://lod.hebis.de/resource/05051135> <http://iflastandards.info/ns/isbd/elements/P1006> "abenteuerliche Film- und Jagdexpedition quer durch Afrika ; von einem Teilnehmer erz\u00E4hlt" .
+<http://lod.hebis.de/resource/05051135> <http://purl.org/dc/terms/creator> "http://d-nb.info/gnd/127965130" .
+<http://lod.hebis.de/resource/05051135> <http://iflastandards.info/ns/isbd/elements/P1016> "Reutlingen" .
+<http://lod.hebis.de/resource/05051135> <http://iflastandards.info/ns/isbd/elements/P1017> "En\u00DFlin & Laiblin" .
+<http://lod.hebis.de/resource/05051135> <http://purl.org/dc/terms/publisher> "En\u00DFlin & Laiblin" .
+<http://lod.hebis.de/resource/05051136> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/vocab/frbr/core#Manifestation> .
+<http://lod.hebis.de/resource/05051136> <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051136> .
+<http://lod.hebis.de/resource/05051136> <http://purl.org/dc/terms/medium> "paper" .
+<http://lod.hebis.de/resource/05051136> <http://purl.org/dc/terms/format> "print" .
+<http://lod.hebis.de/resource/05051136> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/dc/terms/BibliographicResource> .
+<http://lod.hebis.de/resource/05051136> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/bibo/Book> .
+<http://lod.hebis.de/resource/05051136> <http://purl.org/dc/terms/identifier> "05051136X" .
+<http://lod.hebis.de/resource/05051136> <http://purl.org/ontology/bibo/oclcnum> "64536228" .
+<http://lod.hebis.de/resource/05051136> <http://www.w3.org/2002/07/owl#sameAs> "http://d-nb.info/947682732" .
+<http://lod.hebis.de/resource/05051136> <http://iflastandards.info/ns/isbd/elements/P1018> "1996" .
+<http://lod.hebis.de/resource/05051136> <http://purl.org/dc/terms/issued> "1996" .
+<http://lod.hebis.de/resource/05051136> <http://purl.org/dc/terms/title> "Die Geschichte des Christentums" .
+<http://lod.hebis.de/resource/05051136> <http://iflastandards.info/ns/isbd/elements/P1004> "Die @Geschichte des Christentums" .
+<http://lod.hebis.de/resource/05051136> <http://purl.org/dc/terms/alternative> "A @history of Christianity" .
+<http://lod.hebis.de/resource/05051136> <http://purl.org/dc/terms/creator> "http://d-nb.info/gnd/109342011" .
+<http://lod.hebis.de/resource/05051136> <http://iflastandards.info/ns/isbd/elements/P1016> "Stuttgart" .
+<http://lod.hebis.de/resource/05051136> <http://iflastandards.info/ns/isbd/elements/P1017> "Dt. Verl.-Anst." .
+<http://lod.hebis.de/resource/05051136> <http://purl.org/dc/terms/publisher> "Dt. Verl.-Anst." .
+<http://lod.hebis.de/resource/05051136> <http://purl.org/dc/terms/subject> "http://d-nb.info/gnd/4030720-7" .
+<http://lod.hebis.de/resource/05051137> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/vocab/frbr/core#Manifestation> .
+<http://lod.hebis.de/resource/05051137> <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051137> .
+<http://lod.hebis.de/resource/05051137> <http://purl.org/dc/terms/medium> "paper" .
+<http://lod.hebis.de/resource/05051137> <http://purl.org/dc/terms/format> "print" .
+<http://lod.hebis.de/resource/05051137> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/dc/terms/BibliographicResource> .
+<http://lod.hebis.de/resource/05051137> <http://purl.org/dc/terms/identifier> "050511378" .
+<http://lod.hebis.de/resource/05051137> <http://purl.org/ontology/bibo/oclcnum> "311887063" .
+<http://lod.hebis.de/resource/05051137> <http://iflastandards.info/ns/isbd/elements/P1018> "1993" .
+<http://lod.hebis.de/resource/05051137> <http://purl.org/dc/terms/issued> "1993" .
+<http://lod.hebis.de/resource/05051137> <http://purl.org/dc/terms/contributor> "http://d-nb.info/gnd/11921511X" .
+<http://lod.hebis.de/resource/05051137> <http://purl.org/ontology/bibo/edition> "2., unver\u00E4nd. Aufl." .
+<http://lod.hebis.de/resource/05051137> <http://iflastandards.info/ns/isbd/elements/P1008> "2., unver\u00E4nd. Aufl." .
+<http://lod.hebis.de/resource/05051137> <http://iflastandards.info/ns/isbd/elements/P1016> "Stuttgart" .
+<http://lod.hebis.de/resource/05051137> <http://iflastandards.info/ns/isbd/elements/P1017> "Fraunhofer IRB-Verl." .
+<http://lod.hebis.de/resource/05051137> <http://purl.org/dc/terms/publisher> "Fraunhofer IRB-Verl." .
+<http://lod.hebis.de/resource/05051138> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/vocab/frbr/core#Manifestation> .
+<http://lod.hebis.de/resource/05051138> <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051138> .
+<http://lod.hebis.de/resource/05051138> <http://purl.org/dc/terms/medium> "paper" .
+<http://lod.hebis.de/resource/05051138> <http://purl.org/dc/terms/format> "print" .
+<http://lod.hebis.de/resource/05051138> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/dc/terms/BibliographicResource> .
+<http://lod.hebis.de/resource/05051138> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/bibo/Book> .
+<http://lod.hebis.de/resource/05051138> <http://purl.org/dc/terms/identifier> "050511386" .
+<http://lod.hebis.de/resource/05051138> <http://purl.org/ontology/bibo/oclcnum> "174337792" .
+<http://lod.hebis.de/resource/05051138> <http://iflastandards.info/ns/isbd/elements/P1018> "1826" .
+<http://lod.hebis.de/resource/05051138> <http://purl.org/dc/terms/issued> "1826" .
+<http://lod.hebis.de/resource/05051138> <http://purl.org/dc/terms/title> "\u00DCber die ehemalige Liebfrauen-Kirche" .
+<http://lod.hebis.de/resource/05051138> <http://iflastandards.info/ns/isbd/elements/P1004> "\u00DCber die ehemalige Liebfrauen-Kirche" .
+<http://lod.hebis.de/resource/05051138> <http://iflastandards.info/ns/isbd/elements/P1006> "ein Vortrag zur ausf\u00FChrlichen Erkl\u00E4rung einer i. J. 1801 nach d. Natur gekennzeichn. Ansicht d. Portals dieser Kirche, u. des hierauf Bezug habenden Geschichtlichen, gehalten d. 30ten Okt. 1826, i. d. Vers. d. Freunde f\u00FCr Litteratur u. Kunst" .
+<http://lod.hebis.de/resource/05051138> <http://purl.org/dc/terms/creator> "http://d-nb.info/gnd/120193019" .
+<http://lod.hebis.de/resource/05051139> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/vocab/frbr/core#Manifestation> .
+<http://lod.hebis.de/resource/05051139> <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051139> .
+<http://lod.hebis.de/resource/05051139> <http://purl.org/dc/terms/medium> "paper" .
+<http://lod.hebis.de/resource/05051139> <http://purl.org/dc/terms/format> "print" .
+<http://lod.hebis.de/resource/05051139> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/dc/terms/BibliographicResource> .
+<http://lod.hebis.de/resource/05051139> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/bibo/Book> .
+<http://lod.hebis.de/resource/05051139> <http://purl.org/dc/terms/identifier> "050511394" .
+<http://lod.hebis.de/resource/05051139> <http://purl.org/ontology/bibo/oclcnum> "602806441" .
+<http://lod.hebis.de/resource/05051139> <http://www.w3.org/2002/07/owl#sameAs> "http://d-nb.info/820668214" .
+<http://lod.hebis.de/resource/05051139> <http://iflastandards.info/ns/isbd/elements/P1018> "1970" .
+<http://lod.hebis.de/resource/05051139> <http://purl.org/dc/terms/issued> "1970" .
+<http://lod.hebis.de/resource/05051139> <http://purl.org/dc/terms/title> "Die Wochenendpendler des Bayerischen und \u00D6stlichen Oberpf\u00E4lzer Waldes" .
+<http://lod.hebis.de/resource/05051139> <http://iflastandards.info/ns/isbd/elements/P1004> "Die @Wochenendpendler des Bayerischen und \u00D6stlichen Oberpf\u00E4lzer Waldes" .
+<http://lod.hebis.de/resource/05051139> <http://iflastandards.info/ns/isbd/elements/P1006> "eine wirtschaftsgeographische Regionalstudie unter besonderer Ber\u00FCcksichtigung des Einpendlerzentrums M\u00FCnchen" .
+<http://lod.hebis.de/resource/05051139> <http://purl.org/dc/terms/creator> "http://d-nb.info/gnd/123466911" .
+<http://lod.hebis.de/resource/05051139> <http://iflastandards.info/ns/isbd/elements/P1016> "M\u00FCnchen" .
+<http://lod.hebis.de/resource/05051139> <http://iflastandards.info/ns/isbd/elements/P1017> "Geographische Buchh." .
+<http://lod.hebis.de/resource/05051139> <http://purl.org/dc/terms/publisher> "Geographische Buchh." .
+<http://lod.hebis.de/resource/05051140> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/vocab/frbr/core#Manifestation> .
+<http://lod.hebis.de/resource/05051140> <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051140> .
+<http://lod.hebis.de/resource/05051140> <http://purl.org/dc/terms/medium> "paper" .
+<http://lod.hebis.de/resource/05051140> <http://purl.org/dc/terms/format> "print" .
+<http://lod.hebis.de/resource/05051140> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/dc/terms/BibliographicResource> .
+<http://lod.hebis.de/resource/05051140> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/bibo/Book> .
+<http://lod.hebis.de/resource/05051140> <http://purl.org/dc/terms/identifier> "050511408" .
+<http://lod.hebis.de/resource/05051140> <http://purl.org/ontology/bibo/oclcnum> "174337794" .
+<http://lod.hebis.de/resource/05051140> <http://iflastandards.info/ns/isbd/elements/P1018> "1815" .
+<http://lod.hebis.de/resource/05051140> <http://purl.org/dc/terms/issued> "1815" .
+<http://lod.hebis.de/resource/05051140> <http://purl.org/dc/terms/title> "Predigten in Beziehung auf die der das Vaterland so gl\u00FCcklichen Ereignisse der Jahre 1813 und 1814" .
+<http://lod.hebis.de/resource/05051140> <http://iflastandards.info/ns/isbd/elements/P1004> "Predigten in Beziehung auf die der das Vaterland so gl\u00FCcklichen Ereignisse der Jahre 1813 und 1814" .
+<http://lod.hebis.de/resource/05051140> <http://purl.org/dc/terms/creator> "http://d-nb.info/gnd/12755159X" .
+<http://lod.hebis.de/resource/05051140> <http://iflastandards.info/ns/isbd/elements/P1016> "Cassel {[u.a.]" .
+<http://lod.hebis.de/resource/05051140> <http://iflastandards.info/ns/isbd/elements/P1017> "Krieger" .
+<http://lod.hebis.de/resource/05051140> <http://purl.org/dc/terms/publisher> "Krieger" .
+<http://lod.hebis.de/resource/05051141> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/vocab/frbr/core#Manifestation> .
+<http://lod.hebis.de/resource/05051141> <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051141> .
+<http://lod.hebis.de/resource/05051141> <http://purl.org/dc/terms/medium> "paper" .
+<http://lod.hebis.de/resource/05051141> <http://purl.org/dc/terms/format> "print" .
+<http://lod.hebis.de/resource/05051141> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/dc/terms/BibliographicResource> .
+<http://lod.hebis.de/resource/05051141> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/bibo/Book> .
+<http://lod.hebis.de/resource/05051141> <http://purl.org/dc/terms/identifier> "050511416" .
+<http://lod.hebis.de/resource/05051141> <http://purl.org/ontology/bibo/oclcnum> "174337795" .
+<http://lod.hebis.de/resource/05051141> <http://iflastandards.info/ns/isbd/elements/P1018> "1932" .
+<http://lod.hebis.de/resource/05051141> <http://purl.org/dc/terms/issued> "1932" .
+<http://lod.hebis.de/resource/05051141> <http://purl.org/dc/terms/title> "Die Expedition des Mister Penn" .
+<http://lod.hebis.de/resource/05051141> <http://iflastandards.info/ns/isbd/elements/P1004> "Die @Expedition des Mister Penn" .
+<http://lod.hebis.de/resource/05051141> <http://iflastandards.info/ns/isbd/elements/P1006> "aus den Erlebnissen eines afrikanischen Globetrotters" .
+<http://lod.hebis.de/resource/05051141> <http://purl.org/dc/terms/creator> "http://d-nb.info/gnd/126471630" .
+<http://lod.hebis.de/resource/05051141> <http://iflastandards.info/ns/isbd/elements/P1016> "Reutlingen" .
+<http://lod.hebis.de/resource/05051141> <http://iflastandards.info/ns/isbd/elements/P1017> "En\u00DFlin & Laiblin" .
+<http://lod.hebis.de/resource/05051141> <http://purl.org/dc/terms/publisher> "En\u00DFlin & Laiblin" .
+<http://lod.hebis.de/resource/05051142> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/vocab/frbr/core#Manifestation> .
+<http://lod.hebis.de/resource/05051142> <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051142> .
+<http://lod.hebis.de/resource/05051142> <http://purl.org/dc/terms/medium> "paper" .
+<http://lod.hebis.de/resource/05051142> <http://purl.org/dc/terms/format> "print" .
+<http://lod.hebis.de/resource/05051142> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/dc/terms/BibliographicResource> .
+<http://lod.hebis.de/resource/05051142> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/bibo/Book> .
+<http://lod.hebis.de/resource/05051142> <http://purl.org/dc/terms/identifier> "050511424" .
+<http://lod.hebis.de/resource/05051142> <http://purl.org/ontology/bibo/oclcnum> "174337792" .
+<http://lod.hebis.de/resource/05051142> <http://iflastandards.info/ns/isbd/elements/P1018> "1826" .
+<http://lod.hebis.de/resource/05051142> <http://purl.org/dc/terms/issued> "1826" .
+<http://lod.hebis.de/resource/05051142> <http://purl.org/dc/terms/title> "\u00DCber die ehemalige Liebfrauen-Kirche" .
+<http://lod.hebis.de/resource/05051142> <http://iflastandards.info/ns/isbd/elements/P1004> "\u00DCber die ehemalige Liebfrauen-Kirche" .
+<http://lod.hebis.de/resource/05051142> <http://iflastandards.info/ns/isbd/elements/P1006> "ein Vortrag zur ausf\u00FChrlichen Erkl\u00E4rung einer i. J. 1801 nach d. Natur gekennzeichn. Ansicht d. Portals dieser Kirche, u. des hierauf Bezug habenden Geschichtlichen, gehalten d. 30ten Okt. 1826, i. d. Vers. d. Freunde f\u00FCr Litteratur u. Kunst" .
+<http://lod.hebis.de/resource/05051142> <http://purl.org/dc/terms/creator> "http://d-nb.info/gnd/120193019" .
+<http://lod.hebis.de/resource/05051143> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/vocab/frbr/core#Manifestation> .
+<http://lod.hebis.de/resource/05051143> <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051143> .
+<http://lod.hebis.de/resource/05051143> <http://purl.org/dc/terms/medium> "paper" .
+<http://lod.hebis.de/resource/05051143> <http://purl.org/dc/terms/format> "print" .
+<http://lod.hebis.de/resource/05051143> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/dc/terms/BibliographicResource> .
+<http://lod.hebis.de/resource/05051143> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/bibo/Book> .
+<http://lod.hebis.de/resource/05051143> <http://purl.org/dc/terms/identifier> "050511432" .
+<http://lod.hebis.de/resource/05051143> <http://purl.org/ontology/bibo/oclcnum> "36448381" .
+<http://lod.hebis.de/resource/05051143> <http://www.w3.org/2002/07/owl#sameAs> "http://d-nb.info/948119195" .
+<http://lod.hebis.de/resource/05051143> <http://iflastandards.info/ns/isbd/elements/P1018> "1996" .
+<http://lod.hebis.de/resource/05051143> <http://purl.org/dc/terms/issued> "1996" .
+<http://lod.hebis.de/resource/05051143> <http://purl.org/dc/terms/title> "Im Kampf ums \u00DCberleben" .
+<http://lod.hebis.de/resource/05051143> <http://iflastandards.info/ns/isbd/elements/P1004> "Im Kampf ums \u00DCberleben" .
+<http://lod.hebis.de/resource/05051143> <http://iflastandards.info/ns/isbd/elements/P1006> "j\u00FCdische Schicksale in Polen ; 1939 - 1945" .
+<http://lod.hebis.de/resource/05051143> <http://purl.org/dc/terms/creator> "http://d-nb.info/gnd/104273968" .
+<http://lod.hebis.de/resource/05051143> <http://purl.org/dc/terms/contributor> "http://d-nb.info/gnd/115824960" .
+<http://lod.hebis.de/resource/05051143> <http://iflastandards.info/ns/isbd/elements/P1016> "Konstanz" .
+<http://lod.hebis.de/resource/05051143> <http://iflastandards.info/ns/isbd/elements/P1017> "Hartung-Gorre" .
+<http://lod.hebis.de/resource/05051143> <http://purl.org/dc/terms/publisher> "Hartung-Gorre" .
+<http://lod.hebis.de/resource/05051143> <http://purl.org/dc/terms/subject> "http://d-nb.info/gnd/4011882-4" .
+<http://lod.hebis.de/resource/05051143> <http://purl.org/dc/terms/subject> "http://d-nb.info/gnd/4028814-6" .
+<http://lod.hebis.de/resource/05051143> <http://purl.org/dc/terms/subject> "http://d-nb.info/gnd/4046496-9" .
+<http://lod.hebis.de/resource/05051144> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/vocab/frbr/core#Manifestation> .
+<http://lod.hebis.de/resource/05051144> <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051144> .
+<http://lod.hebis.de/resource/05051144> <http://purl.org/dc/terms/medium> "paper" .
+<http://lod.hebis.de/resource/05051144> <http://purl.org/dc/terms/format> "print" .
+<http://lod.hebis.de/resource/05051144> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/dc/terms/BibliographicResource> .
+<http://lod.hebis.de/resource/05051144> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/bibo/Book> .
+<http://lod.hebis.de/resource/05051144> <http://purl.org/dc/terms/identifier> "050511440" .
+<http://lod.hebis.de/resource/05051144> <http://purl.org/ontology/bibo/oclcnum> "174337799" .
+<http://lod.hebis.de/resource/05051144> <http://iflastandards.info/ns/isbd/elements/P1018> "1982" .
+<http://lod.hebis.de/resource/05051144> <http://purl.org/dc/terms/issued> "1982" .
+<http://lod.hebis.de/resource/05051144> <http://purl.org/dc/terms/title> "Die Mainzer Altstadt in Aquarellen von Carl Bronner um 1930" .
+<http://lod.hebis.de/resource/05051144> <http://iflastandards.info/ns/isbd/elements/P1004> "Die @Mainzer Altstadt in Aquarellen von Carl Bronner um 1930" .
+<http://lod.hebis.de/resource/05051144> <http://purl.org/dc/terms/creator> "http://d-nb.info/gnd/118503928" .
+<http://lod.hebis.de/resource/05051144> <http://purl.org/dc/terms/contributor> "http://d-nb.info/gnd/119047373" .
+<http://lod.hebis.de/resource/05051144> <http://purl.org/dc/terms/contributor> "http://d-nb.info/gnd/115150420" .
+<http://lod.hebis.de/resource/05051144> <http://iflastandards.info/ns/isbd/elements/P1016> "Eltville am Rhein" .
+<http://lod.hebis.de/resource/05051144> <http://iflastandards.info/ns/isbd/elements/P1017> "Walter" .
+<http://lod.hebis.de/resource/05051144> <http://purl.org/dc/terms/publisher> "Walter" .
+<http://lod.hebis.de/resource/05051145> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/vocab/frbr/core#Manifestation> .
+<http://lod.hebis.de/resource/05051145> <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051145> .
+<http://lod.hebis.de/resource/05051145> <http://purl.org/dc/terms/medium> "paper" .
+<http://lod.hebis.de/resource/05051145> <http://purl.org/dc/terms/format> "print" .
+<http://lod.hebis.de/resource/05051145> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/dc/terms/BibliographicResource> .
+<http://lod.hebis.de/resource/05051145> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/bibo/Book> .
+<http://lod.hebis.de/resource/05051145> <http://purl.org/dc/terms/identifier> "050511459" .
+<http://lod.hebis.de/resource/05051145> <http://purl.org/ontology/bibo/oclcnum> "246569210" .
+<http://lod.hebis.de/resource/05051145> <http://iflastandards.info/ns/isbd/elements/P1018> "1994" .
+<http://lod.hebis.de/resource/05051145> <http://purl.org/dc/terms/issued> "1994" .
+<http://lod.hebis.de/resource/05051145> <http://purl.org/dc/terms/title> "Colloquium Musica ac Societas (1740 - 1815)" .
+<http://lod.hebis.de/resource/05051145> <http://iflastandards.info/ns/isbd/elements/P1004> "Colloquium Musica ac Societas (1740 - 1815)" .
+<http://lod.hebis.de/resource/05051145> <http://iflastandards.info/ns/isbd/elements/P1006> "Brno 1989" .
+<http://lod.hebis.de/resource/05051145> <http://purl.org/dc/terms/contributor> "http://d-nb.info/gnd/114538867" .
+_:genid2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq> .
+_:genid2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#_1> <http://d-nb.info/gnd/5160366-4> .
+<http://lod.hebis.de/resource/05051145> <http://purl.org/ontology/bibo/authorlist> _:genid2 .
+<http://lod.hebis.de/resource/05051145> <http://iflastandards.info/ns/isbd/elements/P1016> "Brno" .
+<http://lod.hebis.de/resource/05051145> <http://iflastandards.info/ns/isbd/elements/P1017> "Filozofick\u00E1 Fakulta MU" .
+<http://lod.hebis.de/resource/05051145> <http://purl.org/dc/terms/publisher> "Filozofick\u00E1 Fakulta MU" .
+<http://lod.hebis.de/resource/05051146> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/vocab/frbr/core#Manifestation> .
+<http://lod.hebis.de/resource/05051146> <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051146> .
+<http://lod.hebis.de/resource/05051146> <http://purl.org/dc/terms/medium> "paper" .
+<http://lod.hebis.de/resource/05051146> <http://purl.org/dc/terms/format> "print" .
+<http://lod.hebis.de/resource/05051146> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/dc/terms/BibliographicResource> .
+<http://lod.hebis.de/resource/05051146> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/bibo/Book> .
+<http://lod.hebis.de/resource/05051146> <http://purl.org/dc/terms/identifier> "050511467" .
+<http://lod.hebis.de/resource/05051146> <http://purl.org/ontology/bibo/oclcnum> "36557855" .
+<http://lod.hebis.de/resource/05051146> <http://iflastandards.info/ns/isbd/elements/P1018> "1996" .
+<http://lod.hebis.de/resource/05051146> <http://purl.org/dc/terms/issued> "1996" .
+<http://lod.hebis.de/resource/05051146> <http://purl.org/dc/terms/title> "Blessings in disguise" .
+<http://lod.hebis.de/resource/05051146> <http://iflastandards.info/ns/isbd/elements/P1004> "Blessings in disguise" .
+<http://lod.hebis.de/resource/05051146> <http://purl.org/dc/terms/creator> "http://d-nb.info/gnd/118809067" .
+<http://lod.hebis.de/resource/05051146> <http://purl.org/ontology/bibo/edition> "Reissues with a new chapter, 1. [Dr.]" .
+<http://lod.hebis.de/resource/05051146> <http://iflastandards.info/ns/isbd/elements/P1008> "Reissues with a new chapter, 1. [Dr.]" .
+<http://lod.hebis.de/resource/05051146> <http://iflastandards.info/ns/isbd/elements/P1016> "London" .
+<http://lod.hebis.de/resource/05051146> <http://iflastandards.info/ns/isbd/elements/P1017> "Hamilton" .
+<http://lod.hebis.de/resource/05051146> <http://purl.org/dc/terms/publisher> "Hamilton" .
+<http://lod.hebis.de/resource/05051147> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/vocab/frbr/core#Manifestation> .
+<http://lod.hebis.de/resource/05051147> <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051147> .
+<http://lod.hebis.de/resource/05051147> <http://purl.org/dc/terms/medium> "paper" .
+<http://lod.hebis.de/resource/05051147> <http://purl.org/dc/terms/format> "print" .
+<http://lod.hebis.de/resource/05051147> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/dc/terms/BibliographicResource> .
+<http://lod.hebis.de/resource/05051147> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/bibo/Book> .
+<http://lod.hebis.de/resource/05051147> <http://purl.org/dc/terms/identifier> "050511475" .
+<http://lod.hebis.de/resource/05051147> <http://purl.org/ontology/bibo/oclcnum> "06121959" .
+<http://lod.hebis.de/resource/05051147> <http://iflastandards.info/ns/isbd/elements/P1018> "1968" .
+<http://lod.hebis.de/resource/05051147> <http://purl.org/dc/terms/issued> "1968" .
+<http://lod.hebis.de/resource/05051147> <http://purl.org/dc/terms/title> "Konzentration und Wettbewerb im Gemeinsamen Markt" .
+<http://lod.hebis.de/resource/05051147> <http://iflastandards.info/ns/isbd/elements/P1004> "Konzentration und Wettbewerb im Gemeinsamen Markt" .
+<http://lod.hebis.de/resource/05051147> <http://iflastandards.info/ns/isbd/elements/P1006> "das Beispiel der Automobilindustrie" .
+<http://lod.hebis.de/resource/05051147> <http://purl.org/dc/terms/creator> "http://d-nb.info/gnd/11871337X" .
+<http://lod.hebis.de/resource/05051147> <http://purl.org/dc/terms/creator> "http://d-nb.info/gnd/104759143" .
+<http://lod.hebis.de/resource/05051147> <http://iflastandards.info/ns/isbd/elements/P1016> "G\u00F6ttingen" .
+<http://lod.hebis.de/resource/05051147> <http://iflastandards.info/ns/isbd/elements/P1017> "Vandenhoeck & Ruprecht" .
+<http://lod.hebis.de/resource/05051147> <http://purl.org/dc/terms/publisher> "Vandenhoeck & Ruprecht" .
+<http://lod.hebis.de/resource/05051148> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/vocab/frbr/core#Manifestation> .
+<http://lod.hebis.de/resource/05051148> <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051148> .
+<http://lod.hebis.de/resource/05051148> <http://purl.org/dc/terms/medium> "paper" .
+<http://lod.hebis.de/resource/05051148> <http://purl.org/dc/terms/format> "print" .
+<http://lod.hebis.de/resource/05051148> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/dc/terms/BibliographicResource> .
+<http://lod.hebis.de/resource/05051148> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/bibo/Book> .
+<http://lod.hebis.de/resource/05051148> <http://purl.org/dc/terms/identifier> "050511483" .
+<http://lod.hebis.de/resource/05051148> <http://purl.org/ontology/bibo/oclcnum> "75662412" .
+<http://lod.hebis.de/resource/05051148> <http://www.w3.org/2002/07/owl#sameAs> "http://d-nb.info/946895163" .
+<http://lod.hebis.de/resource/05051148> <http://iflastandards.info/ns/isbd/elements/P1018> "1996" .
+<http://lod.hebis.de/resource/05051148> <http://purl.org/dc/terms/issued> "1996" .
+<http://lod.hebis.de/resource/05051148> <http://purl.org/dc/terms/title> "Nachumh\u00FCllen von erdverlegten Gas- und Wasserrohrleitungen" .
+<http://lod.hebis.de/resource/05051148> <http://iflastandards.info/ns/isbd/elements/P1004> "Nachumh\u00FCllen von erdverlegten Gas- und Wasserrohrleitungen" .
+<http://lod.hebis.de/resource/05051148> <http://purl.org/dc/terms/contributor> "http://d-nb.info/gnd/114236623" .
+<http://lod.hebis.de/resource/05051148> <http://purl.org/ontology/bibo/edition> "2. Aufl." .
+<http://lod.hebis.de/resource/05051148> <http://iflastandards.info/ns/isbd/elements/P1008> "2. Aufl." .
+<http://lod.hebis.de/resource/05051148> <http://iflastandards.info/ns/isbd/elements/P1016> "Essen" .
+<http://lod.hebis.de/resource/05051148> <http://iflastandards.info/ns/isbd/elements/P1017> "Vulkan-Verl." .
+<http://lod.hebis.de/resource/05051148> <http://purl.org/dc/terms/publisher> "Vulkan-Verl." .
+<http://lod.hebis.de/resource/05051148> <http://purl.org/dc/terms/subject> "http://d-nb.info/gnd/4301993-6" .
+<http://lod.hebis.de/resource/05051148> <http://purl.org/dc/terms/subject> "http://d-nb.info/gnd/4133791-8" .
+<http://lod.hebis.de/resource/05051148> <http://purl.org/dc/terms/subject> "http://d-nb.info/gnd/4032522-2" .
+<http://lod.hebis.de/resource/05051148> <http://purl.org/dc/terms/subject> "http://d-nb.info/gnd/4144863-7" .
+<http://lod.hebis.de/resource/05051148> <http://purl.org/dc/terms/subject> "http://d-nb.info/gnd/4064751-1" .
+<http://lod.hebis.de/resource/05051149> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/vocab/frbr/core#Manifestation> .
+<http://lod.hebis.de/resource/05051149> <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051149> .
+<http://lod.hebis.de/resource/05051149> <http://purl.org/dc/terms/medium> "paper" .
+<http://lod.hebis.de/resource/05051149> <http://purl.org/dc/terms/format> "print" .
+<http://lod.hebis.de/resource/05051149> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/dc/terms/BibliographicResource> .
+<http://lod.hebis.de/resource/05051149> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/bibo/Book> .
+<http://lod.hebis.de/resource/05051149> <http://purl.org/dc/terms/identifier> "050511491" .
+<http://lod.hebis.de/resource/05051149> <http://purl.org/ontology/bibo/oclcnum> "174337801" .
+<http://lod.hebis.de/resource/05051149> <http://iflastandards.info/ns/isbd/elements/P1018> "1932" .
+<http://lod.hebis.de/resource/05051149> <http://purl.org/dc/terms/issued> "1932" .
+<http://lod.hebis.de/resource/05051149> <http://purl.org/dc/terms/title> "Im Tal der gr\u00FCnen Schlangen" .
+<http://lod.hebis.de/resource/05051149> <http://iflastandards.info/ns/isbd/elements/P1004> "Im Tal der gr\u00FCnen Schlangen" .
+<http://lod.hebis.de/resource/05051149> <http://iflastandards.info/ns/isbd/elements/P1006> "kalifornische Erz\u00E4hlung aus der Jetztzeit" .
+<http://lod.hebis.de/resource/05051149> <http://iflastandards.info/ns/isbd/elements/P1016> "Reutlingen" .
+<http://lod.hebis.de/resource/05051149> <http://iflastandards.info/ns/isbd/elements/P1017> "En\u00DFlin & Laiblin" .
+<http://lod.hebis.de/resource/05051149> <http://purl.org/dc/terms/publisher> "En\u00DFlin & Laiblin" .
+<http://lod.hebis.de/resource/05051150> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/vocab/frbr/core#Manifestation> .
+<http://lod.hebis.de/resource/05051150> <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051150> .
+<http://lod.hebis.de/resource/05051150> <http://purl.org/dc/terms/medium> "paper" .
+<http://lod.hebis.de/resource/05051150> <http://purl.org/dc/terms/format> "print" .
+<http://lod.hebis.de/resource/05051150> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/dc/terms/BibliographicResource> .
+<http://lod.hebis.de/resource/05051150> <http://purl.org/dc/terms/identifier> "050511505" .
+<http://lod.hebis.de/resource/05051150> <http://purl.org/ontology/bibo/oclcnum> "84582706" .
+<http://lod.hebis.de/resource/05051150> <http://www.w3.org/2002/07/owl#sameAs> "http://d-nb.info/948791918" .
+<http://lod.hebis.de/resource/05051150> <http://purl.org/dc/terms/title> "Allgemeines Verwaltungs- und Eingriffsrecht im Polizeidienst" .
+<http://lod.hebis.de/resource/05051150> <http://iflastandards.info/ns/isbd/elements/P1004> "Allgemeines Verwaltungs- und Eingriffsrecht im Polizeidienst" .
+<http://lod.hebis.de/resource/05051150> <http://iflastandards.info/ns/isbd/elements/P1006> "Fachbuch mit Fallbeispielen erl\u00E4utert f\u00FCr Theorie und Praxis" .
+<http://lod.hebis.de/resource/05051150> <http://purl.org/dc/terms/creator> "http://d-nb.info/gnd/129917125" .
+<http://lod.hebis.de/resource/05051150> <http://iflastandards.info/ns/isbd/elements/P1016> "Witten" .
+<http://lod.hebis.de/resource/05051150> <http://iflastandards.info/ns/isbd/elements/P1017> "Bernhardt/Sch\u00FCnemann" .
+<http://lod.hebis.de/resource/05051150> <http://purl.org/dc/terms/publisher> "Bernhardt/Sch\u00FCnemann" .
+<http://lod.hebis.de/resource/05051151> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/vocab/frbr/core#Manifestation> .
+<http://lod.hebis.de/resource/05051151> <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051151> .
+<http://lod.hebis.de/resource/05051151> <http://purl.org/dc/terms/medium> "paper" .
+<http://lod.hebis.de/resource/05051151> <http://purl.org/dc/terms/format> "print" .
+<http://lod.hebis.de/resource/05051151> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/dc/terms/BibliographicResource> .
+<http://lod.hebis.de/resource/05051151> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/bibo/Book> .
+<http://lod.hebis.de/resource/05051151> <http://purl.org/dc/terms/identifier> "050511513" .
+<http://lod.hebis.de/resource/05051151> <http://purl.org/ontology/bibo/oclcnum> "75688959" .
+<http://lod.hebis.de/resource/05051151> <http://www.w3.org/2002/07/owl#sameAs> "http://d-nb.info/947247009" .
+<http://lod.hebis.de/resource/05051151> <http://iflastandards.info/ns/isbd/elements/P1018> "1996" .
+<http://lod.hebis.de/resource/05051151> <http://purl.org/dc/terms/issued> "1996" .
+<http://lod.hebis.de/resource/05051151> <http://purl.org/dc/terms/title> "Messen nichtelektrischer Gr\u00F6\u00DFen" .
+<http://lod.hebis.de/resource/05051151> <http://iflastandards.info/ns/isbd/elements/P1004> "Messen nichtelektrischer Gr\u00F6\u00DFen" .
+<http://lod.hebis.de/resource/05051151> <http://iflastandards.info/ns/isbd/elements/P1006> "Grundlagen der Praxis" .
+<http://lod.hebis.de/resource/05051151> <http://purl.org/dc/terms/creator> "http://d-nb.info/gnd/111887488" .
+<http://lod.hebis.de/resource/05051151> <http://iflastandards.info/ns/isbd/elements/P1016> "D\u00FCsseldorf" .
+<http://lod.hebis.de/resource/05051151> <http://iflastandards.info/ns/isbd/elements/P1017> "VDI-Verl." .
+<http://lod.hebis.de/resource/05051151> <http://purl.org/dc/terms/publisher> "VDI-Verl." .
+<http://lod.hebis.de/resource/05051151> <http://purl.org/dc/terms/subject> "http://d-nb.info/gnd/4201286-7" .
+<http://lod.hebis.de/resource/05051151> <http://purl.org/dc/terms/subject> "http://d-nb.info/gnd/4038852-9" .
+<http://lod.hebis.de/resource/05051152> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/vocab/frbr/core#Manifestation> .
+<http://lod.hebis.de/resource/05051152> <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051152> .
+<http://lod.hebis.de/resource/05051152> <http://purl.org/dc/terms/medium> "paper" .
+<http://lod.hebis.de/resource/05051152> <http://purl.org/dc/terms/format> "print" .
+<http://lod.hebis.de/resource/05051152> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/dc/terms/BibliographicResource> .
+<http://lod.hebis.de/resource/05051152> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/bibo/Book> .
+<http://lod.hebis.de/resource/05051152> <http://purl.org/dc/terms/identifier> "050511521" .
+<http://lod.hebis.de/resource/05051152> <http://purl.org/ontology/bibo/oclcnum> "40750291" .
+<http://lod.hebis.de/resource/05051152> <http://iflastandards.info/ns/isbd/elements/P1018> "1995" .
+<http://lod.hebis.de/resource/05051152> <http://purl.org/dc/terms/issued> "1995" .
+<http://lod.hebis.de/resource/05051152> <http://purl.org/dc/terms/title> "Kalevala" .
+<http://lod.hebis.de/resource/05051152> <http://iflastandards.info/ns/isbd/elements/P1004> "Kalevala" .
+<http://lod.hebis.de/resource/05051152> <http://purl.org/ontology/bibo/edition> "28. painos" .
+<http://lod.hebis.de/resource/05051152> <http://iflastandards.info/ns/isbd/elements/P1008> "28. painos" .
+<http://lod.hebis.de/resource/05051152> <http://iflastandards.info/ns/isbd/elements/P1016> "Helsinki" .
+<http://lod.hebis.de/resource/05051152> <http://iflastandards.info/ns/isbd/elements/P1017> "Suomalaisen Kirjallisuuden Seura" .
+<http://lod.hebis.de/resource/05051152> <http://purl.org/dc/terms/publisher> "Suomalaisen Kirjallisuuden Seura" .
+<http://lod.hebis.de/resource/05051153> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/vocab/frbr/core#Manifestation> .
+<http://lod.hebis.de/resource/05051153> <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051153> .
+<http://lod.hebis.de/resource/05051153> <http://purl.org/dc/terms/medium> "paper" .
+<http://lod.hebis.de/resource/05051153> <http://purl.org/dc/terms/format> "print" .
+<http://lod.hebis.de/resource/05051153> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/dc/terms/BibliographicResource> .
+<http://lod.hebis.de/resource/05051153> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/bibo/Book> .
+<http://lod.hebis.de/resource/05051153> <http://purl.org/dc/terms/identifier> "05051153X" .
+<http://lod.hebis.de/resource/05051153> <http://purl.org/ontology/bibo/oclcnum> "174337802" .
+<http://lod.hebis.de/resource/05051153> <http://iflastandards.info/ns/isbd/elements/P1018> "1994" .
+<http://lod.hebis.de/resource/05051153> <http://purl.org/dc/terms/issued> "1994" .
+<http://lod.hebis.de/resource/05051153> <http://purl.org/dc/terms/title> "Grundseminar" .
+<http://lod.hebis.de/resource/05051153> <http://iflastandards.info/ns/isbd/elements/P1004> "Grundseminar" .
+<http://lod.hebis.de/resource/05051153> <http://iflastandards.info/ns/isbd/elements/P1006> "ein Lehrgang f\u00FCr Fachpersonal der Gemeinschaftsverpflegung mit \u00DCbungen ; Seminarunterlagen" .
+<http://lod.hebis.de/resource/05051153> <http://purl.org/dc/terms/contributor> "http://d-nb.info/gnd/113926219" .
+<http://lod.hebis.de/resource/05051153> <http://iflastandards.info/ns/isbd/elements/P1016> "Frankfurt" .
+<http://lod.hebis.de/resource/05051154> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/vocab/frbr/core#Manifestation> .
+<http://lod.hebis.de/resource/05051154> <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051154> .
+<http://lod.hebis.de/resource/05051154> <http://purl.org/dc/terms/medium> "paper" .
+<http://lod.hebis.de/resource/05051154> <http://purl.org/dc/terms/format> "print" .
+<http://lod.hebis.de/resource/05051154> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/dc/terms/BibliographicResource> .
+<http://lod.hebis.de/resource/05051154> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/bibo/Book> .
+<http://lod.hebis.de/resource/05051154> <http://purl.org/dc/terms/identifier> "050511548" .
+<http://lod.hebis.de/resource/05051154> <http://purl.org/ontology/bibo/oclcnum> "174337804" .
+<http://lod.hebis.de/resource/05051154> <http://iflastandards.info/ns/isbd/elements/P1018> "1814" .
+<http://lod.hebis.de/resource/05051154> <http://purl.org/dc/terms/issued> "1814" .
+<http://lod.hebis.de/resource/05051154> <http://purl.org/dc/terms/title> "Empfindungen eines Hessen bey dem Antritt des Jahres 1814" .
+<http://lod.hebis.de/resource/05051154> <http://iflastandards.info/ns/isbd/elements/P1004> "Empfindungen eines Hessen bey dem Antritt des Jahres 1814" .
+<http://lod.hebis.de/resource/05051154> <http://iflastandards.info/ns/isbd/elements/P1016> "{[s.l.]" .
+<http://lod.hebis.de/resource/05051155> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/vocab/frbr/core#Manifestation> .
+<http://lod.hebis.de/resource/05051155> <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051155> .
+<http://lod.hebis.de/resource/05051155> <http://purl.org/dc/terms/medium> "paper" .
+<http://lod.hebis.de/resource/05051155> <http://purl.org/dc/terms/format> "print" .
+<http://lod.hebis.de/resource/05051155> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/dc/terms/BibliographicResource> .
+<http://lod.hebis.de/resource/05051155> <http://purl.org/dc/terms/identifier> "050511556" .
+<http://lod.hebis.de/resource/05051155> <http://purl.org/ontology/bibo/oclcnum> "613821117" .
+<http://lod.hebis.de/resource/05051155> <http://purl.org/dc/terms/title> "Zur Geschichte des Erzbischofs Johann II. von Mainz" .
+<http://lod.hebis.de/resource/05051155> <http://iflastandards.info/ns/isbd/elements/P1004> "Zur Geschichte des Erzbischofs Johann II. von Mainz" .
+<http://lod.hebis.de/resource/05051155> <http://iflastandards.info/ns/isbd/elements/P1006> "1396 - 1419" .
+<http://lod.hebis.de/resource/05051155> <http://iflastandards.info/ns/isbd/elements/P1016> "Halle a.S." .
+<http://lod.hebis.de/resource/05051156> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/vocab/frbr/core#Manifestation> .
+<http://lod.hebis.de/resource/05051156> <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051156> .
+<http://lod.hebis.de/resource/05051156> <http://purl.org/dc/terms/medium> "paper" .
+<http://lod.hebis.de/resource/05051156> <http://purl.org/dc/terms/format> "print" .
+<http://lod.hebis.de/resource/05051156> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/dc/terms/BibliographicResource> .
+<http://lod.hebis.de/resource/05051156> <http://purl.org/dc/terms/identifier> "050511564" .
+<http://lod.hebis.de/resource/05051156> <http://purl.org/ontology/bibo/oclcnum> "75785858" .
+<http://lod.hebis.de/resource/05051156> <http://iflastandards.info/ns/isbd/elements/P1018> "1996" .
+<http://lod.hebis.de/resource/05051156> <http://purl.org/dc/terms/issued> "1996" .
+<http://lod.hebis.de/resource/05051156> <http://purl.org/dc/terms/creator> "http://d-nb.info/gnd/129917125" .
+<http://lod.hebis.de/resource/05051156> <http://iflastandards.info/ns/isbd/elements/P1016> "Witten" .
+<http://lod.hebis.de/resource/05051156> <http://iflastandards.info/ns/isbd/elements/P1017> "Bernhardt/Sch\u00FCnemann" .
+<http://lod.hebis.de/resource/05051156> <http://purl.org/dc/terms/publisher> "Bernhardt/Sch\u00FCnemann" .
+<http://lod.hebis.de/resource/05051157> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/vocab/frbr/core#Manifestation> .
+<http://lod.hebis.de/resource/05051157> <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051157> .
+<http://lod.hebis.de/resource/05051157> <http://purl.org/dc/terms/medium> "paper" .
+<http://lod.hebis.de/resource/05051157> <http://purl.org/dc/terms/format> "print" .
+<http://lod.hebis.de/resource/05051157> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/dc/terms/BibliographicResource> .
+<http://lod.hebis.de/resource/05051157> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/bibo/Book> .

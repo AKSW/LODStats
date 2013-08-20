@@ -16,50 +16,8 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with LODStats.  If not, see <http://www.gnu.org/licenses/>.
 """
-import RDF
 import logging
 logger = logging.getLogger("lodstats.format")
-
-def get_format(url):
-    logger.debug("get_format(%s)" % url)
-    process_url = url.split('/')[-1]
-    process_url = process_url.split('.')
-
-    for item in process_url:
-        if(item == 'ttl'):
-            return 'ttl'
-        if(item == 'nt'):
-            return 'nt'
-        if(item == 'n3'):
-            return 'n3'
-        if(item == 'rdf' or item == 'owl' or item == 'rdfs'):
-            return 'rdf'
-        if(item == 'nq'):
-            return 'nq'
-        if(item == 'sparql' or item == 'sparql/'):
-            return 'sparql'
-        if(item == 'sitemap'):
-            return 'sitemap'
-    raise NameError("could not guess format")
-
-def get_parser(format):
-    
-    if format == 'ttl':
-        parser = RDF.TurtleParser()
-    elif format == 'nt' or format == 'n3': # FIXME: this probably won't do for n3
-        parser = RDF.NTriplesParser()
-    elif format == 'nq':
-        parser = RDF.Parser(name='nquads')
-    elif format == 'rdf':
-        parser = RDF.Parser(name="rdfxml")
-    elif format == 'sparql':
-        return None
-    elif format == 'sitemap':
-        return None
-    else:
-        raise NameError("unsupported format")
-
-    return parser
 
 def parse_sitemap(url):
     from xml.etree import ElementTree as etree

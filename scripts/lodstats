@@ -22,10 +22,13 @@ import os
 import sys
 import datetime
 from optparse import OptionParser
-import logging
 
-from lodstats import RDFStats
-from lodstats.stats import available_stats, vocab_stats, lodstats, ParsedVocabulary, test_stats
+import lodstats.RDFStats
+import lodstats.config
+import lodstats.stats
+
+import logging
+logger = logging.getLogger("lodstats")
 
 parser = OptionParser(usage="usage: %prog [options] [-m model.{rdf,nt,...}] file/URI [file/URI ...]")
 parser.add_option('-v', '--void', action='store_true', help='generate VoID')
@@ -33,7 +36,6 @@ parser.add_option('-c', '--count', action='store_true', help='just count triples
 parser.add_option('-p', '--progress', action='store_true', help='show progress')
 parser.add_option('-a', '--all-stats', action='store_true', help='do all available statistics')
 parser.add_option('-l', '--lod-stats', action='store_true', help='do statistics for lodstats')
-parser.add_option('-t', '--test-stats', action='store_true', help='do statistics for test')
 parser.add_option('-i', '--intermediate-stats', action='store_true', help='print intermediate statistics every 100k triples')
 parser.add_option('-m', '--rdf-model', help='parse and do stats for everything that isDefinedBy supplied model')
 parser.add_option('-s', '--schema-syntax-owl', action='store_true', help='do stats for RDF-Schema, -Syntax, Owl')
@@ -44,29 +46,28 @@ if len(args) == 0:
     parser.print_help()
     exit(2)
 
+lodstats.config.disable_debug()
 if options.debug:
-    logging.basicConfig(level=logging.DEBUG)
+    lodstats.config.enable_debug()
 
-if options.rdf_model:
-    options.all_stats = False
-    options.count = False
-    options.void = False
-    model_stats = [ParsedVocabulary, options.rdf_model]
+if options.count:
+    stats = []
+    new_stats = []
+elif options.void:
+    stats = lodstats.stats.void_stats
+    new_stats = []
+elif options.schema_syntax_owl:
+    stats = lodstats.stats.vocab_stats
+    new_stats = []
+elif options.rdf_model:
+    model_stats = [lodstats.stats.ParsedVocabulary, options.rdf_model]
     stats = []
     new_stats = model_stats
-elif options.schema_syntax_owl:
-    stats = vocab_stats
+elif options.lod_stats:
+    stats = lodstats.stats.lodstats
     new_stats = []
 elif options.all_stats:
-    options.count = False
-    stats = available_stats
-    new_stats = []
-elif options.lod_stats:
-    options.count = False
-    stats = lodstats
-    new_stats = []
-elif options.test_stats:
-    stats = test_stats
+    stats = lodstats.stats.available_stats
     new_stats = []
 else:
     stats = []
@@ -74,93 +75,82 @@ else:
 
 start_time = datetime.datetime.now()
 
-for resource in args:
-    is_remote = resource.lower().startswith('http://') or resource.lower().startswith('https://')
-    if not is_remote and not os.access(resource, os.R_OK):
-        print("File not found/unreadable")
-        exit(3)
-    if not is_remote:
-        resource = "file://%s" % os.path.realpath(resource)
+######################
+# Callback functions #
+######################
+def callback_function_download(remote_file):
+    now = datetime.datetime.now()
+    time_delta = (now-start_time).seconds
+    if time_delta > 0:
+        print("\r%d of %d KB loaded, %d KB/s." % (remote_file.bytes_downloaded/1024,
+        remote_file.content_length/1024, (remote_file.bytes_downloaded/1024)/time_delta)),
+        sys.stdout.flush()
+    else:
+        print("\r%d of %d KB loaded." % (remote_file.bytes_downloaded/1024,
+        remote_file.content_length/1024)),
+        sys.stdout.flush()
 
-    a = RDFStats(resource, stats=stats, new_stats=new_stats)
+def callback_function_extraction(archive_extractor):
+    manyspaces = ' '*72
+    print("\r%s" % manyspaces),
+    sys.stdout.flush()
+    now = datetime.datetime.now()
+    time_delta = (now-start_time).seconds
+    if time_delta > 0:
+        print("\rFetch done %d KB, %d KB uncomp., %d KB/s." % (archive_extractor.original_file_size, archive_extractor.bytes_extracted/1024, (archive_extractor.bytes_extracted/1024)/time_delta))
+    else:
+        print("\rFetch done %d KB, %d KB uncomp." % (archive_extractor.original_file_size, archive_extractor.bytes_extracted/1024))
+
+def callback_function_statistics(rdf_file):
+    if rdf_file.get_no_of_triples() > 0:
+        now = datetime.datetime.now()
+        time_delta = (now-start_time).seconds
+        if time_delta > 0:
+            print("\r%d triples done, %d/s, %d warnings" % (rdf_file.get_no_of_triples(),
+            rdf_file.get_no_of_triples()/time_delta, rdf_file.warnings)),
+        else:
+            print("\r%d triples done, %d warnings" % (rdf_file.get_no_of_triples(), rdf_file.warnings)),
+        sys.stdout.flush()
+        if not options.count and options.intermediate_stats and rdf_file.no_of_statements % 100000 == 0:
+            print("Results (from custom code):")
+            for stat_name,stat_dict in rdf_file.stats_results.iteritems():
+                print("\t%s" % stat_name)
+                for subname, result in stat_dict.iteritems():
+                    if type(result) == dict or type(result) == list:
+                        print("\t\tlen(%s): %d" % (subname, len(result)))
+                    else:
+                        print("\t\t%s: %s" % (subname, result))
+
+####################
+# Processing logic #
+####################
+
+for resource_uri in args:
+    #if not os.access(resource_uri, os.R_OK):
+        #print("File not found/unreadable")
+        #exit(3)
+
+    rdf_stats = lodstats.RDFStats(resource_uri, stats=stats, new_stats=new_stats)
     
-    def callback_parser(rdfdocstat):
-        now = datetime.datetime.now()
-        time_delta = (now-start_time).seconds
-        if time_delta > 0:
-            print("\r%d of %d KB loaded, %d KB/s, %d KB uncomp." % (rdfdocstat.bytes_download/1024,
-            rdfdocstat.content_length/1024, (rdfdocstat.bytes_download/1024)/time_delta, rdfdocstat.bytes/1024)),
-            sys.stdout.flush()
-        else:
-            print("\r%d of %d KB loaded, %d KB uncomp." % (rdfdocstat.bytes_download/1024,
-            rdfdocstat.content_length/1024, rdfdocstat.bytes/1024)),
-            sys.stdout.flush()
-
     if options.progress:
-        a.parse(callback_parser)
+        rdf_stats.set_callback_function_download(callback_function_download)
+        rdf_stats.set_callback_function_extraction(callback_function_extraction)
+        rdf_stats.set_callback_function_statistics(callback_function_statistics)
     else:
-        a.parse()
-    if is_remote and options.progress:
-        #clear console
-        manyspaces = ' '*72
-        print("\r%s" % manyspaces),
-        sys.stdout.flush()
-        now = datetime.datetime.now()
-        time_delta = (now-start_time).seconds
-        if time_delta > 0:
-            print("\rFetch done, %d of %d KB loaded, %d KB/s, %d KB uncomp." % (a.bytes_download/1024,
-                a.content_length/1024, (a.bytes_download/1024)/time_delta, a.bytes/1024))
-        else:
-            print("\rFetch done, %d of %d KB loaded, %d KB uncomp." % (a.bytes_download/1024,
-                a.content_length/1024, a.bytes/1024))
+        rdf_stats.disable_callback_function_download()
+        rdf_stats.disable_callback_function_extraction()
+        rdf_stats.disable_callback_function_statistics()
 
-    def callback(rdfdocstat):
-        if rdfdocstat.no_of_statements > 0:
-            now = datetime.datetime.now()
-            time_delta = (now-start_time).seconds
-            if time_delta > 0:
-                print("\r%d triples done, %d/s, %d warnings" % (rdfdocstat.no_of_statements,
-                rdfdocstat.no_of_statements/time_delta, rdfdocstat.warnings)),
-            else:
-                print("\r%d triples done, %d warnings" % (rdfdocstat.no_of_statements,
-                rdfdocstat.warnings)),
-            if rdfdocstat.files_handled > 0:
-                print("%d files" % (rdfdocstat.files_handled+1)),
-            sys.stdout.flush()
-            if not options.count and options.intermediate_stats and rdfdocstat.no_of_statements % 100000 == 0:
-                print("Results (from custom code):")
-                for stat_name,stat_dict in rdfdocstat.stats_results.iteritems():
-                    print("\t%s" % stat_name)
-                    for subname, result in stat_dict.iteritems():
-                        if type(result) == dict or type(result) == list:
-                            print("\t\tlen(%s): %d" % (subname, len(result)))
-                        else:
-                            print("\t\t%s: %s" % (subname, result))
-
-    if options.progress:
-        a.do_stats(callback)
-    else:
-        a.do_stats()
-    if options.progress:
-        #clear console
-        manyspaces = ' '*72
-        print("\r%s" % manyspaces),
-        sys.stdout.flush()
-        # print status one final time
-        time_delta = (datetime.datetime.now()-start_time).seconds
-        if time_delta > 0:
-            print("\r%d triples done, %d/s, %d warnings" % (a.no_of_statements,
-            a.no_of_statements/time_delta, a.warnings))
+    rdf_stats.start_statistics()
 
 if options.void:
-    # make void
-    print(a.voidify("turtle"))
+    print(rdf_stats.voidify("turtle"))
 
 if not options.void:
-    print("Basic stats: %s triples, %s warnings" % (a.no_of_triples(), a.warnings))
+    print("Basic stats: %s triples, %s warnings" % (rdf_stats.get_no_of_triples(), rdf_stats.get_no_of_warnings()))
     if not options.count:
         print("Results (from custom code):")
-        for stat_name,stat_dict in a.stats_results.iteritems():
+        for stat_name,stat_dict in rdf_stats.get_stats_results().iteritems():
             print("\t%s" % stat_name)
             for subname, result in stat_dict.iteritems():
                 if type(result) == dict or type(result) == list:
@@ -173,4 +163,3 @@ if not options.void:
                         print("\t\tlen(%s): %d" % (subname, len(result)))
                 else:
                     print("\t\t%s: %s" % (subname, result))
-

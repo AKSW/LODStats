@@ -20,38 +20,30 @@ import lodstats.util.rdf_namespaces
 from RDFStatInterface import RDFStatInterface
 import RDF
 
-class Entities(RDFStatInterface):
+class DistinctSubjects(RDFStatInterface):
     """
         Distinct number of entities
         Entity - triple, where ?s is iri (not blank)
     """
     def __init__(self, results):
-        super(Entities, self).__init__(results)
-        self.triples = []
-        self.c = 0
+        super(DistinctSubjects, self).__init__(results)
+        self.subjects = {}
         
     def count(self, s, p, o, s_blank, o_l, o_blank, statement):
-        if statement.object.is_resource() and\
-           statement.subject.is_resource() and\
-           statement.predicate.is_resource():
-               self.triples.append( (s,p,o) )
-               self.c += 1
+        self.subjects[s] = self.subjects.get(s, 1) + 1
     
     def postproc(self):
-        #Entities mentioned
-        self.results['count'] = self.c
-        #Distinct entities
-        self.results['triples'] = self.triples
+        self.results['count'] = len(self.subjects)
 
     def voidify(self, void_model, dataset):
         namespaces = lodstats.util.rdf_namespaces.RDFNamespaces()
         datatype_uri = namespaces.get_rdf_namespace("xsd").integer.uri
-        number_of_distinct_entities = str(len(self.results['triples']))
-        number_of_entities_node = RDF.Node(literal=number_of_distinct_entities, 
+        number_of_distinct_subjects = str(self.results['count'])
+        number_of_distinct_subjects_node = RDF.Node(literal=number_of_distinct_subjects, 
                                           datatype=datatype_uri)
         void_model.append(RDF.Statement(dataset,
-                                        namespaces.get_rdf_namespace("void").entities,
-                                        number_of_entities_node))
+                                        namespaces.get_rdf_namespace("void").distinctSubjects,
+                                        number_of_distinct_subjects_node))
     
     def sparql(self, endpoint):
         pass

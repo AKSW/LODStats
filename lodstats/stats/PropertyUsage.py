@@ -17,6 +17,8 @@ You should have received a copy of the GNU General Public License
 along with LODStats.  If not, see <http://www.gnu.org/licenses/>.
 """
 from RDFStatInterface import RDFStatInterface
+import lodstats.util.rdf_namespaces
+import RDF
 
 class PropertyUsage(RDFStatInterface):
     def __init__(self, results):
@@ -27,7 +29,14 @@ class PropertyUsage(RDFStatInterface):
         self.usage_count[p] = self.usage_count.get(p, 0) + 1
     
     def voidify(self, void_model, dataset):
-        pass
+        namespaces = lodstats.util.rdf_namespaces.RDFNamespaces()
+        datatype_uri = namespaces.get_rdf_namespace("xsd").integer.uri
+        number_of_distinct_properties = str(len(self.usage_count))
+        number_of_distinct_properties_node = RDF.Node(literal=number_of_distinct_properties, 
+                                          datatype=datatype_uri)
+        void_model.append(RDF.Statement(dataset,
+                                        namespaces.get_rdf_namespace("void").properties,
+                                        number_of_distinct_properties_node))
     
     def sparql(self, endpoint):
         pass

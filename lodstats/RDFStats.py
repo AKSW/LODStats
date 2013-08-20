@@ -17,107 +17,104 @@ You should have received a copy of the GNU General Public License
 along with LODStats.  If not, see <http://www.gnu.org/licenses/>.
 """
 """Parse RDF and do some stats"""
-import RDF
-import os
 import datetime
-import gzip
-import bz2
-import tarfile
-import zipfile
-import tempfile
-import requests 
-import warnings
 import lodstats.stats
-import lodstats.util
-import exceptions
-import logging
+import lodstats.util.archiveextractor
+import lodstats.util.rdfparser
+import lodstats.util.remotefile
+import lodstats.util.sitemap
+import lodstats.util.makevoid
+import lodstats.util.interfaces
 
+import lodstats.config
+
+import logging
 logger = logging.getLogger("lodstats")
 
-class RDFStats(object):
-    """file extensions that will be processed"""
-    rdf_extensions = ('.nt', '.rdf', '.ttl', '.n3', '.nq', '.owl', '.rdfs')
+class RDFStats(lodstats.util.interfaces.UriParserInterface):
 
     """Get some interesting numbers from RDFish resources"""
     def __init__(self, rdfurl, do_custom_stats = True,
             stats=None, new_stats=None):
 
-        # URI of the file (local file:// or remote http:// https://
-        # TODO: url -> uri
-        self.url = rdfurl
+        #run start_statistics to gather stats
+        self.uri = self.fix_uri(rdfurl)
 
-        # URI of temp file in /temp folder 
-        self.tempurl = None
+        #stats to be calculated (list)
+        self.stats = stats
 
-        # RDF format (n3, nt, rdf/xml etc.)
-        # Format will be autodetected
-        self.format = self.get_format(self.url) 
-
-        # compression of the file .tar, .gz etc.
-        # compression is also autodetected
-        self.compression_format = self.get_compression()
-
-        # Redland Parser Object
-        self.parser = self.get_parser(self.format)
-
-        # Stream Object from Redland Parser
-        self.stream = None
+        #use set_callback_function_* to set custom callback
+        self.set_callback_function_download(None)
+        self.set_callback_function_extraction(None)
+        self.set_callback_function_statistics(None)
 
         # TODO: no_of_statements -> triples_number
         self.no_of_statements = 0
-
-        # not used
-        self.literals = 0
-        self.stats_to_do = None
-
-        # stats=available_stats object - from lodstats.stats import available_stats, vocab_stats, lodstats, ParsedVocabulary 
-        if stats is None:
-            self.stats_results = lodstats.stats.init_stats()
-        else:
-            self.stats_results = lodstats.stats.init_stats(stats)
 
         # this is a hook for parsing vocabulary
         # new_stats = [ParsedVocabulary, options.rdf_model]
         if new_stats:
             lodstats.stats.stats_to_do.append(new_stats[0](self.stats_results, new_stats[1]))
 
-        # used by warn_handler
-        self.warnings = 0
-        self.last_warning = None
+    def start_statistics(self):
+        logger.debug("Downloading remote file ...")
+        remote_file = lodstats.util.remotefile.RemoteFile(self.uri, callback_function=self.callback_function_download)
+        downloaded_file_uri = remote_file.get_downloaded_file_uri()
 
-        # defined in parse()
-        self.start_time = None
+        #logger.debug("Parsing sitemap ...")
+        #sitemap = lodstats.util.sitemap.SiteMap(uri)
 
-        # defined in do_stats()
-        self.end_time = None
+        logger.debug("Extracting the file from archive: %s" % downloaded_file_uri)
+        archive_extractor = lodstats.util.archiveextractor.ArchiveExtractor(downloaded_file_uri, 
+                                                                            callback_function=self.callback_function_extraction,
+                                                                            remote_file=remote_file)
+        extracted_file_uri_list = archive_extractor.get_extracted_file_uri_list()
 
-        # will hold size of file from http-header / stat() (if local)
-        # content_length = remote_resource.info().getheader('Content-Length')
-        self.content_length = 0
+        logger.debug("Parsing RDF files ...")
+        self.rdfparser = lodstats.util.rdfparser.RdfParser(extracted_file_uri_list, stats=self.stats, callback_function=self.callback_function_statistics)
 
-        # bytes downloaded (if remote)
-        self.bytes_download = 0
-        # bytes after decompression
-        self.bytes = 0
+    def get_stats_results(self):
+        return self.rdfparser.get_stats_results()
 
-        # callback functions
-        self.callback_parse = None
-        self.callback_stats = None
-        # when last callback was done
-        self.last_callback = None
+    def get_no_of_triples(self):
+        return self.rdfparser.get_no_of_triples()
 
-        #TODO: should be modifiable through config file (in seconds)
-        self.callback_delay = 2
+    def get_no_of_warnings(self):
+        return self.rdfparser.get_no_of_warnings()
 
-        # archives
-        self.archive = None
-        # archives: file entries
-        self.file_entries = None
-        # archives: files handled
-        self.files_handled = 0
-        # will hold date of last modification from stat / http header
-        self.last_modified = None
-    
+    def enable_debug(self):
+        lodstats.config.enable_debug()
+
+    def disable_debug(self):
+        lodstats.config.disable_debug()
+
+    def set_callback_function_download(self, callback_function):
+        if(callback_function is None):
+            self.callback_function_download = lodstats.config.callback_function_download
+        else:
+            self.callback_function_download = callback_function
+
+    def disable_callback_function_download(self):
+        self.callback_function_download = None
+
+    def set_callback_function_extraction(self, callback_function):
+        if(callback_function is None):
+            self.callback_function_extraction = lodstats.config.callback_function_archive_extraction
+        else:
+            self.callback_function_extraction = callback_function
+
+    def disable_callback_function_extraction(self):
+        self.callback_function_extraction = None
+
+    def set_callback_function_statistics(self, callback_function):
+        if(callback_function is None):
+            self.callback_function_statistics = lodstats.config.callback_function_statistics
+        else:
+            self.callback_function_statistics = callback_function
+
+    def disable_callback_function_statistics(self):
+        self.callback_function_statistics = None
+
     def sitemap(self, sitemapurl, callback_parse=None, callback_stats=None):
         """process datadumps from a sitemap.xml as per http://XXX"""
         logger.debug("processing sitemap %s" % sitemapurl)
@@ -132,301 +129,8 @@ class RDFStats(object):
             self.next_file(datadump)
             self.parse(callback_parse)
             self.do_stats(callback_stats)
-    
-    def get_compression(self):
-        """guess compression of resource"""
-        logger.debug("get_compression()")
-        compression_format = None
-        if self.is_tar():
-            compression_format = 'tar' 
-        if self.is_zip():
-            compression_format = 'zip' 
-        if self.is_gzip():
-            compression_format = 'gz' 
-        if self.is_bzip2():
-            compression_format = 'bz2' 
-        return compression_format
-    
-    def get_format(self, url):
-        logger.debug("get_format()")
-        return lodstats.util.format.get_format(url)
-
-    def get_parser(self, format):
-        return lodstats.util.format.get_parser(format)
-    
-    def is_remote(self):
-        return any(self.url.lower().startswith(x) for x in ('http://', 'https://'))
-
-    def is_tar(self):
-        return any(self.url.lower().endswith(x) for x in ('.tgz', '.tar.gz', '.tar.bz2'))
-
-    def is_zip(self):
-        return self.url.lower().endswith('.zip')
-
-    def is_gzip(self):
-        return self.url.lower().endswith('.gz')
-
-    def is_bzip2(self):
-        return self.url.lower().endswith('.bz2')
-
-    def get_free_diskspace(self, p):
-        """
-            Returns the number of free bytes on the drive that p is on
-        """
-        s = os.statvfs(p)
-        return s.f_bsize * s.f_bavail
-
-    def get_local_free_diskspace(self):
-        return self.get_free_diskspace(tempfile.tempdir)
-
-    def download_remote_file(self, url, if_modified_since, callback_function):
-        tf = tempfile.NamedTemporaryFile(prefix='lodstats', delete=False)
-        r = requests.get(url)
-
-        last_modified = r.headers.get('last-modified')
-        if last_modified is not None:
-            self.last_modified = datetime.datetime.strptime(last_modified, '%a, %d %b %Y %H:%M:%S %Z')
-            if if_modified_since is not None and last_modified == if_modified_since:
-                raise exceptions.NotModified, 'resource has not been modified'
-
-        content_length = r.headers['content-length']
-        if content_length is not None:
-            self.content_length = int(content_length)
-
-        free_diskspace = self.get_local_free_diskspace()
-        if self.content_length > free_diskspace:
-            raise Exception, "file too large (> free space)"
-
-        if callback_function is not None:
-            callback_function(self)
-
-        #Download file
-        for data in r.content:
-            self.bytes_download += len(data)
-            tf.write(data)
-            self.ratelimited_callback_caller(callback_function)
-        tf.seek(0)
-
-        return tf
-
-    def decompress_file(self, url, callback_function):
-        filename = url[7:]
-        f = open(filename, 'rU') #omitting file://
-        decompressed_tf = tempfile.NamedTemporaryFile(prefix='lodstats_decompressed', delete=False)
-        if self.compression_format == 'gz':
-            gzip_file = gzip.GzipFile(filename, mode='rb')
-            for data in gzip_file.read():
-                #self.bytes += len(data)
-                decompressed_tf.write(data)
-                self.ratelimited_callback_caller(callback_function)
-            gzip_file.close()
-        elif self.compression_format == 'bz2':
-            bz2_file = bz2.BZ2File(filename)
-            for data in bz2_file.read():
-                #self.bytes_download += len(data)
-                #self.bytes += len(data)
-                decompressed_tf.write(data)
-                self.ratelimited_callback_caller(callback_function)
-            bz2_file.close()
-
-        #TODO: Refactor tar and zip processing
-        elif self.compression_format == 'tar':
-            self.archive = tarfile.open(fileobj=f, mode='r')
-            self.file_entries = self.archive.getmembers()
-        elif self.compression_format == 'zip':
-            self.archive = zipfile.ZipFile(f, 'r')
-            self.file_entries = self.archive.infolist()
-        decompressed_tf.flush()
-        f.close()
-        decompressed_tf.close()
-        # call back one last time to push final numbers
-        if callback_function is not None:
-            callback_function(self)
-
-        return "file://%s" % decompressed_tf.name
-
-    def parse(self, callback_function = None, if_modified_since = None):
-        """parse to redland::Stream"""
-        logger.debug("parsing url %s, format %s" % (self.url, self.format))
-
-        self.measure_execution_time_start()
-        self.callback_parse = callback_function
-
-        tempurl = self.url #changes if file is archive
-
-        if self.format == 'sparql':
-            return
-        if self.format == 'sitemap':
-            return
-
-        # check if modified since last visit, 
-        # TODO: really use http if-modified-since, etags
-        # if file is remote - download it
-        if self.is_remote():
-            tf = self.download_remote_file(self.url, if_modified_since, callback_function)
-            tempurl = "file://%s" % tf.name
-        if self.compression_format is not None:
-            tempurl = self.decompress_file(tempurl, callback_function)
-
-        self.stream = self.parser.parse_as_stream(tempurl)
-
-    def warn_handler(self, message, category, filename, lineno, file=None, line=None):
-        self.warnings += 1
-        self.last_warning = message
-    
-    def do_stats(self, callback_function = None):
-        """do the real work"""
-        logger.debug("do_stats()")
-        self.callback_stats = callback_function
-        if self.compression_format in ('tar', 'zip'):
-            self.do_archive_stats(callback_function)
-        if self.format == 'sitemap':
-            self.sitemap(self.url)
-            return
-        if self.format != 'sparql':
-            with warnings.catch_warnings():
-                warnings.showwarning = self.warn_handler
-                for statement in self.stream:
-                    # count statements
-                    self.no_of_statements += 1
-            
-                    # do custom counting
-                    self.do_custom_stats(statement)
-                
-                    # optional callback (eg for status stuff) every 5000 triples
-                    if callback_function != None and self.no_of_statements % 5000 == 0:
-                        callback_function(self)
-        else:
-            self.do_sparql_stats()
-        
-        # post-processing
-        lodstats.stats.postproc()
-        
-        self.measure_execution_time_stop()
-
-        if self.no_of_statements == 0:
-            raise Exception, "zero triples"
-    
-    def do_archive_stats(self, callback_function):
-        """do stats for archives"""
-        logger.debug("do_archive_stats()")
-        if self.compression_format == 'tar':
-            for tar_entry in self.file_entries:
-                if tar_entry.isfile():
-                    # skip files with unknown extensions unless format is known
-                    if self.format is None and not any(tar_entry.name.lower().endswith(x) for x in self.rdf_extensions):
-                        continue
-                    supplied_format = self.format
-                    tar_content = self.archive.extractfile(tar_entry)
-                    tf = tempfile.NamedTemporaryFile(prefix='lodstats_tar_entry')
-                    for data in tar_content:
-                         self.bytes += len(data)
-                         tf.write(data)
-                         self.ratelimited_callback_caller(callback_function)
-                    # guess format later if necessary
-                    if self.format is None:
-                        self.lowerurl = tar_entry.name.lower()
-                    # parse and to stats
-                    tf.flush()
-                    self.compression_format = None
-                    self.tempurl = "file://%s" % tf.name
-                    self.parse_tempurl()
-                    self.do_stats(callback_function)
-                    tf.close()
-                    self.compression_format = 'tar'
-                    self.format = supplied_format
-                    self.files_handled += 1
-            if self.files_handled == 0:
-                raise Exception, "no RDF-ish files found in archive"
-            # tar_tempfile.close()
-            # tar_file.close()
-        elif self.compression_format == 'zip':
-            for zip_entry in self.file_entries:
-                # do not handle directories at all
-                if not zip_entry.filename.endswith(os.sep):
-                    # skip files with unknown extensions unless format is known
-                    if self.format is None and not any(zip_entry.filename.lower().endswith(x) for x in self.rdf_extensions):
-                        continue
-                    supplied_format = self.format
-                    zip_content = self.archive.open(zip_entry)
-                    tf = tempfile.NamedTemporaryFile(prefix='lodstats_zip_entry')
-                    for data in zip_content:
-                        self.bytes += len(data)
-                        tf.write(data)
-                        self.ratelimited_callback_caller(callback_function)
-                    # guess format later if necessary
-                    if self.format is None:
-                        self.lowerurl = zip_entry.filename.lower()
-                    # parse and to stats
-                    tf.flush()
-                    self.compression_format = None
-                    self.tempurl = "file://%s" % tf.name
-                    self.parse_tempurl()
-                    self.do_stats(callback_function)
-                    tf.close()
-                    self.compression_format = 'zip'
-                    self.format = supplied_format
-                    self.files_handled += 1
-            if self.files_handled == 0:
-                raise Exception, "no RDF-ish files found in archive"
-            # zip_tempfile.close()
-            # zip_file.close()
-        else:
-            raise Exception, "unknown archive - this should not happen"
-    
-    def do_sparql_stats(self):
-        """do stats via SPARQL"""
-        logger.debug("do_sparql_stats()")
-        from SPARQLWrapper import SPARQLWrapper, JSON
-        sparql = SPARQLWrapper(self.url)
-        sparql.setQuery("SELECT (count(*) AS ?triples) WHERE { ?s ?p ?o }")
-        sparql.setReturnFormat(JSON)
-        results = sparql.query().convert()
-        if not isinstance(results, dict):
-            raise Exception, "unknown response content type"
-        self.no_of_statements = int(results['results']['bindings'][0]['triples']['value'])
-        
-        lodstats.stats.run_stats_sparql(self.url)
-    
-    def do_custom_stats(self, statement):
-        """call custom stats"""
-        # make various things available to the custom code, triple is already there
-        results = self.stats_results
-        s_blank = statement.subject.is_blank()
-        if s_blank:
-            s = str(statement.subject)
-        else:
-            s = str(statement.subject.uri)
-        p = str(statement.predicate.uri)
-        o_l = statement.object.is_literal()
-        o_blank = statement.object.is_blank()
-        if o_l or o_blank:
-            o = str(statement.object)
-        else:
-            o = str(statement.object.uri)
-        
-        lodstats.stats.run_stats(s, p, o, s_blank, o_l, o_blank, statement)
-    
-    def ratelimited_callback_caller(self, callback_function):
-        """helper for callbacks that should only fire every self.callback_delay seconds"""
-        if callback_function is None:
-            return
-        now = datetime.datetime.now()
-        if self.last_callback is None:
-            self.last_callback = now
-            callback_function(self)
-        else:
-            time_delta = (now-self.last_callback).seconds
-            if time_delta >= self.callback_delay:
-                callback_function(self)
-                self.last_callback = now
-
     # accessors for statistics here
-    
-    def no_of_triples(self):
-        """docstring for notriples"""
-        return self.no_of_statements
-    
+
     def no_of_namespaces(self):
         """docstring for noofnamespaces"""
         if self.format != 'sparql':
@@ -439,158 +143,51 @@ class RDFStats(object):
         self.end_time = datetime.datetime.now()
     
     def voidify(self, serialize_as = "ntriples"):
-        """present stats in VoID (http://www.w3.org/TR/void/)"""
-        results = self.stats_results
-        
-        #Namespaces
-        rdf = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-        void = "http://rdfs.org/ns/void#"
-        void_ext = "http://stats.lod2.eu/rdf/void-ext/"
-        qb = "http://purl.org/linked-data/cube#"
-        dcterms = "http://purl.org/dc/terms/"
-        ls_void = "http://stats.lod2.eu/rdf/void/"
-        ls_qb = "http://stats.lod2.eu/rdf/qb/"
-        ls_cr = "http://stats.lod2.eu/rdf/qb/criteria/"
-        xsd = "http://www.w3.org/2001/XMLSchema#"
-        stats = "http://example.org/XStats#"
+        makevoid = lodstats.util.makevoid.MakeVoid(self, serialize_as=serialize_as)
+        return makevoid.voidify()
 
-        # setup serializar
-        serializer = RDF.Serializer(name=serialize_as)
-        serializer.set_namespace("rdf", rdf)
-        serializer.set_namespace("void", void)
-        serializer.set_namespace("void-ext", void_ext)
-        serializer.set_namespace("qb", qb)
-        serializer.set_namespace("dcterms", dcterms)
-        serializer.set_namespace("ls-void", ls_void)
-        serializer.set_namespace("ls-qb", ls_qb)
-        serializer.set_namespace("ls-cr", ls_cr)
-        serializer.set_namespace("xsd", xsd)
-        serializer.set_namespace("xstats", stats)
 
-        #Define namespaces with Redland
-        ns_rdf = RDF.NS(rdf)
-        ns_void = RDF.NS(void)
-        ns_void_ext = RDF.NS(void_ext)
-        ns_qb = RDF.NS(qb)
-        ns_dcterms = RDF.NS(dcterms)
-        ns_ls_void = RDF.NS(ls_void)
-        ns_ls_qb = RDF.NS(ls_qb)
-        ns_ls_cr = RDF.NS(ls_cr)
-        ns_xsd = RDF.NS(xsd)
-        ns_stats = RDF.NS(stats)
+if __name__ == "__main__":
+    def test_callback_extraction(object):
+        print "%s bytes" % object.bytes_extracted
 
-        # FIXME?: our dataset
-        dataset_ns = RDF.NS("%s#" % self.url)
+    def test_callback_download(object):
+        print "%s bytes" % object.bytes_downloaded
 
-        void_model = RDF.Model()
+    #logger.debug("Test case 1: remote file, bzip2 archive")
+    #logger.debug("=======================================")
+    #uri = "https://dl.dropboxusercontent.com/u/4882345/lodstats-test/heb.rdf.bz2"
+    #rdfstats = RDFStats(uri)
+    #rdfstats.set_callback_function_download(test_callback_download)
+    #rdfstats.set_callback_function_extraction(test_callback_extraction)
+    #rdfstats.start_statistics()
+    #print rdfstats.get_stats_results()
+    #print "\n\n\n"
+    #lodstats.stats.stats_to_do = []
 
-        #Defining the Dataset
-        source_uri = self.url
-        dataset_uri = ls_void + "?source=" + source_uri
-        dataset_entity = RDF.Uri(dataset_uri)
-        source_entity = RDF.Uri(source_uri)
+    
+    logger.debug("Test case 2: local file")
+    logger.debug("======================================")
+    uri = lodstats.config.rdf_test_file_uri
+    rdfstats = RDFStats(uri)
+    rdfstats.set_callback_function_download(test_callback_download)
+    rdfstats.set_callback_function_extraction(test_callback_extraction)
+    rdfstats.start_statistics()
+    print rdfstats.voidify("turtle")
+    #print rdfstats.get_stats_results()
+    print "\n\n\n"
+    lodstats.stats.stats_to_do = []
 
-        void_model.append(RDF.Statement(dataset_entity,ns_rdf.type,ns_void.Dataset))
-        void_model.append(RDF.Statement(dataset_entity,ns_dcterms.source,source_entity))
-        #void-ext:observation ls-qb:hash1; ...hash2 etc.
+    #logger.debug("Test case 3: remote file, tar archive")
+    #logger.debug("======================================")
+    #uri = "https://dl.dropboxusercontent.com/u/4882345/lodstats-test/heb.nt.tgz" 
+    #rdfstats = RDFStats(uri)
+    #rdfstats.set_callback_function_download(test_callback_download)
+    #rdfstats.set_callback_function_extraction(test_callback_extraction)
+    #rdfstats.start_statistics()
+    ##print rdfstats.get_stats_results()
+    #print "\n\n\n"
+    #lodstats.stats.stats_to_do = []
 
-        #Statistics from the stat
-        number_of_triples_node = RDF.Node(literal=str(self.no_of_statements), datatype=ns_xsd.integer.uri)
-        void_model.append(RDF.Statement(dataset_entity, ns_void.triples, number_of_triples_node))
-        
-        # voidify results from custom stats
-        for stat in lodstats.stats.stats_to_do:
-            stat.voidify(void_model, dataset_entity)
-
-        # qb dataset
-        lodstats_qb_dataset_label = "LODStats DataCube Dataset"
-        lodstats_qb_dataset_label_node = RDF.Node(literal=lodstats_qb_dataset_label, datatype=ns_xsd.string.uri) 
-        void_model.append(RDF.Statement(ns_ls_qb.LODStats, ns_rdf.type, ns_qb.Dataset))
-        void_model.append(RDF.Statement(ns_ls_qb.LODStats, ns_qb.structure, ns_ls_qb.LODStatsStructure))
-        void_model.append(RDF.Statement(ns_ls_qb.LODStats, ns_rdf.label, lodstats_qb_dataset_label_node))
-
-        #qb datastructure
-        lodstats_qb_dsd_label = "LODStats DataCube Structure Definition"
-        lodstats_qb_dsd_label_node = RDF.Node(literal=lodstats_qb_dsd_label, datatype=ns_xsd.string.uri)
-        void_model.append(RDF.Statement(ns_ls_qb.LODStatsStructure, ns_rdf.type, ns_qb.DataStructureDefinition))
-        void_model.append(RDF.Statement(ns_ls_qb.LODStatsStructure, ns_qb.component, ns_ls_qb.timeOfMeasureSpec))
-        void_model.append(RDF.Statement(ns_ls_qb.LODStatsStructure, ns_qb.component, ns_ls_qb.sourceDatasetSpec))
-        void_model.append(RDF.Statement(ns_ls_qb.LODStatsStructure, ns_qb.component, ns_ls_qb.statisticalCriterionSpec))
-        void_model.append(RDF.Statement(ns_ls_qb.LODStatsStructure, ns_qb.component, ns_ls_qb.valueSpec))
-        void_model.append(RDF.Statement(ns_ls_qb.LODStatsStructure, ns_qb.component, ns_ls_qb.unitSpec))
-        void_model.append(RDF.Statement(ns_ls_qb.LODStatsStructure, ns_qb.component, lodstats_qb_dsd_label_node))
-
-        #qb components
-        timeOfMeasureSpec_label = "Time of Measure (Component Specification)"
-        timeOfMeasureSpec_label_node = RDF.Node(literal=timeOfMeasureSpec_label, datatype=ns_xsd.string.uri)
-        void_model.append(RDF.Statement(ns_ls_qb.timeOfMeasureSpec, ns_rdf.type, ns_qb.ComponentSpecification))
-        void_model.append(RDF.Statement(ns_ls_qb.timeOfMeasureSpec, ns_qb.dimension, ns_ls_qb.timeOfMeasure))
-        void_model.append(RDF.Statement(ns_ls_qb.timeOfMeasureSpec, ns_rdf.label, timeOfMeasureSpec_label_node))
-
-        sourceDatasetSpec_label = "Source Dataset which is observerd (Component Specification)"
-        sourceDatasetSpec_label_node = RDF.Node(literal=sourceDatasetSpec_label, datatype=ns_xsd.string.uri)
-        void_model.append(RDF.Statement(ns_ls_qb.sourceDatasetSpec, ns_rdf.type, ns_qb.ComponentSpecification))
-        void_model.append(RDF.Statement(ns_ls_qb.sourceDatasetSpec, ns_qb.dimension, ns_ls_qb.sourceDataset))
-        void_model.append(RDF.Statement(ns_ls_qb.sourceDatasetSpec, ns_rdf.label, sourceDatasetSpec_label_node))
-
-        statisticalCriterionSpec_label = "Statistical Criterion (Component Specification)"
-        statisticalCriterionSpec_label_node = RDF.Node(literal=statisticalCriterionSpec_label, datatype=ns_xsd.string.uri)
-        void_model.append(RDF.Statement(ns_ls_qb.statisticalCriterionSpec, ns_rdf.type, ns_qb.ComponentSpecification))
-        void_model.append(RDF.Statement(ns_ls_qb.statisticalCriterionSpec, ns_qb.dimension, ns_ls_qb.statisticalCriterion))
-        void_model.append(RDF.Statement(ns_ls_qb.statisticalCriterionSpec, ns_rdf.label, statisticalCriterionSpec_label_node))
-
-        valueSpec_label = "Measure of Observation (Component Specification)"
-        valueSpec_label_node = RDF.Node(literal=valueSpec_label, datatype=ns_xsd.string.uri)
-        void_model.append(RDF.Statement(ns_ls_qb.valueSpec, ns_rdf.type, ns_qb.ComponentSpecification))
-        void_model.append(RDF.Statement(ns_ls_qb.valueSpec, ns_qb.measure, ns_ls_qb.value))
-        void_model.append(RDF.Statement(ns_ls_qb.valueSpec, ns_rdf.label, valueSpec_label_node))
-
-        unitSpec_label = "Unit of Measure (Component Specification)"
-        unitSpec_label_node = RDF.Node(literal=unitSpec_label, datatype=ns_xsd.string.uri)
-        void_model.append(RDF.Statement(ns_ls_qb.unitSpec, ns_rdf.type, ns_qb.ComponentSpecification))
-        void_model.append(RDF.Statement(ns_ls_qb.unitSpec, ns_qb.attribute, ns_ls_qb.unit))
-        void_model.append(RDF.Statement(ns_ls_qb.unitSpec, ns_rdf.label, unitSpec_label_node))
-
-        # dimention properties
-        timeOfMeasure_label = "Time of Measure"
-        timeOfMeasure_label_node = RDF.Node(literal=timeOfMeasure_label, datatype=ns_xsd.string.uri)
-        void_model.append(RDF.Statement(ns_ls_qb.timeOfMeasure, ns_rdf.type, ns_qb.DimensionProperty))
-        void_model.append(RDF.Statement(ns_ls_qb.timeOfMeasure, ns_rdf.label, timeOfMeasure_label_node))
-
-        sourceDataset_label = "Source Dataset"
-        sourceDataset_label_node = RDF.Node(literal=sourceDataset_label, datatype=ns_xsd.string.uri)
-        void_model.append(RDF.Statement(ns_ls_qb.sourceDataset, ns_rdf.type, ns_qb.DimensionProperty))
-        void_model.append(RDF.Statement(ns_ls_qb.sourceDataset, ns_rdf.label, sourceDataset_label_node))
-
-        statisticalCriterion_label = "Statistical Criterion"
-        statisticalCriterion_label_node = RDF.Node(literal=statisticalCriterion_label, datatype=ns_xsd.string.uri)
-        void_model.append(RDF.Statement(ns_ls_qb.statisticalCriterion, ns_rdf.type, ns_qb.DimensionProperty))
-        void_model.append(RDF.Statement(ns_ls_qb.statisticalCriterion, ns_rdf.label, statisticalCriterion_label_node))
-
-        value_label = "Measure of Observation"
-        value_label_node = RDF.Node(literal=value_label, datatype=ns_xsd.string.uri)
-        void_model.append(RDF.Statement(ns_ls_qb.value, ns_rdf.type, ns_qb.MeasureProperty))
-        void_model.append(RDF.Statement(ns_ls_qb.value, ns_rdf.label, value_label_node))
-
-        unit_label = "Unit of Measure"
-        unit_label_node = RDF.Node(literal=unit_label, datatype=ns_xsd.string.uri)
-        void_model.append(RDF.Statement(ns_ls_qb.unit, ns_rdf.type, ns_qb.AttributeProperty))
-        void_model.append(RDF.Statement(ns_ls_qb.unit, ns_rdf.label, unit_label_node))
-
-        StatisticalCriterion_label = "Statistical Criterion"
-        StatisticalCriterion_label_node = RDF.Node(literal=StatisticalCriterion_label, datatype=ns_xsd.string.uri)
-        void_model.append(RDF.Statement(ns_ls_qb.StatisticalCriterion, ns_rdf.type, ns_qb.AttributeProperty))
-        void_model.append(RDF.Statement(ns_ls_qb.StatisticalCriterion, ns_rdf.label, StatisticalCriterion_label_node))
-
-        # voidify results from custom stats
-        #for stat in lodstats.stats.stats_to_do:
-            #stat.qbify(void_model, dataset_entity)
-
-        # void:observation extension stuff
-        #void_model.append(RDF.Statement(ns_stats.value, ns_rdf.type, ns_qb.MeasureProperty))
-        #void_model.append(RDF.Statement(ns_stats.subjectsOfType, ns_rdf.type, ns_qb.DimensonProperty))
-        #void_model.append(RDF.Statement(ns_stats.schema, ns_rdf.type, ns_qb.AttributeProperty))
-        
-        #serializer.set_namespace("thisdataset", dataset_ns._prefix)
-        return serializer.serialize_model_to_string(void_model)
-
+    #Test case 4:
+    #sitemap

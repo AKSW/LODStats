@@ -19,10 +19,10 @@ along with LODStats.  If not, see <http://www.gnu.org/licenses/>.
 import RDF
 from os.path import realpath, dirname
 from RDFStatInterface import RDFStatInterface
-from lodstats.util.format import get_parser
+from lodstats.util.rdffile import RdfFile
 from lodstats.util.namespace import ns_xs, ns_void, ns_rdf, ns_stats, ns_qb
 
-class ParsedVocabulary(RDFStatInterface):
+class ParsedVocabulary(RDFStatInterface, RdfFile):
     """count usage of everything that #isDefinedBy some vocabulary"""
     
     def __init__(self, results, model_path):
@@ -32,7 +32,9 @@ class ParsedVocabulary(RDFStatInterface):
             model = realpath(model_path)
         else:
             model = realpath(dirname(__file__) + "/../rdf/rdf-schema.rdf")
-        parser_model = get_parser(model)
+        self.set_uri(model)
+        self.set_rdf_format(self.identify_rdf_format())
+        parser_model = self.identify_rdf_parser()
 
         model_stream = parser_model.parse_as_stream("file://%s" % model)
         
