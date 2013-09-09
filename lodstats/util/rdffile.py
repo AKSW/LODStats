@@ -19,8 +19,8 @@ class RdfFile(CallbackInterface, UriParserInterface):
         self.processing_end_time = None
 
         self.stats_results = []
-        self.uri = uri
-        self.rdf_format = self.identify_rdf_format() # UriParserInterface
+        self.set_uri(uri)
+        self.rdf_format = self.identify_rdf_format(self.uri) # UriParserInterface
         logger.debug("Rdf format identified: %s" % self.rdf_format)
         self.rdf_parser = self.identify_rdf_parser()
         self.rdf_stream = self.rdf_parser.parse_as_stream(self.uri)

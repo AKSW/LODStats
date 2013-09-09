@@ -29,8 +29,7 @@ class UriParserInterface(object):
     def __init__(self, uri):
         self.uri = uri
 
-    def identify_rdf_format(self):
-        uri = self.uri
+    def identify_rdf_format(self, uri):
         logger.debug("UriParser.get_format: %s" % uri)
         process_uri = uri.split('/')[-1]
         process_uri = process_uri.split('.')
@@ -82,16 +81,24 @@ class UriParserInterface(object):
         return uri.split('/')[-1]
 
     def has_scheme(self, uri):
-        parsed_uri = urlparse.urlparse(uri)
-        if(parsed_uri.scheme is ''):
+        scheme = self.get_scheme(uri)
+        if(scheme is ''):
             return False
         else:
             return True
 
+    def get_scheme(self, uri):
+        parsed_uri = urlparse.urlparse(uri)
+        return parsed_uri.scheme
+
     def fix_uri(self, uri):
         fixed_uri = uri
-        if(self.has_scheme(uri)):
+        scheme = self.get_scheme(uri)
+        if(scheme == "http" or 
+           scheme == "https"):
             return fixed_uri
-        else:
-            return "file://%s"%fixed_uri
+        elif(scheme == ""):
+            import os
+            abs_path = os.path.abspath(fixed_uri)
+            return "file://%s"%abs_path
 

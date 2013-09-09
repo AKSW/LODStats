@@ -33,7 +33,7 @@ class ParsedVocabulary(RDFStatInterface, RdfFile):
         else:
             model = realpath(dirname(__file__) + "/../rdf/rdf-schema.rdf")
         self.set_uri(model)
-        self.set_rdf_format(self.identify_rdf_format())
+        self.set_rdf_format(self.identify_rdf_format(self.uri))
         parser_model = self.identify_rdf_parser()
 
         model_stream = parser_model.parse_as_stream("file://%s" % model)
