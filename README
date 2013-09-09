@@ -36,7 +36,7 @@ cd ../
 git clone git://github.com/earthquakesan/CSV2RDF-WIKI.git
 cd CSV2RDF-WIKI/
 add2virtualenv ./
-./deploy-for-lodstats
+./deploy-for-lodstats.sh
 
 (lodstats) $ lodstats --help
 Usage: lodstats [options] [-m model.{rdf,nt,...}] file/URI
