@@ -51,9 +51,7 @@ class UsedClasses(RDFStatInterface):
 		void_model.append(statement_class_triples_value)
 
     def postproc(self):
-	"""	        
-		self.count = self.results['count'] = len(self.usage_count)
-	"""
+	self.count = self.results['count'] = len(self.usage_count)
 
     def sparql(sparql, endpoint):
         pass
