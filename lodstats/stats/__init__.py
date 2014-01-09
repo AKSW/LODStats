@@ -22,6 +22,7 @@ from ClassHierarchyDepth import *
 from PropertyUsage import PropertyUsage
 from PropertyUsageDistinctPerSubject import PropertyUsageDistinctPerSubject
 from PropertyUsageDistinctPerObject import PropertyUsageDistinctPerObject
+from PropertiesPerEntity import PropertiesPerEntity
 from Outdegree import Outdegree
 from Indegree import Indegree
 from PropertyHierarchyDepth import PropertyHierarchyDepth
@@ -60,9 +61,14 @@ available_stats = [UsedClasses, ClassesDefined, ClassHierarchyDepth, PropertyUsa
         Outdegree, Indegree, PropertyHierarchyDepth, SubclassUsage, Entities, Literals, BlanksAsSubject, BlanksAsObject, Datatypes,\
         Languages, StringLength, TypedSubjects, LabeledSubjects, SameAs, Links, Vocabularies, VocabulariesPerNode]
 # stuff usually run for lodstats/web
+lodstats_old = [UsedClasses, Vocabularies, PropertyUsage, ClassesDefined, Entities, Literals, BlanksAsObject, BlanksAsSubject,\
+                SubclassUsage, TypedSubjects, LabeledSubjects, ClassHierarchyDepth, PropertyHierarchyDepth, PropertiesPerEntity,\
+                StringLength, Links, Datatypes, Languages]
 lodstats = [UsedClasses, ClassesDefined, ClassHierarchyDepth, PropertyUsage, PropertyUsageDistinctPerSubject, PropertyUsageDistinctPerObject,\
         Outdegree, Indegree, PropertyHierarchyDepth, SubclassUsage, Entities, Literals, BlanksAsSubject, BlanksAsObject, Datatypes,\
-        Languages, StringLength, TypedSubjects, LabeledSubjects, SameAs, Links, Vocabularies, VocabulariesPerNode]
+        Languages, StringLength, TypedSubjects, LabeledSubjects, SameAs, Links, Vocabularies, VocabulariesPerNode, PropertiesPerEntity]
+#lodstats_new = lodstats - lodstats_old = what's missing on the site
+
 # not so useful/redundant optional stuff
 stupid_stats = [LiteralsList, CookieCounter]
 # stats for owl, rdf-schema, -syntax
@@ -91,9 +97,9 @@ def run_stats(s, p, o, s_blank, o_l, o_blank, statement):
 
 def run_stats_sparql(endpoint):
     from SPARQLWrapper import SPARQLWrapper
-    
+
     sparql = SPARQLWrapper(endpoint)
-        
+
     for stat_object in stats_to_do:
         stat_object.sparql(sparql)
 

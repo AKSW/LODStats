@@ -1,5 +1,5 @@
 """
-Copyright 2013 AKSW Research Group http://aksw.org
+Copyright 2012 Jan Demter <jan@demter.de>
 
 This file is part of LODStats.
 
@@ -18,21 +18,29 @@ along with LODStats.  If not, see <http://www.gnu.org/licenses/>.
 """
 from RDFStatInterface import RDFStatInterface
 
-class BlanksAsObject(RDFStatInterface):
-    """
-        Distinct number of entities
-        Entity - triple, where ?s is iri (not blank)
-    """
+class PropertiesPerEntity(RDFStatInterface):
+    """count all properties"""
     def __init__(self, results):
-        super(BlanksAsObject, self).__init__(results)
-        self.c = 0
+        super(PropertiesPerEntity, self).__init__(results)
+        self.current_subject = ''
+        self.properties = {}
+        self.subjects = 0
+        self.results['avg'] = 0
+        self.sum = 0
 
+#FIXME: vielleicht immer die letzen 10-100 props merken, um bei "out of order" serialisierung besser zu performen
     def count(self, s, p, o, s_blank, o_l, o_blank, statement):
-        if o_blank:
-            self.c += 1
-
-    def postproc(self):
-        self.results['count'] = self.c
+        if not s_blank and self.current_subject != s:
+            self.sum += len(self.properties)
+            if self.subjects > 0:
+                self.results['avg'] = self.sum/float(self.subjects)
+            else:
+                self.results['avg'] = self.sum
+            self.current_subject = s
+            self.subjects += 1
+            self.properties = {}
+        # count all properties
+        self.properties[p] = self.properties.get(p, 0) + 1
 
     def voidify(self, void_model, dataset):
         pass

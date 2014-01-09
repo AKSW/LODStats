@@ -35,7 +35,12 @@ class RDFStats(lodstats.util.interfaces.UriParserInterface):
 
     """Get some interesting numbers from RDFish resources"""
     def __init__(self, rdfurl, do_custom_stats = True,
-            stats=None, new_stats=None):
+            stats=None, new_stats=None, format=None):
+
+        #from the LODStats_WWW DB
+        self.rdf_format = format
+
+        self.rdf_parser = None
 
         #run start_statistics to gather stats
         self.uri = self.fix_uri(rdfurl)
@@ -51,6 +56,9 @@ class RDFStats(lodstats.util.interfaces.UriParserInterface):
         # TODO: no_of_statements -> triples_number
         self.no_of_statements = 0
 
+        #for backward compatibility
+        self.last_modified = None
+
         # this is a hook for parsing vocabulary
         # new_stats = [ParsedVocabulary, options.rdf_model]
         if new_stats:
@@ -65,13 +73,16 @@ class RDFStats(lodstats.util.interfaces.UriParserInterface):
         #sitemap = lodstats.util.sitemap.SiteMap(uri)
 
         logger.debug("Extracting the file from archive: %s" % downloaded_file_uri)
-        archive_extractor = lodstats.util.archiveextractor.ArchiveExtractor(downloaded_file_uri, 
+        archive_extractor = lodstats.util.archiveextractor.ArchiveExtractor(downloaded_file_uri,
                                                                             callback_function=self.callback_function_extraction,
                                                                             remote_file=remote_file)
         extracted_file_uri_list = archive_extractor.get_extracted_file_uri_list()
 
         logger.debug("Parsing RDF files ...")
-        self.rdfparser = lodstats.util.rdfparser.RdfParser(extracted_file_uri_list, stats=self.stats, callback_function=self.callback_function_statistics)
+        self.rdfparser = lodstats.util.rdfparser.RdfParser(extracted_file_uri_list,
+                                                           stats=self.stats,
+                                                           callback_function=self.callback_function_statistics,
+                                                           rdf_format=self.rdf_format)
 
     def get_stats_results(self):
         return self.rdfparser.get_stats_results()
@@ -119,12 +130,12 @@ class RDFStats(lodstats.util.interfaces.UriParserInterface):
         """process datadumps from a sitemap.xml as per http://XXX"""
         logger.debug("processing sitemap %s" % sitemapurl)
         datadumps = lodstats.util.format.parse_sitemap(sitemapurl)
-        
+
         if callback_parse is None:
             callback_parse = self.callback_parse
         if callback_stats is None:
             callback_stats = self.callback_stats
-        
+
         for datadump in datadumps:
             self.next_file(datadump)
             self.parse(callback_parse)
@@ -141,7 +152,7 @@ class RDFStats(lodstats.util.interfaces.UriParserInterface):
 
     def measure_execution_time_stop(self):
         self.end_time = datetime.datetime.now()
-    
+
     def voidify(self, serialize_as = "ntriples"):
         makevoid = lodstats.util.makevoid.MakeVoid(self, serialize_as=serialize_as)
         return makevoid.voidify()
@@ -165,7 +176,7 @@ if __name__ == "__main__":
     #print "\n\n\n"
     #lodstats.stats.stats_to_do = []
 
-    
+
     logger.debug("Test case 2: local file")
     logger.debug("======================================")
     uri = lodstats.config.rdf_test_file_uri
@@ -180,7 +191,7 @@ if __name__ == "__main__":
 
     #logger.debug("Test case 3: remote file, tar archive")
     #logger.debug("======================================")
-    #uri = "https://dl.dropboxusercontent.com/u/4882345/lodstats-test/heb.nt.tgz" 
+    #uri = "https://dl.dropboxusercontent.com/u/4882345/lodstats-test/heb.nt.tgz"
     #rdfstats = RDFStats(uri)
     #rdfstats.set_callback_function_download(test_callback_download)
     #rdfstats.set_callback_function_extraction(test_callback_extraction)

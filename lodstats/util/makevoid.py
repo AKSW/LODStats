@@ -19,7 +19,7 @@ class MakeVoid(lodstats.util.interfaces.UriParserInterface):
         self.filename = self.identify_filename(self.uri)
         self.serialize_as = serialize_as
         self.namespaces = lodstats.util.rdf_namespaces.RDFNamespaces()
-        
+
     def ckan_lookup(self):
         #look up meta data from CKAN instance (datahub.io)
         searcher = csv2rdf.ckan.resource.Resource('')
@@ -51,13 +51,13 @@ class MakeVoid(lodstats.util.interfaces.UriParserInterface):
                                             foaf_homepage_entity))
             #dcterms:title
             dcterms_title = resource['name']
-            dcterms_title_entity = RDF.Node(literal=dcterms_title, 
-                                            datatype=self.namespaces.get_rdf_namespace('xsd').string.uri) 
+            dcterms_title_entity = RDF.Node(literal=dcterms_title,
+                                            datatype=self.namespaces.get_rdf_namespace('xsd').string.uri)
             void_model.append(RDF.Statement(void_dataset_entity,
                                             self.namespaces.get_rdf_namespace('dcterms').title,
                                             dcterms_title_entity))
             #dcterms:description
-            dcterms_description = package.notes_rendered 
+            dcterms_description = package.notes_rendered
             dcterms_description_entity = RDF.Node(literal=dcterms_description,
                                                   datatype=self.namespaces.get_rdf_namespace('xsd').string.uri)
             void_model.append(RDF.Statement(void_dataset_entity,
@@ -144,7 +144,7 @@ class MakeVoid(lodstats.util.interfaces.UriParserInterface):
         #not implemented yet
         # qb dataset
         lodstats_qb_dataset_label = "LODStats DataCube Dataset"
-        lodstats_qb_dataset_label_node = RDF.Node(literal=lodstats_qb_dataset_label, datatype=ns_xsd.string.uri) 
+        lodstats_qb_dataset_label_node = RDF.Node(literal=lodstats_qb_dataset_label, datatype=ns_xsd.string.uri)
         void_model.append(RDF.Statement(ns_ls_qb.LODStats, ns_rdf.type, ns_qb.Dataset))
         void_model.append(RDF.Statement(ns_ls_qb.LODStats, ns_qb.structure, ns_ls_qb.LODStatsStructure))
         void_model.append(RDF.Statement(ns_ls_qb.LODStats, ns_rdf.label, lodstats_qb_dataset_label_node))
@@ -230,7 +230,7 @@ class MakeVoid(lodstats.util.interfaces.UriParserInterface):
         #void_model.append(RDF.Statement(ns_stats.value, ns_rdf.type, ns_qb.MeasureProperty))
         #void_model.append(RDF.Statement(ns_stats.subjectsOfType, ns_rdf.type, ns_qb.DimensonProperty))
         #void_model.append(RDF.Statement(ns_stats.schema, ns_rdf.type, ns_qb.AttributeProperty))
-        
+
         #serializer.set_namespace("thisdataset", dataset_ns._prefix)
 
     def voidify(self):
@@ -249,15 +249,15 @@ class MakeVoid(lodstats.util.interfaces.UriParserInterface):
                                         self.namespaces.get_rdf_namespace("rdf").type,
                                         self.namespaces.get_rdf_namespace("void").Dataset))
 
-        self.generate_general_void_metadata(void_model, void_dataset_entity)
+        #self.generate_general_void_metadata(void_model, void_dataset_entity)
 
         #Number of triples
-        number_of_triples_node = RDF.Node(literal=str(self.rdf_stats.get_no_of_triples()), 
+        number_of_triples_node = RDF.Node(literal=str(self.rdf_stats.get_no_of_triples()),
                                           datatype=self.namespaces.get_rdf_namespace("xsd").integer.uri)
-        void_model.append(RDF.Statement(void_dataset_entity, 
-                                        self.namespaces.get_rdf_namespace("void").triples, 
+        void_model.append(RDF.Statement(void_dataset_entity,
+                                        self.namespaces.get_rdf_namespace("void").triples,
                                         number_of_triples_node))
-        
+
         # voidify results from custom stats
         for stat in lodstats.stats.stats_to_do:
             stat.voidify(void_model, void_dataset_entity)
@@ -268,7 +268,7 @@ if __name__ == "__main__":
     import lodstats.RDFStats
     uri = "http://www.gutenberg.org/ebooks/12345.rdf"
     #uri = "http://bio2rdf.org/rdfxml/genbank:BC062795"
-    #uri = lodstats.config.rdf_test_file_uri 
+    #uri = lodstats.config.rdf_test_file_uri
     stats = lodstats.stats.void_stats
     rdf_stats = lodstats.RDFStats(uri, stats=stats)
     rdf_stats.disable_debug()

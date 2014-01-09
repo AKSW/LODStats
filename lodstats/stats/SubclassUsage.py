@@ -22,16 +22,16 @@ class SubclassUsage(RDFStatInterface):
     def __init__(self, results):
         super(SubclassUsage, self).__init__(results)
         self.c = 0
-        
+
     def count(self, s, p, o, s_blank, o_l, o_blank, statement):
         if p == 'http://www.w3.org/2000/01/rdf-schema#subClassOf':
             self.c += 1
-    
+
     def postproc(self):
         self.results['count'] = self.c
 
     def voidify(self, void_model, dataset):
         pass
-    
+
     def sparql(self, endpoint):
         pass

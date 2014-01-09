@@ -5,7 +5,8 @@ import logging
 logger = logging.getLogger("lodstats")
 
 class RdfParser(object):
-    def __init__(self, uri_list, callback_function=None, stats=None):
+    def __init__(self, uri_list, callback_function=None, stats=None, rdf_format=None):
+        self.rdf_format=rdf_format
         self.callback_function = callback_function
         self.uri_list = uri_list
         self.stats = stats
@@ -45,7 +46,10 @@ class RdfParser(object):
         rdf_files = []
         for uri in self.uri_list:
             logger.debug("Processing rdf file: %s" % uri)
-            rdf_file = lodstats.util.rdffile.RdfFile(uri, stats=self.stats, callback_function=self.callback_function)
+            rdf_file = lodstats.util.rdffile.RdfFile(uri,
+                                                     stats=self.stats,
+                                                     callback_function=self.callback_function,
+                                                     rdf_format=self.rdf_format)
             rdf_files.append(rdf_file)
         lodstats.stats.postproc()
         return rdf_files

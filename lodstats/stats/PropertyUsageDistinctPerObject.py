@@ -26,7 +26,7 @@ class PropertyUsageDistinctPerObject(RDFStatInterface):
         super(PropertyUsageDistinctPerObject, self).__init__(results)
         self.usage_count = self.results['usage_count'] = {}
         self.digest_list = []
-        
+
     def count(self, s, p, o, s_blank, o_l, o_blank, statement):
         po = p+o
         hash = md5.new()
@@ -35,10 +35,10 @@ class PropertyUsageDistinctPerObject(RDFStatInterface):
         if not digest in self.digest_list:
             self.digest_list.append(digest)
             self.usage_count[p] = self.usage_count.get(p, 0) + 1
-    
+
     def voidify(self, void_model, dataset):
         pass
-    
+
     def sparql(self, endpoint):
         pass
 

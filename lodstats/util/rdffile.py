@@ -10,17 +10,19 @@ from lodstats.util.interfaces import CallbackInterface
 from lodstats.util.interfaces import UriParserInterface
 
 class RdfFile(CallbackInterface, UriParserInterface):
-    def __init__(self, uri, callback_function=None, stats=None):
+    def __init__(self, uri, callback_function=None, stats=None, rdf_format=None):
         super(RdfFile, self).__init__()
         self.no_of_statements = 0
         self.warnings = 0
         self.last_warning = None
         self.processing_start_time = None
         self.processing_end_time = None
+        self.rdf_format = rdf_format
 
         self.stats_results = []
         self.set_uri(uri)
-        self.rdf_format = self.identify_rdf_format(self.uri) # UriParserInterface
+        if(self.rdf_format is None):
+            self.rdf_format = self.identify_rdf_format(self.uri) # UriParserInterface
         logger.debug("Rdf format identified: %s" % self.rdf_format)
         self.rdf_parser = self.identify_rdf_parser()
         self.rdf_stream = self.rdf_parser.parse_as_stream(self.uri)
@@ -75,10 +77,10 @@ class RdfFile(CallbackInterface, UriParserInterface):
             for statement in self.rdf_stream:
                 # count statements
                 self.no_of_statements += 1
-        
+
                 # do custom counting
                 self.do_custom_stats(statement)
-            
+
                 # optional callback (eg for status stuff) every 5000 triples
                 if callback_function != None and self.no_of_statements % 5000 == 0:
                     callback_function(self)
@@ -101,7 +103,7 @@ class RdfFile(CallbackInterface, UriParserInterface):
             o = str(statement.object)
         else:
             o = str(statement.object.uri)
-        
+
         lodstats.stats.run_stats(s, p, o, s_blank, o_l, o_blank, statement)
 
     def do_stats(self, callback_function = None):
@@ -116,10 +118,10 @@ class RdfFile(CallbackInterface, UriParserInterface):
             self.collect_stats_sparql()
         else:
             self.collect_stats_file(callback_function)
-        
+
         if self.no_of_statements == 0:
             raise Exception, "zero triples"
-    
+
     def collect_stats_sparql(self):
         """do stats via SPARQL"""
         logger.debug("do_sparql_stats()")
@@ -131,6 +133,6 @@ class RdfFile(CallbackInterface, UriParserInterface):
         if not isinstance(results, dict):
             raise Exception, "unknown response content type"
         self.no_of_statements = int(results['results']['bindings'][0]['triples']['value'])
-        
+
         lodstats.stats.run_stats_sparql(self.url)
 

@@ -29,7 +29,17 @@ class UriParserInterface(object):
     def __init__(self, uri):
         self.uri = uri
 
+
     def identify_rdf_format(self, uri):
+        rdf_format = None
+        rdf_format = self.identify_rdf_format_by_file_extension(uri)
+
+        if(rdf_format is None):
+            raise NameError("could not guess format")
+        else:
+            return rdf_format
+
+    def identify_rdf_format_by_file_extension(self, uri):
         logger.debug("UriParser.get_format: %s" % uri)
         process_uri = uri.split('/')[-1]
         process_uri = process_uri.split('.')
@@ -49,20 +59,23 @@ class UriParserInterface(object):
                 return 'sparql'
             if(item == 'sitemap'):
                 return 'sitemap'
-        raise NameError("could not guess format")
+        return None
+
+    def identify_rdf_format_by_magic(self, uri):
+        return None
 
     def identify_compression_format(self, uri):
         """guess compression of resource"""
         logger.debug("UriParser.get_compression: %s" % uri)
         compression_format = None
         if self._has_tar_extension(uri):
-            compression_format = 'tar' 
+            compression_format = 'tar'
         if self._has_zip_extension(uri):
-            compression_format = 'zip' 
+            compression_format = 'zip'
         if self._has_gzip_extension(uri):
-            compression_format = 'gz' 
+            compression_format = 'gz'
         if self._has_bzip2_extension(uri):
-            compression_format = 'bz2' 
+            compression_format = 'bz2'
         return compression_format
 
     def _has_tar_extension(self, uri):
@@ -94,7 +107,7 @@ class UriParserInterface(object):
     def fix_uri(self, uri):
         fixed_uri = uri
         scheme = self.get_scheme(uri)
-        if(scheme == "http" or 
+        if(scheme == "http" or
            scheme == "https"):
             return fixed_uri
         elif(scheme == ""):
