@@ -112,7 +112,7 @@ class RemoteFile(CallbackInterface, UriParserInterface):
                                                   suffix=self.generate_uuid_for_filename(),
                                                   delete=False)
         #chunk_size = "16"
-        for data in r.iter_lines():
+        for data in r.iter_content(chunk_size=512):
             self.bytes_downloaded += len(data)
             output_file.write(data)
             self.ratelimited_callback_caller(self.callback_function)
