@@ -4,6 +4,7 @@ import requests
 import exceptions
 import datetime
 import logging
+import uuid
 
 import lodstats.config
 from lodstats.util.interfaces import CallbackInterface
@@ -56,8 +57,38 @@ class RemoteFile(CallbackInterface, UriParserInterface):
     def get_local_free_diskspace(self):
         return self.get_free_diskspace(tempfile.gettempdir())
 
+    def generate_uuid_for_filename(self, filename=None):
+        if(filename is None):
+            filename = self.filename
+
+        namespace = uuid.NAMESPACE_URL
+        unique_id = str(uuid.uuid5(namespace, filename)) + self.get_file_extension()
+
+        return unique_id
+
+    def get_file_extension(self, filename=None):
+        if(filename is None):
+            filename = self.filename
+
+        extension = ""
+        extension_outer = None
+        extension_inner = None
+        try:
+            extension_outer = filename.split(".")[-1]
+            extension_inner = filename.split(".")[-2]
+        except IndexError as e:
+            logging.error("Could not determine extension "+str(e))
+
+        if(extension_outer is not None and len(extension_outer) < 6):
+            extension = extension + "." + extension_inner
+
+        if(extension_inner is not None and len(extension_inner) < 6):
+            extension = extension + "." + extension_outer
+
+        return extension
+
     def download(self):
-        r = requests.get(self.uri)
+        r = requests.get(self.uri, stream=True)
 
         last_modified = r.headers.get('last-modified')
         if last_modified is not None:
@@ -77,8 +108,11 @@ class RemoteFile(CallbackInterface, UriParserInterface):
             self.callback_function(self)
 
         #Download file
-        output_file = tempfile.NamedTemporaryFile(prefix='lodstats', suffix=self.filename, delete=False)
-        for data in r.content:
+        output_file = tempfile.NamedTemporaryFile(prefix='lodstats',
+                                                  suffix=self.generate_uuid_for_filename(),
+                                                  delete=False)
+        #chunk_size = "16"
+        for data in r.iter_lines():
             self.bytes_downloaded += len(data)
             output_file.write(data)
             self.ratelimited_callback_caller(self.callback_function)
@@ -90,5 +124,8 @@ class RemoteFile(CallbackInterface, UriParserInterface):
 
 if __name__ == "__main__":
     uri = "https://premium.scraperwiki.com/dtuaora/91bafd103a364fc/http/__status.csv"
+    uri = "http://uccaribe.eagle-i.net/sparqler/sparql?view=published-resources&format=text/turtle&query=PREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E+PREFIX+%3A+%3Chttp%3A%2F%2Feagle-i.org%2Font%2Frepo%2F1.0%2F%3E+construct+%7B%3Fs+%3Fp+%3Fo+.+%3Fs+a+%3Ftype+.+%3Ftype+rdfs%3Alabel+%3Ftype_label+.+%3Fp+rdfs%3Alabel+%3Fp_label+.+%3Fo+rdfs%3Alabel+%3Fo_label%7D+where+%7Bgraph+%3ANG_Published%7B%3Fs+%3Fp+%3Fo%7D+.+optional%7B%3Fs+a+%3Ftype%7D+.+optional%7B%3Ftype+rdfs%3Alabel+%3Ftype_label%7D+.+optional%7B%3Fp+rdfs%3Alabel+%3Fp_label+%7D+.+optional%7B+%3Fo+rdfs%3Alabel+%3Fo_label%7D%7D+"
+    uri = "http://mlode.nlp2rdf.org/datasets/semanticquran.ttl.gz"
     remote_file = RemoteFile(uri, callback_function=lodstats.config.callback_function_download)
+    #remote_file.download()
     print remote_file.get_downloaded_file_uri()
