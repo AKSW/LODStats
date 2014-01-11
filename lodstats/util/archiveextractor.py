@@ -3,6 +3,7 @@ import gzip
 import bz2
 import tarfile
 import zipfile
+import os
 
 import logging
 logger = logging.getLogger("lodstats")
@@ -17,7 +18,9 @@ class ArchiveExtractor(CallbackInterface, UriParserInterface):
         super(ArchiveExtractor, self).__init__()
         self.uri = uri
         self.remote_file = remote_file
-        self.original_file_size = remote_file.get_bytes_downloaded()
+        self.original_file_size = 0
+        if(self.remote_file is not None):
+            self.original_file_size = remote_file.get_bytes_downloaded()
         self.filename = self.identify_filename(uri)
         self.filepath = uri[7:] #omitting file://
         self.compression_format = self.identify_compression_format(self.uri)
@@ -26,6 +29,8 @@ class ArchiveExtractor(CallbackInterface, UriParserInterface):
 
         self.extracted_file_uri_list = self.extract_archive(uri, self.filepath, self.compression_format, callback_function)
         self.extracted_file_path_list = self.set_extracted_file_path(self.extracted_file_uri_list)
+
+        logger.debug("File is extracted to %s" % self.extracted_file_path_list)
 
     def get_compression_format(self):
         if(self.compression_format is None):
@@ -71,7 +76,7 @@ class ArchiveExtractor(CallbackInterface, UriParserInterface):
         return output
 
     def extract_archive(self, uri, filepath, compression_format, callback_function):
-        f = open(filepath, 'rU') 
+        f = open(filepath, 'rU')
         if compression_format is None:
             extracted_file_uri = [uri]
         elif compression_format == 'gz':
@@ -89,25 +94,36 @@ class ArchiveExtractor(CallbackInterface, UriParserInterface):
 
         logging.debug("File %s has been successfully extracted to %s" % (filepath, extracted_file_uri))
         #return an array of uris
-        return extracted_file_uri 
+        return extracted_file_uri
+
+    def get_filesize(self, path_to_file):
+        return os.path.getsize(path_to_file)
 
     def decompress_gzip(self, input_file, callback_function):
         output_file = tempfile.NamedTemporaryFile(prefix='lodstats_gzip_decompressed', suffix=self.filename, delete=False)
         gzip_file = gzip.GzipFile(input_file, mode='rb')
-        for data in gzip_file.read():
-            self.bytes_extracted += len(data)
-            output_file.write(data)
-            self.ratelimited_callback_caller(callback_function)
+        try:
+            for data in gzip_file:
+                self.bytes_extracted += len(data)
+                output_file.write(data)
+                self.ratelimited_callback_caller(callback_function)
+        except IOError as e:
+            logger.error(str(e))
         output_file.flush()
         output_file.close()
         gzip_file.close()
 
-        return ["file://%s" % output_file.name]
+        result_uri = ["file://%s" % output_file.name]
+        if(self.get_filesize(output_file.name) < self.get_filesize(self.filepath)):
+            result_uri = self.uri
+
+
+        return result_uri
 
     def decompress_bz2(self, input_file, callback_function):
         output_file = tempfile.NamedTemporaryFile(prefix='lodstats_bzip2_decompressed', suffix=self.filename, delete=False)
         bz2_file = bz2.BZ2File(input_file)
-        for data in bz2_file.read():
+        for data in bz2_file:
             self.bytes_extracted += len(data)
             output_file.write(data)
             self.ratelimited_callback_caller(callback_function)
@@ -178,35 +194,35 @@ if __name__ == "__main__":
     gz_file_uri = 'file://'+virtenv_path+'heb.rdf'
     ae = ArchiveExtractor(gz_file_uri, callback_function)
     print ae.get_info()
-    assert filecmp.cmp(ae.get_extracted_file_path_list()[0], original_file_name), "Extracted gzip file is not the same as original!" 
+    assert filecmp.cmp(ae.get_extracted_file_path_list()[0], original_file_name), "Extracted gzip file is not the same as original!"
 
     ##Test gzip
     print "Testing gzip extraction"
     gz_file_uri = 'file://'+virtenv_path+'heb.rdf.gz'
     ae = ArchiveExtractor(gz_file_uri, callback_function)
     print ae.get_info()
-    assert filecmp.cmp(ae.get_extracted_file_path_list()[0], original_file_name), "Extracted gzip file is not the same as original!" 
+    assert filecmp.cmp(ae.get_extracted_file_path_list()[0], original_file_name), "Extracted gzip file is not the same as original!"
 
     ##Test bz2
     print "Testing bzip2 extraction"
     file_uri = 'file://'+virtenv_path+'heb.rdf.bz2'
     ae = ArchiveExtractor(file_uri, callback_function)
     print ae.get_info()
-    assert filecmp.cmp(ae.get_extracted_file_path_list()[0], original_file_name), "Extracted bzip2 file is not the same as original!" 
+    assert filecmp.cmp(ae.get_extracted_file_path_list()[0], original_file_name), "Extracted bzip2 file is not the same as original!"
 
     #Test tar
     print "Testing tar extraction"
     file_uri = 'file://'+virtenv_path+'heb.nt.tgz'
     ae = ArchiveExtractor(file_uri, callback_function)
     print ae.get_info()
-    assert filecmp.cmp(ae.get_extracted_file_path_list()[0], original_file_name_head), "Extracted tar file part 1 is not the same as original!" 
-    assert filecmp.cmp(ae.get_extracted_file_path_list()[1], original_file_name_tail), "Extracted tar file part 2 is not the same as original!" 
+    assert filecmp.cmp(ae.get_extracted_file_path_list()[0], original_file_name_head), "Extracted tar file part 1 is not the same as original!"
+    assert filecmp.cmp(ae.get_extracted_file_path_list()[1], original_file_name_tail), "Extracted tar file part 2 is not the same as original!"
 
     #Test zip
     print "Testing zip extraction"
     file_uri = 'file://'+virtenv_path+'heb.nt.zip'
     ae = ArchiveExtractor(file_uri, callback_function)
     print ae.get_info()
-    assert filecmp.cmp(ae.get_extracted_file_path_list()[0], original_file_name_head), "Extracted zip file part 1 is not the same as original!" 
-    assert filecmp.cmp(ae.get_extracted_file_path_list()[1], original_file_name_tail), "Extracted tar file part 2 is not the same as original!" 
+    assert filecmp.cmp(ae.get_extracted_file_path_list()[0], original_file_name_head), "Extracted zip file part 1 is not the same as original!"
+    assert filecmp.cmp(ae.get_extracted_file_path_list()[1], original_file_name_tail), "Extracted tar file part 2 is not the same as original!"
 

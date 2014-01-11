@@ -33,6 +33,7 @@ logger = logging.getLogger("lodstats")
 parser = OptionParser(usage="usage: %prog [options] [-m model.{rdf,nt,...}] file/URI [file/URI ...]")
 parser.add_option('-v', '--void', action='store_true', help='generate VoID')
 parser.add_option('-c', '--count', action='store_true', help='just count triples, no statistics')
+parser.add_option('-f', '--format', dest="format", help='specify RDF format', metavar="FORMAT")
 parser.add_option('-p', '--progress', action='store_true', help='show progress')
 parser.add_option('-a', '--all-stats', action='store_true', help='do all available statistics')
 parser.add_option('-l', '--lod-stats', action='store_true', help='do statistics for lodstats')
@@ -97,9 +98,11 @@ def callback_function_extraction(archive_extractor):
     now = datetime.datetime.now()
     time_delta = (now-start_time).seconds
     if time_delta > 0:
-        print("\rFetch done %d KB, %d KB uncomp., %d KB/s." % (archive_extractor.original_file_size, archive_extractor.bytes_extracted/1024, (archive_extractor.bytes_extracted/1024)/time_delta))
+        print("\rFetch done %d KB, %d KB uncomp., %d KB/s." % (archive_extractor.original_file_size/1024, archive_extractor.bytes_extracted/1024, (archive_extractor.bytes_extracted/1024)/time_delta))
+        sys.stdout.flush()
     else:
-        print("\rFetch done %d KB, %d KB uncomp." % (archive_extractor.original_file_size, archive_extractor.bytes_extracted/1024))
+        print("\rFetch done %d KB, %d KB uncomp." % (archive_extractor.original_file_size/1024, archive_extractor.bytes_extracted/1024))
+        sys.stdout.flush()
 
 def callback_function_statistics(rdf_file):
     if rdf_file.get_no_of_triples() > 0:
@@ -130,8 +133,8 @@ for resource_uri in args:
         #print("File not found/unreadable")
         #exit(3)
 
-    rdf_stats = lodstats.RDFStats(resource_uri, stats=stats, new_stats=new_stats)
-    
+    rdf_stats = lodstats.RDFStats(resource_uri, stats=stats, new_stats=new_stats, format=options.format)
+
     if options.progress:
         rdf_stats.set_callback_function_download(callback_function_download)
         rdf_stats.set_callback_function_extraction(callback_function_extraction)

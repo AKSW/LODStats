@@ -26,9 +26,11 @@ class CallbackInterface(object):
                 self.time_of_last_callback = now
 
 class UriParserInterface(object):
-    def __init__(self, uri):
-        self.uri = uri
+    def __init__(self):
+        pass
 
+    def is_remote(self):
+        return any(self.uri.lower().startswith(x) for x in ('http://', 'https://'))
 
     def identify_rdf_format(self, uri):
         rdf_format = None
@@ -115,3 +117,23 @@ class UriParserInterface(object):
             abs_path = os.path.abspath(fixed_uri)
             return "file://%s"%abs_path
 
+    def get_file_extension(self, filename=None):
+        if(filename is None):
+            filename = self.filename
+
+        extension = ""
+        extension_outer = None
+        extension_inner = None
+        try:
+            extension_outer = filename.split(".")[-1]
+            extension_inner = filename.split(".")[-2]
+        except IndexError as e:
+            logging.error("Could not determine extension "+str(e))
+
+        if(extension_outer is not None and len(extension_outer) < 6):
+            extension = extension + "." + extension_inner
+
+        if(extension_inner is not None and len(extension_inner) < 6):
+            extension = extension + "." + extension_outer
+
+        return extension

@@ -34,10 +34,10 @@ logger = logging.getLogger("lodstats")
 class RDFStats(lodstats.util.interfaces.UriParserInterface):
 
     """Get some interesting numbers from RDFish resources"""
-    def __init__(self, rdfurl, do_custom_stats = True,
+    def __init__(self, rdfurl, do_custom_stats=True,
             stats=None, new_stats=None, format=None):
 
-        #from the LODStats_WWW DB
+        #from the LODStats_WWW DB or command line script
         self.rdf_format = format
 
         self.rdf_parser = None

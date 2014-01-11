@@ -8,6 +8,7 @@ logger = logging.getLogger("lodstats")
 
 from lodstats.util.interfaces import CallbackInterface
 from lodstats.util.interfaces import UriParserInterface
+from lodstats.util.rdf2rdf import RDF2RDF
 
 class RdfFile(CallbackInterface, UriParserInterface):
     def __init__(self, uri, callback_function=None, stats=None, rdf_format=None):
@@ -24,6 +25,11 @@ class RdfFile(CallbackInterface, UriParserInterface):
         if(self.rdf_format is None):
             self.rdf_format = self.identify_rdf_format(self.uri) # UriParserInterface
         logger.debug("Rdf format identified: %s" % self.rdf_format)
+        if(self.rdf_format == "ttl"):
+            logger.debug("Converting turtle to ntriples")
+            rdf2rdf = RDF2RDF(self.get_uri())
+            self.set_uri(rdf2rdf.convert_ttl_to_nt())
+            logger.debug("Converted turtle to ntriples %s" % self.get_uri())
         self.rdf_parser = self.identify_rdf_parser()
         self.rdf_stream = self.rdf_parser.parse_as_stream(self.uri)
         self.do_stats(callback_function)
@@ -46,13 +52,18 @@ class RdfFile(CallbackInterface, UriParserInterface):
     def set_uri(self, uri):
         self.uri = uri
 
+    def get_uri(self):
+        return self.uri
+
     def set_rdf_format(self, rdf_format):
         self.rdf_format = rdf_format
 
     def identify_rdf_parser(self):
         format = self.rdf_format
         if format == 'ttl':
-            parser = RDF.TurtleParser()
+            #parser = RDF.TurtleParser()
+            logger.error("Turtle is not supported by LODStats, should be converted to ntriples!")
+            parser = RDF.NTriplesParser()
         elif format == 'nt' or format == 'n3': # FIXME: this probably won't do for n3
             parser = RDF.NTriplesParser()
         elif format == 'nq':

@@ -3,8 +3,10 @@ import os
 import requests
 import exceptions
 import datetime
-import logging
 import uuid
+
+import logging
+logger = logging.getLogger("lodstats")
 
 import lodstats.config
 from lodstats.util.interfaces import CallbackInterface
@@ -37,15 +39,12 @@ class RemoteFile(CallbackInterface, UriParserInterface):
         return self.content_length
 
     def get_downloaded_file_uri(self):
-        if(self._is_remote()):
+        if(self.is_remote()):
             downloaded_file_uri = self.download()
             return downloaded_file_uri
         else:
             logging.debug("File is local, returning original URI")
             return self.uri
-
-    def _is_remote(self):
-        return any(self.uri.lower().startswith(x) for x in ('http://', 'https://'))
 
     def get_free_diskspace(self, p):
         """
@@ -66,27 +65,6 @@ class RemoteFile(CallbackInterface, UriParserInterface):
 
         return unique_id
 
-    def get_file_extension(self, filename=None):
-        if(filename is None):
-            filename = self.filename
-
-        extension = ""
-        extension_outer = None
-        extension_inner = None
-        try:
-            extension_outer = filename.split(".")[-1]
-            extension_inner = filename.split(".")[-2]
-        except IndexError as e:
-            logging.error("Could not determine extension "+str(e))
-
-        if(extension_outer is not None and len(extension_outer) < 6):
-            extension = extension + "." + extension_inner
-
-        if(extension_inner is not None and len(extension_inner) < 6):
-            extension = extension + "." + extension_outer
-
-        return extension
-
     def download(self):
         r = requests.get(self.uri, stream=True)
 
@@ -96,8 +74,8 @@ class RemoteFile(CallbackInterface, UriParserInterface):
             if self.if_modified_since is not None and last_modified == self.if_modified_since:
                 raise exceptions.NotModified, 'resource has not been modified'
 
-        content_length = r.headers['content-length']
-        if content_length is not None:
+        content_length = r.headers.get('content-length', 0)
+        if content_length is not 0:
             self.set_content_length(int(content_length))
 
         free_diskspace = self.get_local_free_diskspace()
@@ -119,6 +97,8 @@ class RemoteFile(CallbackInterface, UriParserInterface):
 
         if(self.callback_function is not None):
             self.callback_function(self)
+
+        logger.debug("File is downloaded to %s" % output_file.name)
 
         return "file://%s" % output_file.name
 
