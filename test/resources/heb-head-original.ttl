@@ -1,0 +1,496 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+<http://lod.hebis.de/resource/05051128>
+    <http://iflastandards.info/ns/isbd/elements/P1004> "Melanchthon und die Reformation" ;
+    <http://iflastandards.info/ns/isbd/elements/P1006> "Forschungsbeiträge" ;
+    <http://iflastandards.info/ns/isbd/elements/P1016> "Mainz" ;
+    <http://iflastandards.info/ns/isbd/elements/P1017> "von Zabern" ;
+    <http://iflastandards.info/ns/isbd/elements/P1018> "1996" ;
+    <http://purl.org/dc/terms/contributor> "http://d-nb.info/gnd/10895787X", "http://d-nb.info/gnd/130599832" ;
+    <http://purl.org/dc/terms/creator> "http://d-nb.info/gnd/123087988" ;
+    <http://purl.org/dc/terms/format> "print" ;
+    <http://purl.org/dc/terms/identifier> "050511289" ;
+    <http://purl.org/dc/terms/issued> "1996" ;
+    <http://purl.org/dc/terms/medium> "paper" ;
+    <http://purl.org/dc/terms/publisher> "von Zabern" ;
+    <http://purl.org/dc/terms/subject> "http://d-nb.info/gnd/118580485", "http://d-nb.info/gnd/4048946-2" ;
+    <http://purl.org/dc/terms/title> "Melanchthon und die Reformation" ;
+    <http://purl.org/ontology/bibo/oclcnum> "35919757" ;
+    a <http://purl.org/dc/terms/BibliographicResource>, <http://purl.org/ontology/bibo/Book>, <http://purl.org/vocab/frbr/core#Manifestation> ;
+    <http://www.w3.org/2002/07/owl#sameAs> "http://d-nb.info/948112298" ;
+    <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051128> .
+
+<http://lod.hebis.de/resource/05051129>
+    <http://iflastandards.info/ns/isbd/elements/P1004> "Die @Rationalität der europäischen Agrarpolitik" ;
+    <http://iflastandards.info/ns/isbd/elements/P1016> "Göttingen" ;
+    <http://iflastandards.info/ns/isbd/elements/P1017> "Vandenhoeck & Ruprecht" ;
+    <http://iflastandards.info/ns/isbd/elements/P1018> "1967" ;
+    <http://purl.org/dc/terms/creator> "http://d-nb.info/gnd/106959247" ;
+    <http://purl.org/dc/terms/format> "print" ;
+    <http://purl.org/dc/terms/identifier> "050511297" ;
+    <http://purl.org/dc/terms/issued> "1967" ;
+    <http://purl.org/dc/terms/medium> "paper" ;
+    <http://purl.org/dc/terms/publisher> "Vandenhoeck & Ruprecht" ;
+    <http://purl.org/dc/terms/title> "Die Rationalität der europäischen Agrarpolitik" ;
+    <http://purl.org/ontology/bibo/oclcnum> "10216004" ;
+    a <http://purl.org/dc/terms/BibliographicResource>, <http://purl.org/ontology/bibo/Book>, <http://purl.org/vocab/frbr/core#Manifestation> ;
+    <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051129> .
+
+<http://lod.hebis.de/resource/05051130>
+    <http://iflastandards.info/ns/isbd/elements/P1004> "Att upptäcka systemnätverk i edukativ slöjd" ;
+    <http://iflastandards.info/ns/isbd/elements/P1006> "analyser av elevens slöjdhandlingar i en kontext ; en paradigmutvecklande ansats" ;
+    <http://iflastandards.info/ns/isbd/elements/P1016> "Åbo" ;
+    <http://iflastandards.info/ns/isbd/elements/P1017> "Åbo Akad. Förlag" ;
+    <http://iflastandards.info/ns/isbd/elements/P1018> "1995" ;
+    <http://purl.org/dc/terms/format> "print" ;
+    <http://purl.org/dc/terms/identifier> "050511300" ;
+    <http://purl.org/dc/terms/issued> "1995" ;
+    <http://purl.org/dc/terms/medium> "paper" ;
+    <http://purl.org/dc/terms/publisher> "Åbo Akad. Förlag" ;
+    <http://purl.org/dc/terms/title> "Att upptäcka systemnätverk i edukativ slöjd" ;
+    <http://purl.org/ontology/bibo/oclcnum> "33664695" ;
+    a <http://purl.org/dc/terms/BibliographicResource>, <http://purl.org/ontology/bibo/Book>, <http://purl.org/vocab/frbr/core#Manifestation> ;
+    <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051130> .
+
+<http://lod.hebis.de/resource/05051131>
+    <http://iflastandards.info/ns/isbd/elements/P1004> "Unter Indianern" ;
+    <http://iflastandards.info/ns/isbd/elements/P1006> "Abenteuer eines deutschen Jungen" ;
+    <http://iflastandards.info/ns/isbd/elements/P1016> "Reutlingen" ;
+    <http://iflastandards.info/ns/isbd/elements/P1017> "Enßlin & Laiblin" ;
+    <http://iflastandards.info/ns/isbd/elements/P1018> "1932" ;
+    <http://purl.org/dc/terms/format> "print" ;
+    <http://purl.org/dc/terms/identifier> "050511319" ;
+    <http://purl.org/dc/terms/issued> "1932" ;
+    <http://purl.org/dc/terms/medium> "paper" ;
+    <http://purl.org/dc/terms/publisher> "Enßlin & Laiblin" ;
+    <http://purl.org/dc/terms/title> "Unter Indianern" ;
+    <http://purl.org/ontology/bibo/oclcnum> "174337787" ;
+    a <http://purl.org/dc/terms/BibliographicResource>, <http://purl.org/ontology/bibo/Book>, <http://purl.org/vocab/frbr/core#Manifestation> ;
+    <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051131> .
+
+<http://lod.hebis.de/resource/05051132>
+    <http://iflastandards.info/ns/isbd/elements/P1004> "The @Oxford history of world cinema" ;
+    <http://iflastandards.info/ns/isbd/elements/P1008> "1. [Dr.]" ;
+    <http://iflastandards.info/ns/isbd/elements/P1016> "Oxford {[u.a.]" ;
+    <http://iflastandards.info/ns/isbd/elements/P1017> "Oxford Univ. Press" ;
+    <http://iflastandards.info/ns/isbd/elements/P1018> "1996" ;
+    <http://purl.org/dc/terms/contributor> "http://d-nb.info/gnd/136378595" ;
+    <http://purl.org/dc/terms/format> "print" ;
+    <http://purl.org/dc/terms/identifier> "050511327" ;
+    <http://purl.org/dc/terms/issued> "1996" ;
+    <http://purl.org/dc/terms/medium> "paper" ;
+    <http://purl.org/dc/terms/publisher> "Oxford Univ. Press" ;
+    <http://purl.org/dc/terms/title> "The Oxford history of world cinema" ;
+    <http://purl.org/ontology/bibo/edition> "1. [Dr.]" ;
+    <http://purl.org/ontology/bibo/oclcnum> "31243045" ;
+    a <http://purl.org/dc/terms/BibliographicResource>, <http://purl.org/ontology/bibo/Book>, <http://purl.org/vocab/frbr/core#Manifestation> ;
+    <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051132> .
+
+<http://lod.hebis.de/resource/05051133>
+    <http://iflastandards.info/ns/isbd/elements/P1004> "Analytic element modeling of groundwater flow" ;
+    <http://iflastandards.info/ns/isbd/elements/P1008> "1. [Dr.]" ;
+    <http://iflastandards.info/ns/isbd/elements/P1016> "San Diego, Calif. {[u.a.]" ;
+    <http://iflastandards.info/ns/isbd/elements/P1017> "Acad. Press" ;
+    <http://iflastandards.info/ns/isbd/elements/P1018> "1995" ;
+    <http://purl.org/dc/terms/format> "print" ;
+    <http://purl.org/dc/terms/identifier> "050511335" ;
+    <http://purl.org/dc/terms/issued> "1995" ;
+    <http://purl.org/dc/terms/medium> "paper" ;
+    <http://purl.org/dc/terms/publisher> "Acad. Press" ;
+    <http://purl.org/dc/terms/title> "Analytic element modeling of groundwater flow" ;
+    <http://purl.org/ontology/bibo/edition> "1. [Dr.]" ;
+    <http://purl.org/ontology/bibo/oclcnum> "32467926" ;
+    a <http://purl.org/dc/terms/BibliographicResource>, <http://purl.org/ontology/bibo/Book>, <http://purl.org/vocab/frbr/core#Manifestation> ;
+    <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051133> .
+
+<http://lod.hebis.de/resource/05051134>
+    <http://iflastandards.info/ns/isbd/elements/P1004> "Was wäre wenn wir planen würden ..." ;
+    <http://iflastandards.info/ns/isbd/elements/P1006> "Stadtplanung aus der Sicht von Frauen" ;
+    <http://iflastandards.info/ns/isbd/elements/P1016> "Wetzlar" ;
+    <http://iflastandards.info/ns/isbd/elements/P1018> "1993" ;
+    <http://purl.org/dc/terms/creator> "http://d-nb.info/gnd/123547466", "http://d-nb.info/gnd/123547474" ;
+    <http://purl.org/dc/terms/format> "print" ;
+    <http://purl.org/dc/terms/identifier> "050511343" ;
+    <http://purl.org/dc/terms/issued> "1993" ;
+    <http://purl.org/dc/terms/medium> "paper" ;
+    <http://purl.org/dc/terms/title> "Was wäre wenn wir planen würden ..." ;
+    <http://purl.org/ontology/bibo/authorlist> [
+        rdf:_1 <http://d-nb.info/gnd/123547482> ;
+        a rdf:Seq
+    ] ;
+    <http://purl.org/ontology/bibo/oclcnum> "76383556" ;
+    a <http://purl.org/dc/terms/BibliographicResource>, <http://purl.org/ontology/bibo/Book>, <http://purl.org/vocab/frbr/core#Manifestation> ;
+    <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051134> .
+
+<http://lod.hebis.de/resource/05051135>
+    <http://iflastandards.info/ns/isbd/elements/P1004> "Motorradjagden mit Film und Büchse" ;
+    <http://iflastandards.info/ns/isbd/elements/P1006> "abenteuerliche Film- und Jagdexpedition quer durch Afrika ; von einem Teilnehmer erzählt" ;
+    <http://iflastandards.info/ns/isbd/elements/P1016> "Reutlingen" ;
+    <http://iflastandards.info/ns/isbd/elements/P1017> "Enßlin & Laiblin" ;
+    <http://iflastandards.info/ns/isbd/elements/P1018> "1932" ;
+    <http://purl.org/dc/terms/creator> "http://d-nb.info/gnd/127965130" ;
+    <http://purl.org/dc/terms/format> "print" ;
+    <http://purl.org/dc/terms/identifier> "050511351" ;
+    <http://purl.org/dc/terms/issued> "1932" ;
+    <http://purl.org/dc/terms/medium> "paper" ;
+    <http://purl.org/dc/terms/publisher> "Enßlin & Laiblin" ;
+    <http://purl.org/dc/terms/title> "Motorradjagden mit Film und Büchse" ;
+    <http://purl.org/ontology/bibo/oclcnum> "174337788" ;
+    a <http://purl.org/dc/terms/BibliographicResource>, <http://purl.org/ontology/bibo/Book>, <http://purl.org/vocab/frbr/core#Manifestation> ;
+    <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051135> .
+
+<http://lod.hebis.de/resource/05051136>
+    <http://iflastandards.info/ns/isbd/elements/P1004> "Die @Geschichte des Christentums" ;
+    <http://iflastandards.info/ns/isbd/elements/P1016> "Stuttgart" ;
+    <http://iflastandards.info/ns/isbd/elements/P1017> "Dt. Verl.-Anst." ;
+    <http://iflastandards.info/ns/isbd/elements/P1018> "1996" ;
+    <http://purl.org/dc/terms/alternative> "A @history of Christianity" ;
+    <http://purl.org/dc/terms/creator> "http://d-nb.info/gnd/109342011" ;
+    <http://purl.org/dc/terms/format> "print" ;
+    <http://purl.org/dc/terms/identifier> "05051136X" ;
+    <http://purl.org/dc/terms/issued> "1996" ;
+    <http://purl.org/dc/terms/medium> "paper" ;
+    <http://purl.org/dc/terms/publisher> "Dt. Verl.-Anst." ;
+    <http://purl.org/dc/terms/subject> "http://d-nb.info/gnd/4030720-7" ;
+    <http://purl.org/dc/terms/title> "Die Geschichte des Christentums" ;
+    <http://purl.org/ontology/bibo/oclcnum> "64536228" ;
+    a <http://purl.org/dc/terms/BibliographicResource>, <http://purl.org/ontology/bibo/Book>, <http://purl.org/vocab/frbr/core#Manifestation> ;
+    <http://www.w3.org/2002/07/owl#sameAs> "http://d-nb.info/947682732" ;
+    <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051136> .
+
+<http://lod.hebis.de/resource/05051137>
+    <http://iflastandards.info/ns/isbd/elements/P1008> "2., unveränd. Aufl." ;
+    <http://iflastandards.info/ns/isbd/elements/P1016> "Stuttgart" ;
+    <http://iflastandards.info/ns/isbd/elements/P1017> "Fraunhofer IRB-Verl." ;
+    <http://iflastandards.info/ns/isbd/elements/P1018> "1993" ;
+    <http://purl.org/dc/terms/contributor> "http://d-nb.info/gnd/11921511X" ;
+    <http://purl.org/dc/terms/format> "print" ;
+    <http://purl.org/dc/terms/identifier> "050511378" ;
+    <http://purl.org/dc/terms/issued> "1993" ;
+    <http://purl.org/dc/terms/medium> "paper" ;
+    <http://purl.org/dc/terms/publisher> "Fraunhofer IRB-Verl." ;
+    <http://purl.org/ontology/bibo/edition> "2., unveränd. Aufl." ;
+    <http://purl.org/ontology/bibo/oclcnum> "311887063" ;
+    a <http://purl.org/dc/terms/BibliographicResource>, <http://purl.org/vocab/frbr/core#Manifestation> ;
+    <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051137> .
+
+<http://lod.hebis.de/resource/05051138>
+    <http://iflastandards.info/ns/isbd/elements/P1004> "Über die ehemalige Liebfrauen-Kirche" ;
+    <http://iflastandards.info/ns/isbd/elements/P1006> "ein Vortrag zur ausführlichen Erklärung einer i. J. 1801 nach d. Natur gekennzeichn. Ansicht d. Portals dieser Kirche, u. des hierauf Bezug habenden Geschichtlichen, gehalten d. 30ten Okt. 1826, i. d. Vers. d. Freunde für Litteratur u. Kunst" ;
+    <http://iflastandards.info/ns/isbd/elements/P1018> "1826" ;
+    <http://purl.org/dc/terms/creator> "http://d-nb.info/gnd/120193019" ;
+    <http://purl.org/dc/terms/format> "print" ;
+    <http://purl.org/dc/terms/identifier> "050511386" ;
+    <http://purl.org/dc/terms/issued> "1826" ;
+    <http://purl.org/dc/terms/medium> "paper" ;
+    <http://purl.org/dc/terms/title> "Über die ehemalige Liebfrauen-Kirche" ;
+    <http://purl.org/ontology/bibo/oclcnum> "174337792" ;
+    a <http://purl.org/dc/terms/BibliographicResource>, <http://purl.org/ontology/bibo/Book>, <http://purl.org/vocab/frbr/core#Manifestation> ;
+    <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051138> .
+
+<http://lod.hebis.de/resource/05051139>
+    <http://iflastandards.info/ns/isbd/elements/P1004> "Die @Wochenendpendler des Bayerischen und Östlichen Oberpfälzer Waldes" ;
+    <http://iflastandards.info/ns/isbd/elements/P1006> "eine wirtschaftsgeographische Regionalstudie unter besonderer Berücksichtigung des Einpendlerzentrums München" ;
+    <http://iflastandards.info/ns/isbd/elements/P1016> "München" ;
+    <http://iflastandards.info/ns/isbd/elements/P1017> "Geographische Buchh." ;
+    <http://iflastandards.info/ns/isbd/elements/P1018> "1970" ;
+    <http://purl.org/dc/terms/creator> "http://d-nb.info/gnd/123466911" ;
+    <http://purl.org/dc/terms/format> "print" ;
+    <http://purl.org/dc/terms/identifier> "050511394" ;
+    <http://purl.org/dc/terms/issued> "1970" ;
+    <http://purl.org/dc/terms/medium> "paper" ;
+    <http://purl.org/dc/terms/publisher> "Geographische Buchh." ;
+    <http://purl.org/dc/terms/title> "Die Wochenendpendler des Bayerischen und Östlichen Oberpfälzer Waldes" ;
+    <http://purl.org/ontology/bibo/oclcnum> "602806441" ;
+    a <http://purl.org/dc/terms/BibliographicResource>, <http://purl.org/ontology/bibo/Book>, <http://purl.org/vocab/frbr/core#Manifestation> ;
+    <http://www.w3.org/2002/07/owl#sameAs> "http://d-nb.info/820668214" ;
+    <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051139> .
+
+<http://lod.hebis.de/resource/05051140>
+    <http://iflastandards.info/ns/isbd/elements/P1004> "Predigten in Beziehung auf die der das Vaterland so glücklichen Ereignisse der Jahre 1813 und 1814" ;
+    <http://iflastandards.info/ns/isbd/elements/P1016> "Cassel {[u.a.]" ;
+    <http://iflastandards.info/ns/isbd/elements/P1017> "Krieger" ;
+    <http://iflastandards.info/ns/isbd/elements/P1018> "1815" ;
+    <http://purl.org/dc/terms/creator> "http://d-nb.info/gnd/12755159X" ;
+    <http://purl.org/dc/terms/format> "print" ;
+    <http://purl.org/dc/terms/identifier> "050511408" ;
+    <http://purl.org/dc/terms/issued> "1815" ;
+    <http://purl.org/dc/terms/medium> "paper" ;
+    <http://purl.org/dc/terms/publisher> "Krieger" ;
+    <http://purl.org/dc/terms/title> "Predigten in Beziehung auf die der das Vaterland so glücklichen Ereignisse der Jahre 1813 und 1814" ;
+    <http://purl.org/ontology/bibo/oclcnum> "174337794" ;
+    a <http://purl.org/dc/terms/BibliographicResource>, <http://purl.org/ontology/bibo/Book>, <http://purl.org/vocab/frbr/core#Manifestation> ;
+    <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051140> .
+
+<http://lod.hebis.de/resource/05051141>
+    <http://iflastandards.info/ns/isbd/elements/P1004> "Die @Expedition des Mister Penn" ;
+    <http://iflastandards.info/ns/isbd/elements/P1006> "aus den Erlebnissen eines afrikanischen Globetrotters" ;
+    <http://iflastandards.info/ns/isbd/elements/P1016> "Reutlingen" ;
+    <http://iflastandards.info/ns/isbd/elements/P1017> "Enßlin & Laiblin" ;
+    <http://iflastandards.info/ns/isbd/elements/P1018> "1932" ;
+    <http://purl.org/dc/terms/creator> "http://d-nb.info/gnd/126471630" ;
+    <http://purl.org/dc/terms/format> "print" ;
+    <http://purl.org/dc/terms/identifier> "050511416" ;
+    <http://purl.org/dc/terms/issued> "1932" ;
+    <http://purl.org/dc/terms/medium> "paper" ;
+    <http://purl.org/dc/terms/publisher> "Enßlin & Laiblin" ;
+    <http://purl.org/dc/terms/title> "Die Expedition des Mister Penn" ;
+    <http://purl.org/ontology/bibo/oclcnum> "174337795" ;
+    a <http://purl.org/dc/terms/BibliographicResource>, <http://purl.org/ontology/bibo/Book>, <http://purl.org/vocab/frbr/core#Manifestation> ;
+    <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051141> .
+
+<http://lod.hebis.de/resource/05051142>
+    <http://iflastandards.info/ns/isbd/elements/P1004> "Über die ehemalige Liebfrauen-Kirche" ;
+    <http://iflastandards.info/ns/isbd/elements/P1006> "ein Vortrag zur ausführlichen Erklärung einer i. J. 1801 nach d. Natur gekennzeichn. Ansicht d. Portals dieser Kirche, u. des hierauf Bezug habenden Geschichtlichen, gehalten d. 30ten Okt. 1826, i. d. Vers. d. Freunde für Litteratur u. Kunst" ;
+    <http://iflastandards.info/ns/isbd/elements/P1018> "1826" ;
+    <http://purl.org/dc/terms/creator> "http://d-nb.info/gnd/120193019" ;
+    <http://purl.org/dc/terms/format> "print" ;
+    <http://purl.org/dc/terms/identifier> "050511424" ;
+    <http://purl.org/dc/terms/issued> "1826" ;
+    <http://purl.org/dc/terms/medium> "paper" ;
+    <http://purl.org/dc/terms/title> "Über die ehemalige Liebfrauen-Kirche" ;
+    <http://purl.org/ontology/bibo/oclcnum> "174337792" ;
+    a <http://purl.org/dc/terms/BibliographicResource>, <http://purl.org/ontology/bibo/Book>, <http://purl.org/vocab/frbr/core#Manifestation> ;
+    <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051142> .
+
+<http://lod.hebis.de/resource/05051143>
+    <http://iflastandards.info/ns/isbd/elements/P1004> "Im Kampf ums Überleben" ;
+    <http://iflastandards.info/ns/isbd/elements/P1006> "jüdische Schicksale in Polen ; 1939 - 1945" ;
+    <http://iflastandards.info/ns/isbd/elements/P1016> "Konstanz" ;
+    <http://iflastandards.info/ns/isbd/elements/P1017> "Hartung-Gorre" ;
+    <http://iflastandards.info/ns/isbd/elements/P1018> "1996" ;
+    <http://purl.org/dc/terms/contributor> "http://d-nb.info/gnd/115824960" ;
+    <http://purl.org/dc/terms/creator> "http://d-nb.info/gnd/104273968" ;
+    <http://purl.org/dc/terms/format> "print" ;
+    <http://purl.org/dc/terms/identifier> "050511432" ;
+    <http://purl.org/dc/terms/issued> "1996" ;
+    <http://purl.org/dc/terms/medium> "paper" ;
+    <http://purl.org/dc/terms/publisher> "Hartung-Gorre" ;
+    <http://purl.org/dc/terms/subject> "http://d-nb.info/gnd/4011882-4", "http://d-nb.info/gnd/4028814-6", "http://d-nb.info/gnd/4046496-9" ;
+    <http://purl.org/dc/terms/title> "Im Kampf ums Überleben" ;
+    <http://purl.org/ontology/bibo/oclcnum> "36448381" ;
+    a <http://purl.org/dc/terms/BibliographicResource>, <http://purl.org/ontology/bibo/Book>, <http://purl.org/vocab/frbr/core#Manifestation> ;
+    <http://www.w3.org/2002/07/owl#sameAs> "http://d-nb.info/948119195" ;
+    <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051143> .
+
+<http://lod.hebis.de/resource/05051144>
+    <http://iflastandards.info/ns/isbd/elements/P1004> "Die @Mainzer Altstadt in Aquarellen von Carl Bronner um 1930" ;
+    <http://iflastandards.info/ns/isbd/elements/P1016> "Eltville am Rhein" ;
+    <http://iflastandards.info/ns/isbd/elements/P1017> "Walter" ;
+    <http://iflastandards.info/ns/isbd/elements/P1018> "1982" ;
+    <http://purl.org/dc/terms/contributor> "http://d-nb.info/gnd/115150420", "http://d-nb.info/gnd/119047373" ;
+    <http://purl.org/dc/terms/creator> "http://d-nb.info/gnd/118503928" ;
+    <http://purl.org/dc/terms/format> "print" ;
+    <http://purl.org/dc/terms/identifier> "050511440" ;
+    <http://purl.org/dc/terms/issued> "1982" ;
+    <http://purl.org/dc/terms/medium> "paper" ;
+    <http://purl.org/dc/terms/publisher> "Walter" ;
+    <http://purl.org/dc/terms/title> "Die Mainzer Altstadt in Aquarellen von Carl Bronner um 1930" ;
+    <http://purl.org/ontology/bibo/oclcnum> "174337799" ;
+    a <http://purl.org/dc/terms/BibliographicResource>, <http://purl.org/ontology/bibo/Book>, <http://purl.org/vocab/frbr/core#Manifestation> ;
+    <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051144> .
+
+<http://lod.hebis.de/resource/05051145>
+    <http://iflastandards.info/ns/isbd/elements/P1004> "Colloquium Musica ac Societas (1740 - 1815)" ;
+    <http://iflastandards.info/ns/isbd/elements/P1006> "Brno 1989" ;
+    <http://iflastandards.info/ns/isbd/elements/P1016> "Brno" ;
+    <http://iflastandards.info/ns/isbd/elements/P1017> "Filozofická Fakulta MU" ;
+    <http://iflastandards.info/ns/isbd/elements/P1018> "1994" ;
+    <http://purl.org/dc/terms/contributor> "http://d-nb.info/gnd/114538867" ;
+    <http://purl.org/dc/terms/format> "print" ;
+    <http://purl.org/dc/terms/identifier> "050511459" ;
+    <http://purl.org/dc/terms/issued> "1994" ;
+    <http://purl.org/dc/terms/medium> "paper" ;
+    <http://purl.org/dc/terms/publisher> "Filozofická Fakulta MU" ;
+    <http://purl.org/dc/terms/title> "Colloquium Musica ac Societas (1740 - 1815)" ;
+    <http://purl.org/ontology/bibo/authorlist> [
+        rdf:_1 <http://d-nb.info/gnd/5160366-4> ;
+        a rdf:Seq
+    ] ;
+    <http://purl.org/ontology/bibo/oclcnum> "246569210" ;
+    a <http://purl.org/dc/terms/BibliographicResource>, <http://purl.org/ontology/bibo/Book>, <http://purl.org/vocab/frbr/core#Manifestation> ;
+    <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051145> .
+
+<http://lod.hebis.de/resource/05051146>
+    <http://iflastandards.info/ns/isbd/elements/P1004> "Blessings in disguise" ;
+    <http://iflastandards.info/ns/isbd/elements/P1008> "Reissues with a new chapter, 1. [Dr.]" ;
+    <http://iflastandards.info/ns/isbd/elements/P1016> "London" ;
+    <http://iflastandards.info/ns/isbd/elements/P1017> "Hamilton" ;
+    <http://iflastandards.info/ns/isbd/elements/P1018> "1996" ;
+    <http://purl.org/dc/terms/creator> "http://d-nb.info/gnd/118809067" ;
+    <http://purl.org/dc/terms/format> "print" ;
+    <http://purl.org/dc/terms/identifier> "050511467" ;
+    <http://purl.org/dc/terms/issued> "1996" ;
+    <http://purl.org/dc/terms/medium> "paper" ;
+    <http://purl.org/dc/terms/publisher> "Hamilton" ;
+    <http://purl.org/dc/terms/title> "Blessings in disguise" ;
+    <http://purl.org/ontology/bibo/edition> "Reissues with a new chapter, 1. [Dr.]" ;
+    <http://purl.org/ontology/bibo/oclcnum> "36557855" ;
+    a <http://purl.org/dc/terms/BibliographicResource>, <http://purl.org/ontology/bibo/Book>, <http://purl.org/vocab/frbr/core#Manifestation> ;
+    <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051146> .
+
+<http://lod.hebis.de/resource/05051147>
+    <http://iflastandards.info/ns/isbd/elements/P1004> "Konzentration und Wettbewerb im Gemeinsamen Markt" ;
+    <http://iflastandards.info/ns/isbd/elements/P1006> "das Beispiel der Automobilindustrie" ;
+    <http://iflastandards.info/ns/isbd/elements/P1016> "Göttingen" ;
+    <http://iflastandards.info/ns/isbd/elements/P1017> "Vandenhoeck & Ruprecht" ;
+    <http://iflastandards.info/ns/isbd/elements/P1018> "1968" ;
+    <http://purl.org/dc/terms/creator> "http://d-nb.info/gnd/104759143", "http://d-nb.info/gnd/11871337X" ;
+    <http://purl.org/dc/terms/format> "print" ;
+    <http://purl.org/dc/terms/identifier> "050511475" ;
+    <http://purl.org/dc/terms/issued> "1968" ;
+    <http://purl.org/dc/terms/medium> "paper" ;
+    <http://purl.org/dc/terms/publisher> "Vandenhoeck & Ruprecht" ;
+    <http://purl.org/dc/terms/title> "Konzentration und Wettbewerb im Gemeinsamen Markt" ;
+    <http://purl.org/ontology/bibo/oclcnum> "06121959" ;
+    a <http://purl.org/dc/terms/BibliographicResource>, <http://purl.org/ontology/bibo/Book>, <http://purl.org/vocab/frbr/core#Manifestation> ;
+    <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051147> .
+
+<http://lod.hebis.de/resource/05051148>
+    <http://iflastandards.info/ns/isbd/elements/P1004> "Nachumhüllen von erdverlegten Gas- und Wasserrohrleitungen" ;
+    <http://iflastandards.info/ns/isbd/elements/P1008> "2. Aufl." ;
+    <http://iflastandards.info/ns/isbd/elements/P1016> "Essen" ;
+    <http://iflastandards.info/ns/isbd/elements/P1017> "Vulkan-Verl." ;
+    <http://iflastandards.info/ns/isbd/elements/P1018> "1996" ;
+    <http://purl.org/dc/terms/contributor> "http://d-nb.info/gnd/114236623" ;
+    <http://purl.org/dc/terms/format> "print" ;
+    <http://purl.org/dc/terms/identifier> "050511483" ;
+    <http://purl.org/dc/terms/issued> "1996" ;
+    <http://purl.org/dc/terms/medium> "paper" ;
+    <http://purl.org/dc/terms/publisher> "Vulkan-Verl." ;
+    <http://purl.org/dc/terms/subject> "http://d-nb.info/gnd/4032522-2", "http://d-nb.info/gnd/4064751-1", "http://d-nb.info/gnd/4133791-8", "http://d-nb.info/gnd/4144863-7", "http://d-nb.info/gnd/4301993-6" ;
+    <http://purl.org/dc/terms/title> "Nachumhüllen von erdverlegten Gas- und Wasserrohrleitungen" ;
+    <http://purl.org/ontology/bibo/edition> "2. Aufl." ;
+    <http://purl.org/ontology/bibo/oclcnum> "75662412" ;
+    a <http://purl.org/dc/terms/BibliographicResource>, <http://purl.org/ontology/bibo/Book>, <http://purl.org/vocab/frbr/core#Manifestation> ;
+    <http://www.w3.org/2002/07/owl#sameAs> "http://d-nb.info/946895163" ;
+    <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051148> .
+
+<http://lod.hebis.de/resource/05051149>
+    <http://iflastandards.info/ns/isbd/elements/P1004> "Im Tal der grünen Schlangen" ;
+    <http://iflastandards.info/ns/isbd/elements/P1006> "kalifornische Erzählung aus der Jetztzeit" ;
+    <http://iflastandards.info/ns/isbd/elements/P1016> "Reutlingen" ;
+    <http://iflastandards.info/ns/isbd/elements/P1017> "Enßlin & Laiblin" ;
+    <http://iflastandards.info/ns/isbd/elements/P1018> "1932" ;
+    <http://purl.org/dc/terms/format> "print" ;
+    <http://purl.org/dc/terms/identifier> "050511491" ;
+    <http://purl.org/dc/terms/issued> "1932" ;
+    <http://purl.org/dc/terms/medium> "paper" ;
+    <http://purl.org/dc/terms/publisher> "Enßlin & Laiblin" ;
+    <http://purl.org/dc/terms/title> "Im Tal der grünen Schlangen" ;
+    <http://purl.org/ontology/bibo/oclcnum> "174337801" ;
+    a <http://purl.org/dc/terms/BibliographicResource>, <http://purl.org/ontology/bibo/Book>, <http://purl.org/vocab/frbr/core#Manifestation> ;
+    <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051149> .
+
+<http://lod.hebis.de/resource/05051150>
+    <http://iflastandards.info/ns/isbd/elements/P1004> "Allgemeines Verwaltungs- und Eingriffsrecht im Polizeidienst" ;
+    <http://iflastandards.info/ns/isbd/elements/P1006> "Fachbuch mit Fallbeispielen erläutert für Theorie und Praxis" ;
+    <http://iflastandards.info/ns/isbd/elements/P1016> "Witten" ;
+    <http://iflastandards.info/ns/isbd/elements/P1017> "Bernhardt/Schünemann" ;
+    <http://purl.org/dc/terms/creator> "http://d-nb.info/gnd/129917125" ;
+    <http://purl.org/dc/terms/format> "print" ;
+    <http://purl.org/dc/terms/identifier> "050511505" ;
+    <http://purl.org/dc/terms/medium> "paper" ;
+    <http://purl.org/dc/terms/publisher> "Bernhardt/Schünemann" ;
+    <http://purl.org/dc/terms/title> "Allgemeines Verwaltungs- und Eingriffsrecht im Polizeidienst" ;
+    <http://purl.org/ontology/bibo/oclcnum> "84582706" ;
+    a <http://purl.org/dc/terms/BibliographicResource>, <http://purl.org/vocab/frbr/core#Manifestation> ;
+    <http://www.w3.org/2002/07/owl#sameAs> "http://d-nb.info/948791918" ;
+    <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051150> .
+
+<http://lod.hebis.de/resource/05051151>
+    <http://iflastandards.info/ns/isbd/elements/P1004> "Messen nichtelektrischer Größen" ;
+    <http://iflastandards.info/ns/isbd/elements/P1006> "Grundlagen der Praxis" ;
+    <http://iflastandards.info/ns/isbd/elements/P1016> "Düsseldorf" ;
+    <http://iflastandards.info/ns/isbd/elements/P1017> "VDI-Verl." ;
+    <http://iflastandards.info/ns/isbd/elements/P1018> "1996" ;
+    <http://purl.org/dc/terms/creator> "http://d-nb.info/gnd/111887488" ;
+    <http://purl.org/dc/terms/format> "print" ;
+    <http://purl.org/dc/terms/identifier> "050511513" ;
+    <http://purl.org/dc/terms/issued> "1996" ;
+    <http://purl.org/dc/terms/medium> "paper" ;
+    <http://purl.org/dc/terms/publisher> "VDI-Verl." ;
+    <http://purl.org/dc/terms/subject> "http://d-nb.info/gnd/4038852-9", "http://d-nb.info/gnd/4201286-7" ;
+    <http://purl.org/dc/terms/title> "Messen nichtelektrischer Größen" ;
+    <http://purl.org/ontology/bibo/oclcnum> "75688959" ;
+    a <http://purl.org/dc/terms/BibliographicResource>, <http://purl.org/ontology/bibo/Book>, <http://purl.org/vocab/frbr/core#Manifestation> ;
+    <http://www.w3.org/2002/07/owl#sameAs> "http://d-nb.info/947247009" ;
+    <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051151> .
+
+<http://lod.hebis.de/resource/05051152>
+    <http://iflastandards.info/ns/isbd/elements/P1004> "Kalevala" ;
+    <http://iflastandards.info/ns/isbd/elements/P1008> "28. painos" ;
+    <http://iflastandards.info/ns/isbd/elements/P1016> "Helsinki" ;
+    <http://iflastandards.info/ns/isbd/elements/P1017> "Suomalaisen Kirjallisuuden Seura" ;
+    <http://iflastandards.info/ns/isbd/elements/P1018> "1995" ;
+    <http://purl.org/dc/terms/format> "print" ;
+    <http://purl.org/dc/terms/identifier> "050511521" ;
+    <http://purl.org/dc/terms/issued> "1995" ;
+    <http://purl.org/dc/terms/medium> "paper" ;
+    <http://purl.org/dc/terms/publisher> "Suomalaisen Kirjallisuuden Seura" ;
+    <http://purl.org/dc/terms/title> "Kalevala" ;
+    <http://purl.org/ontology/bibo/edition> "28. painos" ;
+    <http://purl.org/ontology/bibo/oclcnum> "40750291" ;
+    a <http://purl.org/dc/terms/BibliographicResource>, <http://purl.org/ontology/bibo/Book>, <http://purl.org/vocab/frbr/core#Manifestation> ;
+    <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051152> .
+
+<http://lod.hebis.de/resource/05051153>
+    <http://iflastandards.info/ns/isbd/elements/P1004> "Grundseminar" ;
+    <http://iflastandards.info/ns/isbd/elements/P1006> "ein Lehrgang für Fachpersonal der Gemeinschaftsverpflegung mit Übungen ; Seminarunterlagen" ;
+    <http://iflastandards.info/ns/isbd/elements/P1016> "Frankfurt" ;
+    <http://iflastandards.info/ns/isbd/elements/P1018> "1994" ;
+    <http://purl.org/dc/terms/contributor> "http://d-nb.info/gnd/113926219" ;
+    <http://purl.org/dc/terms/format> "print" ;
+    <http://purl.org/dc/terms/identifier> "05051153X" ;
+    <http://purl.org/dc/terms/issued> "1994" ;
+    <http://purl.org/dc/terms/medium> "paper" ;
+    <http://purl.org/dc/terms/title> "Grundseminar" ;
+    <http://purl.org/ontology/bibo/oclcnum> "174337802" ;
+    a <http://purl.org/dc/terms/BibliographicResource>, <http://purl.org/ontology/bibo/Book>, <http://purl.org/vocab/frbr/core#Manifestation> ;
+    <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051153> .
+
+<http://lod.hebis.de/resource/05051154>
+    <http://iflastandards.info/ns/isbd/elements/P1004> "Empfindungen eines Hessen bey dem Antritt des Jahres 1814" ;
+    <http://iflastandards.info/ns/isbd/elements/P1016> "{[s.l.]" ;
+    <http://iflastandards.info/ns/isbd/elements/P1018> "1814" ;
+    <http://purl.org/dc/terms/format> "print" ;
+    <http://purl.org/dc/terms/identifier> "050511548" ;
+    <http://purl.org/dc/terms/issued> "1814" ;
+    <http://purl.org/dc/terms/medium> "paper" ;
+    <http://purl.org/dc/terms/title> "Empfindungen eines Hessen bey dem Antritt des Jahres 1814" ;
+    <http://purl.org/ontology/bibo/oclcnum> "174337804" ;
+    a <http://purl.org/dc/terms/BibliographicResource>, <http://purl.org/ontology/bibo/Book>, <http://purl.org/vocab/frbr/core#Manifestation> ;
+    <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051154> .
+
+<http://lod.hebis.de/resource/05051155>
+    <http://iflastandards.info/ns/isbd/elements/P1004> "Zur Geschichte des Erzbischofs Johann II. von Mainz" ;
+    <http://iflastandards.info/ns/isbd/elements/P1006> "1396 - 1419" ;
+    <http://iflastandards.info/ns/isbd/elements/P1016> "Halle a.S." ;
+    <http://purl.org/dc/terms/format> "print" ;
+    <http://purl.org/dc/terms/identifier> "050511556" ;
+    <http://purl.org/dc/terms/medium> "paper" ;
+    <http://purl.org/dc/terms/title> "Zur Geschichte des Erzbischofs Johann II. von Mainz" ;
+    <http://purl.org/ontology/bibo/oclcnum> "613821117" ;
+    a <http://purl.org/dc/terms/BibliographicResource>, <http://purl.org/vocab/frbr/core#Manifestation> ;
+    <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051155> .
+
+<http://lod.hebis.de/resource/05051156>
+    <http://iflastandards.info/ns/isbd/elements/P1016> "Witten" ;
+    <http://iflastandards.info/ns/isbd/elements/P1017> "Bernhardt/Schünemann" ;
+    <http://iflastandards.info/ns/isbd/elements/P1018> "1996" ;
+    <http://purl.org/dc/terms/creator> "http://d-nb.info/gnd/129917125" ;
+    <http://purl.org/dc/terms/format> "print" ;
+    <http://purl.org/dc/terms/identifier> "050511564" ;
+    <http://purl.org/dc/terms/issued> "1996" ;
+    <http://purl.org/dc/terms/medium> "paper" ;
+    <http://purl.org/dc/terms/publisher> "Bernhardt/Schünemann" ;
+    <http://purl.org/ontology/bibo/oclcnum> "75785858" ;
+    a <http://purl.org/dc/terms/BibliographicResource>, <http://purl.org/vocab/frbr/core#Manifestation> ;
+    <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051156> .
+
+<http://lod.hebis.de/resource/05051157>
+    <http://purl.org/dc/terms/format> "print" ;
+    <http://purl.org/dc/terms/medium> "paper" ;
+    a <http://purl.org/dc/terms/BibliographicResource>, <http://purl.org/ontology/bibo/Book>, <http://purl.org/vocab/frbr/core#Manifestation> ;
+    <http://www.w3.org/2007/05/powder-s#describedby> <http://lod.hebis.de/catalog/html/05051157> .
+
