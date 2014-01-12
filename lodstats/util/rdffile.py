@@ -31,7 +31,8 @@ class RdfFile(CallbackInterface, UriParserInterface):
             self.set_uri(rdf2rdf.convert_ttl_to_nt())
             logger.debug("Converted turtle to ntriples %s" % self.get_uri())
         self.rdf_parser = self.identify_rdf_parser()
-        self.rdf_stream = self.rdf_parser.parse_as_stream(self.uri)
+        if(self.rdf_parser is not None):
+            self.rdf_stream = self.rdf_parser.parse_as_stream(self.uri)
         self.do_stats(callback_function)
 
     def get_no_of_statements(self):
@@ -123,10 +124,11 @@ class RdfFile(CallbackInterface, UriParserInterface):
         self.callback_stats = callback_function
 
         if self.rdf_format == 'sitemap':
-            self.sitemap(self.url)
+            self.sitemap(self.uri)
             return
         elif self.rdf_format == 'sparql':
             self.collect_stats_sparql()
+            return
         else:
             self.collect_stats_file(callback_function)
 
@@ -136,8 +138,9 @@ class RdfFile(CallbackInterface, UriParserInterface):
     def collect_stats_sparql(self):
         """do stats via SPARQL"""
         logger.debug("do_sparql_stats()")
+        print self.uri
         from SPARQLWrapper import SPARQLWrapper, JSON
-        sparql = SPARQLWrapper(self.url)
+        sparql = SPARQLWrapper(self.uri)
         sparql.setQuery("SELECT (count(*) AS ?triples) WHERE { ?s ?p ?o }")
         sparql.setReturnFormat(JSON)
         results = sparql.query().convert()
@@ -145,5 +148,5 @@ class RdfFile(CallbackInterface, UriParserInterface):
             raise Exception, "unknown response content type"
         self.no_of_statements = int(results['results']['bindings'][0]['triples']['value'])
 
-        lodstats.stats.run_stats_sparql(self.url)
+        lodstats.stats.run_stats_sparql(self.uri)
 

@@ -14,9 +14,10 @@ from lodstats.util.interfaces import CallbackInterface
 from lodstats.util.interfaces import UriParserInterface
 
 class ArchiveExtractor(CallbackInterface, UriParserInterface):
-    def __init__(self, uri, callback_function=None, remote_file=None):
+    def __init__(self, uri, callback_function=None, remote_file=None, rdf_format=None):
         super(ArchiveExtractor, self).__init__()
         self.uri = uri
+        self.rdf_format = rdf_format
         self.remote_file = remote_file
         self.original_file_size = 0
         if(self.remote_file is not None):
@@ -76,6 +77,10 @@ class ArchiveExtractor(CallbackInterface, UriParserInterface):
         return output
 
     def extract_archive(self, uri, filepath, compression_format, callback_function):
+
+        if self.rdf_format == "sparql" or self.rdf_format == "sitemap":
+            return [uri]
+
         f = open(filepath, 'rU')
         if compression_format is None:
             extracted_file_uri = [uri]
