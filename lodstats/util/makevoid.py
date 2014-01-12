@@ -6,8 +6,8 @@ import lodstats.stats
 import lodstats.util.interfaces
 import lodstats.util.rdf_namespaces
 
-import csv2rdf.ckan.resource
-import csv2rdf.ckan.package
+#import csv2rdf.ckan.resource
+#import csv2rdf.ckan.package
 
 logger = logging.getLogger("lodstats")
 
