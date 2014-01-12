@@ -65,7 +65,7 @@ elif options.rdf_model:
     stats = []
     new_stats = model_stats
 elif options.lod_stats:
-    stats = lodstats.stats.lodstats
+    stats = lodstats.stats.lodstats_old
     new_stats = []
 elif options.all_stats:
     stats = lodstats.stats.available_stats
