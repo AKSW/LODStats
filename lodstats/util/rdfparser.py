@@ -39,6 +39,12 @@ class RdfParser(object):
             no_of_warnings += rdf_file.warnings
         return no_of_warnings
 
+    def get_last_warning(self):
+        last_warning = None
+        for rdf_file in self.get_rdf_file_list():
+            last_warning = rdf_file.last_warning
+        return last_warning
+
     def get_stats_results(self):
         return self.stats_results
 

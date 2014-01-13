@@ -22,6 +22,9 @@ class RDF2RDF(CallbackInterface, UriParserInterface):
         if(self.is_remote()):
             logger.error("Can not process URI, is remote: %s" % self.uri)
 
+    def convert_n3_to_nt(self, uri=None):
+        pass
+
     def convert_ttl_to_nt(self, uri=None):
         if(uri is None):
             uri = self.uri
@@ -30,6 +33,7 @@ class RDF2RDF(CallbackInterface, UriParserInterface):
         output_file_path = input_file_path+".nt"
 
         command = "any23 rover -e rdf-turtle -f ntriples -o %s %s" % (output_file_path, input_file_path)
+	print command
 
         pipe = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         (stdout, stderr) = pipe.stdout, pipe.stderr

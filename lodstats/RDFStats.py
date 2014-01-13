@@ -93,6 +93,9 @@ class RDFStats(lodstats.util.interfaces.UriParserInterface):
     def get_no_of_warnings(self):
         return self.rdfparser.get_no_of_warnings()
 
+    def get_last_warning(self):
+        return self.rdfparser.get_last_warning()
+
     def enable_debug(self):
         lodstats.config.enable_debug()
 
