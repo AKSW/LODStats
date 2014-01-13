@@ -13,13 +13,14 @@ from lodstats.util.interfaces import CallbackInterface
 from lodstats.util.interfaces import UriParserInterface
 
 class RemoteFile(CallbackInterface, UriParserInterface):
-    def __init__(self, uri, if_modified_since=None, callback_function=None):
+    def __init__(self, uri, if_modified_since=None, callback_function=None, rdf_format=None):
         super(RemoteFile, self).__init__()
         self.uri = uri
         self.filename = self.identify_filename(self.uri)
         self.if_modified_since = if_modified_since
         self.callback_function = callback_function
         self.last_modified = None
+        self.rdf_format = rdf_format
         self.content_length = 0
         self.bytes_downloaded = 0
 
@@ -66,6 +67,10 @@ class RemoteFile(CallbackInterface, UriParserInterface):
         return unique_id
 
     def download(self):
+
+        if(self.rdf_format == "sparql" or self.rdf_format == "sitemap"):
+            return self.uri
+
         r = requests.get(self.uri, stream=True)
 
         last_modified = r.headers.get('last-modified')

@@ -66,7 +66,9 @@ class RDFStats(lodstats.util.interfaces.UriParserInterface):
 
     def start_statistics(self):
         logger.debug("Downloading remote file ...")
-        remote_file = lodstats.util.remotefile.RemoteFile(self.uri, callback_function=self.callback_function_download)
+        remote_file = lodstats.util.remotefile.RemoteFile(self.uri,
+                                                          callback_function=self.callback_function_download,
+                                                          rdf_format=self.rdf_format)
         downloaded_file_uri = remote_file.get_downloaded_file_uri()
 
         #logger.debug("Parsing sitemap ...")
@@ -75,7 +77,8 @@ class RDFStats(lodstats.util.interfaces.UriParserInterface):
         logger.debug("Extracting the file from archive: %s" % downloaded_file_uri)
         archive_extractor = lodstats.util.archiveextractor.ArchiveExtractor(downloaded_file_uri,
                                                                             callback_function=self.callback_function_extraction,
-                                                                            remote_file=remote_file)
+                                                                            remote_file=remote_file,
+                                                                            rdf_format=self.rdf_format)
         extracted_file_uri_list = archive_extractor.get_extracted_file_uri_list()
 
         logger.debug("Parsing RDF files ...")
