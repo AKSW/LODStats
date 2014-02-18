@@ -9,6 +9,8 @@ sudo apt-get update
 sudo apt-get install python-pip python-dev librdf0-dev python-librdf
 sudo apt-get install git raptor2-utils
 
+# Install virtualenvwrapper
+
 sudo pip install virtualenvwrapper
 mkdir $HOME/.virtualenvs
 mkdir $HOME/Devel
@@ -22,6 +24,10 @@ echo 'source /usr/local/bin/virtualenvwrapper.sh' >> $HOME/.bashrc
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Devel
 source /usr/local/bin/virtualenvwrapper.sh
+
+# End install virtualenvwrapper
+# Alternative:
+# sudo apt-get install virtualenvwrapper
 
 mkvirtualenv --system-site-packages lodstats
 cdvirtualenv
