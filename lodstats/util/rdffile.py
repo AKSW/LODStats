@@ -65,7 +65,10 @@ class RdfFile(CallbackInterface, UriParserInterface):
             #parser = RDF.TurtleParser()
             logger.error("Turtle is not supported by LODStats, should be converted to ntriples!")
             parser = RDF.NTriplesParser()
-        elif format == 'nt' or format == 'n3': # FIXME: this probably won't do for n3
+        elif format == 'n3':
+            parser = None
+            raise NameError("n3 serialization is not supported, please convert to nt")
+        elif format == 'nt': # FIXME: this probably won't do for n3
             parser = RDF.NTriplesParser()
         elif format == 'nq':
             parser = RDF.Parser(name='nquads')
