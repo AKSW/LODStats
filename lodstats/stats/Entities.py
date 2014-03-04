@@ -54,4 +54,10 @@ class Entities(RDFStatInterface):
                                         number_of_entities_node))
     
     def sparql(self, endpoint):
-        pass
+        from SPARQLWrapper import JSON
+        endpoint.setQuery("SELECT (count(distinct ?e) AS ?entities) WHERE { ?e ?p ?o }")
+        endpoint.setReturnFormat(JSON)
+        results = endpoint.query().convert()
+        if not isinstance(results, dict):
+            raise Exception, "unknown response content type"
+        self.c = int(results['results']['bindings'][0]['entities']['value'])

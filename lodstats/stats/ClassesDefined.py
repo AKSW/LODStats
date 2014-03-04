@@ -53,5 +53,21 @@ class ClassesDefined(RDFStatInterface):
     def postproc(self):
         self.count = self.results['count'] = len(self.usage_count)
 
-    def sparql(sparql, endpoint):
-        pass
+    def sparql(self, endpoint):
+        from SPARQLWrapper import JSON
+        endpoint.setQuery("SELECT distinct ?i ?c { ?i a ?c }")
+        endpoint.setReturnFormat(JSON)
+        results = endpoint.query().convert()
+        if not isinstance(results, dict):
+            raise Exception, "unknown response content type"
+        for row in results['results']['bindings']:
+            c = row['c']['value']
+            if (c == 'http://www.w3.org/2000/01/rdf-schema#Class' or c == 'http://www.w3.org/2002/07/owl#Class') :
+                i = row['i']['value']
+                if not self.usage_count.has_key(i) :
+                    self.usage_count[i] = 0
+        for row in results['results']['bindings']:
+            c = row['c']['value']
+            if self.usage_count.has_key(c) :
+                self.usage_count[c] += 1
+

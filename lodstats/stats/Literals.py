@@ -38,4 +38,10 @@ class Literals(RDFStatInterface):
         pass
     
     def sparql(self, endpoint):
-        pass
+        from SPARQLWrapper import JSON
+        endpoint.setQuery("SELECT (count(distinct ?l) AS ?literals) WHERE { ?s ?p ?l . filter(isLiteral(?l)) }")
+        endpoint.setReturnFormat(JSON)
+        results = endpoint.query().convert()
+        if not isinstance(results, dict):
+            raise Exception, "unknown response content type"
+        self.c = int(results['results']['bindings'][0]['literals']['value'])
