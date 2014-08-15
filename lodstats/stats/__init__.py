@@ -62,7 +62,7 @@ available_stats = [ClassesDefined, UsedClasses, ClassHierarchyDepth, PropertiesD
         Outdegree, Indegree, PropertyHierarchyDepth, SubclassUsage, Entities, Literals, BlanksAsSubject, BlanksAsObject, Datatypes,\
         Languages, StringLength, TypedSubjects, LabeledSubjects, SameAs, Links, Vocabularies, VocabulariesPerNode]
 # stuff usually run for lodstats/web
-lodstats_old = [UsedClasses, Vocabularies, PropertyUsage, ClassesDefined, Entities, Literals, BlanksAsObject, BlanksAsSubject,\
+lodstats_old = [UsedClasses, Vocabularies, PropertiesDefined, PropertyUsage, ClassesDefined, Entities, Literals, BlanksAsObject, BlanksAsSubject,\
                 SubclassUsage, TypedSubjects, LabeledSubjects, ClassHierarchyDepth, PropertyHierarchyDepth, PropertiesPerEntity,\
                 StringLength, Links, Datatypes, Languages]
 lodstats = [ClassesDefined, UsedClasses, ClassHierarchyDepth, PropertiesDefined, PropertyUsage, PropertyUsageDistinctPerSubject, PropertyUsageDistinctPerObject,\
