@@ -20,20 +20,20 @@ from RDFStatInterface import RDFStatInterface
 import lodstats.util.rdf_namespaces
 import RDF
 
-class ClassesDefined(RDFStatInterface):
+class PropertiesDefined(RDFStatInterface):
     """
-        Used Classes Criterion
-        Output format: {'classname': usage count}
+        Properties Defined Criterion
+        Output format: {'propertyname': usage count}
     """
 
     def __init__(self, results):
-        super(ClassesDefined, self).__init__(results)
+        super(PropertiesDefined, self).__init__(results)
         self.usage_count = self.results['usage_count'] = {}
         
     def count(self, s, p, o, s_blank, o_l, o_blank, statement):
         # "classes defined" criterion filter
-        if (p == 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' and o == 'http://www.w3.org/2000/01/rdf-schema#Class') or\
-           (p == 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' and o == 'http://www.w3.org/2002/07/owl#Class'):
+        if (p == 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' and o == 'http://www.w3.org/2002/07/owl#ObjectProperty') or\
+           (p == 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' and o == 'http://www.w3.org/1999/02/22-rdf-syntax-ns#Property'):
             if(s.startswith("http")):
                 self.usage_count[s] = 0
         # count usage of defined classes
@@ -44,24 +44,17 @@ class ClassesDefined(RDFStatInterface):
     def voidify(self, void_model, dataset):
         namespaces = lodstats.util.rdf_namespaces.RDFNamespaces()
         datatype_uri = namespaces.get_rdf_namespace("xsd").integer.uri
-        number_of_distinct_classes = str(self.results['count'])
-        number_of_distinct_classes_node = RDF.Node(literal=number_of_distinct_classes, 
-                                          datatype=datatype_uri)
-        void_model.append(RDF.Statement(dataset,
-                                        namespaces.get_rdf_namespace("void").classes,
-                                        number_of_distinct_classes_node))
-
-	for class_uri_k, class_uri_v in self.usage_count.iteritems():
-	    class_partitions_node = RDF.Node()
-
-	    statement_class_uri = RDF.Statement(class_partitions_node, namespaces.get_rdf_namespace("void")['class'],
-	    			RDF.Node(uri_string=class_uri_k))
-	    statement_class_triples_value = RDF.Statement(class_partitions_node, namespaces.get_rdf_namespace("void").entities,
-	    			RDF.Node(literal=str(class_uri_v), datatype=datatype_uri))
-	    statement = RDF.Statement(dataset, namespaces.get_rdf_namespace("void").classPartition, class_partitions_node)
-	    void_model.append(statement)
-	    void_model.append(statement_class_uri)
-	    void_model.append(statement_class_triples_value)
+	for property_uri_k, property_uri_v in self.usage_count.iteritems():
+		property_partitions_node = RDF.Node()
+		
+		statement_property_uri = RDF.Statement(property_partitions_node, namespaces.get_rdf_namespace("void").property,
+					RDF.Node(uri_string=property_uri_k))
+		statement_property_triples_value = RDF.Statement(property_partitions_node, namespaces.get_rdf_namespace("void").triples,
+					RDF.Node(literal=str(property_uri_v), datatype=datatype_uri))
+		statement = RDF.Statement(dataset, namespaces.get_rdf_namespace("void").propertyPartition, property_partitions_node)
+		void_model.append(statement)
+		void_model.append(statement_property_uri)
+		void_model.append(statement_property_triples_value)
 
     def postproc(self):
         self.count = self.results['count'] = len(self.usage_count)

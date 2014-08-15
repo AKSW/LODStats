@@ -20,6 +20,7 @@ from UsedClasses import UsedClasses
 from ClassesDefined import ClassesDefined
 from ClassHierarchyDepth import *
 from PropertyUsage import PropertyUsage
+from PropertiesDefined import PropertiesDefined
 from PropertyUsageDistinctPerSubject import PropertyUsageDistinctPerSubject
 from PropertyUsageDistinctPerObject import PropertyUsageDistinctPerObject
 from PropertiesPerEntity import PropertiesPerEntity
@@ -57,14 +58,14 @@ from Owl import Owl
 # test
 test_stats = [PropertyUsageDistinctPerSubject]
 # add Python-classes for doing stats here after importing them above:
-available_stats = [UsedClasses, ClassesDefined, ClassHierarchyDepth, PropertyUsage, PropertyUsageDistinctPerSubject, PropertyUsageDistinctPerObject,\
+available_stats = [ClassesDefined, UsedClasses, ClassHierarchyDepth, PropertiesDefined, PropertyUsage, PropertyUsageDistinctPerSubject, PropertyUsageDistinctPerObject,\
         Outdegree, Indegree, PropertyHierarchyDepth, SubclassUsage, Entities, Literals, BlanksAsSubject, BlanksAsObject, Datatypes,\
         Languages, StringLength, TypedSubjects, LabeledSubjects, SameAs, Links, Vocabularies, VocabulariesPerNode]
 # stuff usually run for lodstats/web
 lodstats_old = [UsedClasses, Vocabularies, PropertyUsage, ClassesDefined, Entities, Literals, BlanksAsObject, BlanksAsSubject,\
                 SubclassUsage, TypedSubjects, LabeledSubjects, ClassHierarchyDepth, PropertyHierarchyDepth, PropertiesPerEntity,\
                 StringLength, Links, Datatypes, Languages]
-lodstats = [UsedClasses, ClassesDefined, ClassHierarchyDepth, PropertyUsage, PropertyUsageDistinctPerSubject, PropertyUsageDistinctPerObject,\
+lodstats = [ClassesDefined, UsedClasses, ClassHierarchyDepth, PropertiesDefined, PropertyUsage, PropertyUsageDistinctPerSubject, PropertyUsageDistinctPerObject,\
         Outdegree, Indegree, PropertyHierarchyDepth, SubclassUsage, Entities, Literals, BlanksAsSubject, BlanksAsObject, Datatypes,\
         Languages, StringLength, TypedSubjects, LabeledSubjects, SameAs, Links, Vocabularies, VocabulariesPerNode, PropertiesPerEntity]
 #lodstats_new = lodstats - lodstats_old = what's missing on the site
@@ -74,7 +75,7 @@ stupid_stats = [LiteralsList, CookieCounter]
 # stats for owl, rdf-schema, -syntax
 vocab_stats = [RDFSyntax, RDFSchema, Owl]
 # stats necessary for VoiD
-void_stats = [Vocabularies, Entities, ClassesDefined, UsedClasses, PropertyUsage, DistinctSubjects, DistinctObjects]
+void_stats = [Vocabularies, Entities, ClassesDefined, UsedClasses, PropertiesDefined, PropertyUsage, DistinctSubjects, DistinctObjects]
 # links only
 link_stats = [Links]
 
