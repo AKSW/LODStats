@@ -18,6 +18,8 @@ along with LODStats.  If not, see <http://www.gnu.org/licenses/>.
 """
 """Parse RDF and do some stats"""
 import datetime
+import os
+import urlparse
 import lodstats.stats
 import lodstats.util.archiveextractor
 import lodstats.util.rdfparser
@@ -86,6 +88,12 @@ class RDFStats(lodstats.util.interfaces.UriParserInterface):
                                                            stats=self.stats,
                                                            callback_function=self.callback_function_statistics,
                                                            rdf_format=self.rdf_format)
+
+        logger.debug("Clean up the /tmp folder")
+        for filename in os.listdir("/tmp"):
+            if filename.startswith("lodstats"):
+                os.remove(os.path.join("/tmp", filename))
+
 
     def get_stats_results(self):
         return self.rdfparser.get_stats_results()

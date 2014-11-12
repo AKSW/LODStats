@@ -93,7 +93,7 @@ class RemoteFile(CallbackInterface, UriParserInterface):
         #Download file
         output_file = tempfile.NamedTemporaryFile(prefix='lodstats',
                                                   suffix=self.generate_uuid_for_filename(),
-                                                  delete=True)
+                                                  delete=False)
         #chunk_size = "16"
         for data in r.iter_content(chunk_size=512):
             self.bytes_downloaded += len(data)
