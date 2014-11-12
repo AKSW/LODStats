@@ -128,7 +128,8 @@ class UriParserInterface(object):
             extension_outer = filename.split(".")[-1]
             extension_inner = filename.split(".")[-2]
         except IndexError as e:
-            logging.error("Could not determine extension "+str(e))
+            logging.error("Could not determine extension %s" % (str(e),))
+            return extension
 
         if(extension_outer is not None and len(extension_outer) < 6):
             extension = extension + "." + extension_inner

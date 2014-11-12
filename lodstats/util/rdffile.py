@@ -61,6 +61,7 @@ class RdfFile(CallbackInterface, UriParserInterface):
 
     def identify_rdf_parser(self):
         format = self.rdf_format
+        logging.debug("Dataset format is: %s" %(format, ))
         if format == 'ttl':
             #parser = RDF.TurtleParser()
             logger.error("Turtle is not supported by LODStats, should be converted to ntriples!")
