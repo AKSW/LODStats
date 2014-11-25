@@ -33,10 +33,11 @@ logger = logging.getLogger("lodstats")
 parser = OptionParser(usage="usage: %prog [options] [-m model.{rdf,nt,...}] file/URI [file/URI ...]")
 parser.add_option('-v', '--void', action='store_true', help='generate VoID')
 parser.add_option('-c', '--count', action='store_true', help='just count triples, no statistics')
-parser.add_option('-f', '--format', dest="format", help='specify RDF format', metavar="FORMAT")
+parser.add_option('-f', '--format', dest='format', help='specify RDF format', metavar="FORMAT")
 parser.add_option('-p', '--progress', action='store_true', help='show progress')
 parser.add_option('-a', '--all-stats', action='store_true', help='do all available statistics')
 parser.add_option('-l', '--lod-stats', action='store_true', help='do statistics for lodstats')
+parser.add_option('-z', '--specific-stats', dest='specific_stats', help='do specific statistics for lodstats')
 parser.add_option('-i', '--intermediate-stats', action='store_true', help='print intermediate statistics every 100k triples')
 parser.add_option('-m', '--rdf-model', help='parse and do stats for everything that isDefinedBy supplied model')
 parser.add_option('-s', '--schema-syntax-owl', action='store_true', help='do stats for RDF-Schema, -Syntax, Owl')
@@ -70,6 +71,14 @@ elif options.lod_stats:
 elif options.all_stats:
     stats = lodstats.stats.available_stats
     new_stats = []
+elif options.specific_stats:
+    specific_stats = options.specific_stats.split(',')
+    stats = []
+    for stat in specific_stats:
+        st = eval('lodstats.stats.'+stat)
+        stats.append(st)
+    new_stats = []
+    print stats
 else:
     stats = []
     new_stats = []
