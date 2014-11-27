@@ -19,6 +19,9 @@ along with LODStats.  If not, see <http://www.gnu.org/licenses/>.
 from RDFStatInterface import RDFStatInterface
 
 class Indegree(RDFStatInterface):
+    """
+        TODO: memory optimization
+    """
     def __init__(self, results):
         super(Indegree, self).__init__(results)
         self.usage_count = {}

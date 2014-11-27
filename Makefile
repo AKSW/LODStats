@@ -1,7 +1,7 @@
 RDFDUMP = test/resources/public-spending-in-greece.rdf
 BENCHDIR = benchmark
 
-memorybench: memorybench-ClassesDefined memorybench-UsedClasses memorybench-ClassHierarchyDepth memorybench-PropertiesDefined memorybench-PropertyUsage memorybench-PropertyUsageDistinctPerSubject memorybench-PropertyUsageDistinctPerObject memorybench-Outdegree memorybench-Indegree memorybench-PropertyHierarchyDepth memorybench-SubclassUsage memorybench-Entities memorybench-Literals memorybench-BlanksAsSubject memorybench-BlanksAsObject memorybench-Datatypes memorybench-Languages memorybench-StringLength memorybench-TypedSubjects memorybench-LabeledSubjects memorybench-SameAs memorybench-Links memorybench-Vocabularies memorybench-VocabulariesPerNode
+memorybench: memorybench-ClassesDefined memorybench-UsedClasses memorybench-ClassHierarchyDepth memorybench-PropertiesDefined memorybench-PropertyUsage memorybench-Outdegree memorybench-Indegree memorybench-PropertyHierarchyDepth memorybench-SubclassUsage memorybench-Entities memorybench-Literals memorybench-BlanksAsSubject memorybench-BlanksAsObject memorybench-Datatypes memorybench-Languages memorybench-StringLength memorybench-TypedSubjects memorybench-LabeledSubjects memorybench-SameAs memorybench-Links memorybench-Vocabularies memorybench-VocabulariesPerNode
 	mkdir memorybench
 	mv *.dat memorybench
 

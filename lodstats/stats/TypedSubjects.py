@@ -20,7 +20,9 @@ from RDFStatInterface import RDFStatInterface
 import distincthelper as dh
 
 class TypedSubjects(RDFStatInterface):
-    """number of typed subjects"""
+    """
+        number of typed subjects
+    """
     def __init__(self, results):
         super(TypedSubjects, self).__init__(results)
         self.results['count'] = 0
@@ -28,7 +30,7 @@ class TypedSubjects(RDFStatInterface):
     def count(self, s, p, o, s_blank, o_l, o_blank, statement):
         if p == 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' and not dh.query_distinct_subject(s, 1):
             self.results['count'] += 1
-            dh.set_distinct_subject(s, 1)
+            #dh.set_distinct_subject(s, 1)
     
     def voidify(self, void_model, dataset):
         pass
