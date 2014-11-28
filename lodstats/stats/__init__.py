@@ -66,9 +66,10 @@ lodstats_old = [UsedClasses, Vocabularies, PropertiesDefined, PropertyUsage, Cla
                 SubclassUsage, TypedSubjects, LabeledSubjects, ClassHierarchyDepth, PropertyHierarchyDepth, PropertiesPerEntity,\
                 StringLength, Links, Datatypes, Languages]
 lodstats = [ClassesDefined, UsedClasses, ClassHierarchyDepth, PropertiesDefined, PropertyUsage,\
-        Outdegree, Indegree, PropertyHierarchyDepth, SubclassUsage, Entities, Literals, BlanksAsSubject, BlanksAsObject, Datatypes,\
+        PropertyHierarchyDepth, SubclassUsage, Entities, Literals, BlanksAsSubject, BlanksAsObject, Datatypes,\
         Languages, StringLength, TypedSubjects, LabeledSubjects, SameAs, Links, Vocabularies, VocabulariesPerNode, PropertiesPerEntity]
 slow_stats = [PropertyUsageDistinctPerSubject, PropertyUsageDistinctPerObject]
+memory_stats = [Indegree, Outdegree, TypedSubjects, Entities]
 #lodstats_new = lodstats - lodstats_old = what's missing on the site
 
 # not so useful/redundant optional stuff
