@@ -95,6 +95,8 @@ def init_stats(stats_list=void_stats):
 # gather data
 def run_stats(s, p, o, s_blank, o_l, o_blank, statement):
     """submit one triple to objects calculating stats"""
+    if(stats_to_do == []):
+        stats_to_do = lodstats
     for stat_object in stats_to_do:
         stat_object.count(s, p, o, s_blank, o_l, o_blank, statement)
 
