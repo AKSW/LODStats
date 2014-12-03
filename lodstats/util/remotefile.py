@@ -71,7 +71,10 @@ class RemoteFile(CallbackInterface, UriParserInterface):
         if(self.rdf_format == "sparql" or self.rdf_format == "sitemap"):
             return self.uri
 
-        r = requests.get(self.uri, stream=True)
+	try:
+	    r = requests.get(self.uri, stream=True, timeout=5)
+        except requests.exceptions.Timeout as e:
+            raise e
 
         last_modified = r.headers.get('last-modified')
         if last_modified is not None:
@@ -89,6 +92,8 @@ class RemoteFile(CallbackInterface, UriParserInterface):
 
         if self.callback_function is not None:
             self.callback_function(self)
+
+	#Check if file is accessible
 
         #Download file
         output_file = tempfile.NamedTemporaryFile(prefix='lodstats',
@@ -111,6 +116,7 @@ if __name__ == "__main__":
     uri = "https://premium.scraperwiki.com/dtuaora/91bafd103a364fc/http/__status.csv"
     uri = "http://uccaribe.eagle-i.net/sparqler/sparql?view=published-resources&format=text/turtle&query=PREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E+PREFIX+%3A+%3Chttp%3A%2F%2Feagle-i.org%2Font%2Frepo%2F1.0%2F%3E+construct+%7B%3Fs+%3Fp+%3Fo+.+%3Fs+a+%3Ftype+.+%3Ftype+rdfs%3Alabel+%3Ftype_label+.+%3Fp+rdfs%3Alabel+%3Fp_label+.+%3Fo+rdfs%3Alabel+%3Fo_label%7D+where+%7Bgraph+%3ANG_Published%7B%3Fs+%3Fp+%3Fo%7D+.+optional%7B%3Fs+a+%3Ftype%7D+.+optional%7B%3Ftype+rdfs%3Alabel+%3Ftype_label%7D+.+optional%7B%3Fp+rdfs%3Alabel+%3Fp_label+%7D+.+optional%7B+%3Fo+rdfs%3Alabel+%3Fo_label%7D%7D+"
     uri = "http://mlode.nlp2rdf.org/datasets/semanticquran.ttl.gz"
+    uri = "http://prelex.publicdata.eu/model/export/?m=http%3A%2F%2Fprelex.publicdata.eu%2F&f=rdfxml"
     remote_file = RemoteFile(uri, callback_function=lodstats.config.callback_function_download)
     #remote_file.download()
     print remote_file.get_downloaded_file_uri()
