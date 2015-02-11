@@ -45,13 +45,3 @@ class RDF2RDF(CallbackInterface, UriParserInterface):
             logger.debug(str(data))
 
         return "file://%s" % output_file_path
-
-if __name__ == "__main__":
-    #traces conversion process
-    callback_function = lodstats.config.callback_function_conversion
-    virtenv_path = lodstats.config.virtenv_path
-
-    file_uri = 'file://'+virtenv_path+'heb-head-original.ttl'
-
-    rdf2rdf = RDF2RDF(file_uri, callback_function=callback_function)
-    print rdf2rdf.convert_ttl_to_nt(file_uri)

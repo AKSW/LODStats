@@ -30,4 +30,5 @@ setup(name='lodstats',
       package_data={'lodstats': ['rdf/*.rdf']},
       include_package_data=True,
       install_requires = ['requests', 'bitarray', 'sparqlwrapper'],
+      test_suite = 'test'
       )

@@ -263,15 +263,3 @@ class MakeVoid(lodstats.util.interfaces.UriParserInterface):
             stat.voidify(void_model, void_dataset_entity)
 
         return serializer.serialize_model_to_string(void_model)
-
-if __name__ == "__main__":
-    import lodstats.RDFStats
-    uri = "http://www.gutenberg.org/ebooks/12345.rdf"
-    #uri = "http://bio2rdf.org/rdfxml/genbank:BC062795"
-    #uri = lodstats.config.rdf_test_file_uri
-    stats = lodstats.stats.void_stats
-    rdf_stats = lodstats.RDFStats(uri, stats=stats)
-    rdf_stats.disable_debug()
-    rdf_stats.start_statistics()
-    mv = MakeVoid(rdf_stats, serialize_as="turtle")
-    print mv.voidify()

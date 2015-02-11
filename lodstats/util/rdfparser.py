@@ -59,9 +59,3 @@ class RdfParser(object):
             rdf_files.append(rdf_file)
         lodstats.stats.postproc()
         return rdf_files
-
-
-if __name__ == "__main__":
-    rdfparser = RdfParser([lodstats.config.rdf_test_file_uri])
-    print rdfparser.get_stats_results()
-    pass
