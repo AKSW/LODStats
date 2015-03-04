@@ -42,4 +42,11 @@ class LodstatsTest(unittest.TestCase):
             rdfstats = RDFStats(uri)
             rdfstats.start_statistics()
 
+    def test_remote_not_usual_extension(self):
+        uri = "https://data.kingcounty.gov/api/views/jqei-rbgf/rows.rdf?accessType=DOWNLOAD"
+        rdfstats = RDFStats(uri, format="rdf")
+        rdfstats.start_statistics()
+        assert(len(rdfstats.voidify("turtle")) > 5)
+
+
 # FIXME add test for sitemaps

@@ -139,4 +139,8 @@ class UriParserInterface(object):
         if(extension_inner is not None and len(extension_inner) < 6):
             extension = extension + "." + extension_outer
 
+        extension_question_mark = extension.split("?")
+        if(len(extension_question_mark) > 1):
+            extension = extension_question_mark[0]
+
         return extension
