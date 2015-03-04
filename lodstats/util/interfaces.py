@@ -116,6 +116,8 @@ class UriParserInterface(object):
             import os
             abs_path = os.path.abspath(fixed_uri)
             return "file://%s"%abs_path
+        elif(scheme == "file"):
+            return uri
 
     def get_file_extension(self, filename=None):
         if(filename is None):
