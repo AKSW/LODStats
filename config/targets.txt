@@ -1,0 +1,12 @@
+# Maps from a prefix to a dataset name (used to build the LinkSet name) and a dataset identifier, which is a URI
+# The dataset identifier will be used to identify the void:subjectsTarget and the void:objectsTarget of each void:LinkSet
+# This could possibly be generated from other void files...
+http://d-nb.info/gnd/, GND, http://d-nb.info/dataset/authorities
+http://lod.gesis.org/thesoz/concept/, TheSoz, http://lod.gesis.org/thesoz/void#thesoz
+http://id.loc.gov/authorities/subjects/, LCSH, http://id.loc.gov/authorities/subjects/
+http://zbw.eu/stw/descriptor/,STW, http://zbw.eu/stw
+http://dewey.info/class/, DDC, http://dewey.info/class/
+http://dbpedia.org/resource/, dbpedia, http://dbpedia.org/void/Dataset
+http://viaf.org/viaf/, viaf, http://viaf.org/viaf/data
+http://sws.geonames.org/, geonames, http://sws.geonames.org/
+http://data.bnf.fr/ark:/12148/, data.bnf.fr, http://data.bnf.fr/

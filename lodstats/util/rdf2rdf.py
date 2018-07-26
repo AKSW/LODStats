@@ -43,5 +43,9 @@ class RDF2RDF(CallbackInterface, UriParserInterface):
 
         for data in stdout:
             logger.debug(str(data))
+        if( input_file_path.startswith('/tmp')):
+            #remove the input file since we don't need it any more
+            os.remove(input_file_path)
+            logger.debug("removed file %s" % input_file_path)
 
         return "file://%s" % output_file_path

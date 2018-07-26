@@ -1,0 +1,11 @@
+# Only properties listed as keys are evaluated for the linksets. The values are used to build the LinkSet name
+http://www.w3.org/2004/02/skos/core#broadMatch , skos-broadMatch
+http://www.w3.org/2004/02/skos/core#narrowMatch , skos-narrowMatch
+http://www.w3.org/2004/02/skos/core#closeMatch , skos-closeMatch
+http://www.w3.org/2004/02/skos/core#exactMatch , skos-exactMatch
+http://www.w3.org/2004/02/skos/core#relatedMatch , skos-relatedMatch
+http://d-nb.info/standards/elementset/gnd#relatedDdcWithDegreeOfDeterminacy1 , gnd-ddc1
+http://d-nb.info/standards/elementset/gnd#relatedDdcWithDegreeOfDeterminacy2 , gnd-ddc2
+http://d-nb.info/standards/elementset/gnd#relatedDdcWithDegreeOfDeterminacy3 , gnd-ddc3
+http://d-nb.info/standards/elementset/gnd#relatedDdcWithDegreeOfDeterminacy4 , gnd-ddc4
+http://www.w3.org/2002/07/owl#sameAs , owl-sameAs

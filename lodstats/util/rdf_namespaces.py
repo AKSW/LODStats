@@ -16,7 +16,9 @@ class RDFNamespaces(object):
             "xsd": "http://www.w3.org/2001/XMLSchema#",
             "stats": "http://example.org/XStats#",
             "foaf": "http://xmlns.com/foaf/0.1/",
-            "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+            "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+			"skos": "http://www.w3.org/2004/02/skos/core#",
+			"gndo": "http://d-nb.info/standards/elementset/gnd#"
             }
 
     def __init__(self):

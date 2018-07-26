@@ -31,7 +31,7 @@ def get_namespace(uri):
     if not uri.startswith('http://'):
         return None
     uri_no_http = uri[len('http://'):]
-    for sep in ['#', ':', '/']:
+    for sep in ['#', '/' , ':']:
         split_uri = uri_no_http.rsplit(sep, 1)
         if len(split_uri) == 2:
             # base_uri is uri minus non-namepsace-part

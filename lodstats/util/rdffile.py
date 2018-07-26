@@ -3,6 +3,7 @@ import lodstats.stats
 import RDF
 import warnings
 import logging
+import os
 
 logger = logging.getLogger("lodstats")
 
@@ -29,11 +30,16 @@ class RdfFile(CallbackInterface, UriParserInterface):
             logger.debug("Converting turtle to ntriples")
             rdf2rdf = RDF2RDF(self.get_uri())
             self.set_uri(rdf2rdf.convert_ttl_to_nt())
+            self.set_rdf_format(rdf_format='nt')
             logger.debug("Converted turtle to ntriples %s" % self.get_uri())
         self.rdf_parser = self.identify_rdf_parser()
         if(self.rdf_parser is not None):
             self.rdf_stream = self.rdf_parser.parse_as_stream(self.uri)
         self.do_stats(callback_function)
+        file_path = self.get_uri()[7:]
+        if( file_path.startswith('/tmp')):
+            os.remove(file_path)
+            logger.debug("removed file %s" % file_path)
 
     def get_no_of_statements(self):
         return self.no_of_statements

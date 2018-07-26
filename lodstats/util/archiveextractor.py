@@ -93,6 +93,9 @@ class ArchiveExtractor(CallbackInterface, UriParserInterface):
         elif compression_format == 'zip':
             extracted_file_uri = self.decompress_zip(filepath, callback_function)
         f.close()
+        if( filepath.startswith('/tmp')):
+            os.remove(filepath)
+            logger.debug("removed file %s" % filepath)
         # call back one last time to push final numbers
         if callback_function is not None:
             callback_function(self)

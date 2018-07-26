@@ -44,13 +44,6 @@ class ClassesDefined(RDFStatInterface):
     def voidify(self, void_model, dataset):
         namespaces = lodstats.util.rdf_namespaces.RDFNamespaces()
         datatype_uri = namespaces.get_rdf_namespace("xsd").integer.uri
-        number_of_distinct_classes = str(self.results['count'])
-        number_of_distinct_classes_node = RDF.Node(literal=number_of_distinct_classes, 
-                                          datatype=datatype_uri)
-        void_model.append(RDF.Statement(dataset,
-                                        namespaces.get_rdf_namespace("void").classes,
-                                        number_of_distinct_classes_node))
-
 	for class_uri_k, class_uri_v in self.usage_count.iteritems():
 	    class_partitions_node = RDF.Node()
 
