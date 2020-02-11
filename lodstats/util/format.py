@@ -21,7 +21,7 @@ logger = logging.getLogger("lodstats.format")
 
 def parse_sitemap(url):
     from xml.etree import ElementTree as etree
-    from cStringIO import StringIO
+    from io import StringIO
     import requests
     
     sitemap = requests.get(url)

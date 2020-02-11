@@ -20,7 +20,7 @@ import sys
 if sys.hexversion >= 0x02070000:
     from collections import OrderedDict
 else:
-    from OrderedDict import OrderedDict
+    from .OrderedDict import OrderedDict
 
 
 class LimitedSizeDict(OrderedDict):

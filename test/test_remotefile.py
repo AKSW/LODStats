@@ -3,10 +3,12 @@ from os.path import exists
 import filecmp
 from requests.exceptions import HTTPError
 
+from requests.exceptions import HTTPError
+
 import lodstats
 from lodstats.util.remotefile import RemoteFile
 
-import helpers
+from . import helpers
 
 http_base = helpers.webserver(helpers.resources_path)
 

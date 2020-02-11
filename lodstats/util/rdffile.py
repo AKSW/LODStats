@@ -137,19 +137,19 @@ class RdfFile(CallbackInterface, UriParserInterface):
             self.collect_stats_file(callback_function)
 
         if self.no_of_statements == 0:
-            raise Exception, "zero triples"
+            raise Exception("zero triples")
 
     def collect_stats_sparql(self):
         """do stats via SPARQL"""
         logger.debug("do_sparql_stats()")
-        print self.uri
+        print(self.uri)
         from SPARQLWrapper import SPARQLWrapper, JSON
         sparql = SPARQLWrapper(self.uri)
         sparql.setQuery("SELECT (count(*) AS ?triples) WHERE { ?s ?p ?o }")
         sparql.setReturnFormat(JSON)
         results = sparql.query().convert()
         if not isinstance(results, dict):
-            raise Exception, "unknown response content type"
+            raise Exception("unknown response content type")
         self.no_of_statements = int(results['results']['bindings'][0]['triples']['value'])
 
         lodstats.stats.run_stats_sparql(self.uri)

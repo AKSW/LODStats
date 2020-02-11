@@ -16,7 +16,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with LODStats.  If not, see <http://www.gnu.org/licenses/>.
 """
-from RDFStatInterface import RDFStatInterface
+from .RDFStatInterface import RDFStatInterface
 import lodstats.util.rdf_namespaces
 import RDF
 
@@ -35,23 +35,23 @@ class UsedClasses(RDFStatInterface):
             self.usage_count[o] = self.usage_count.get(o, 0) + 1
     
     def voidify(self, void_model, dataset):
-	namespaces = lodstats.util.rdf_namespaces.RDFNamespaces()
+        namespaces = lodstats.util.rdf_namespaces.RDFNamespaces()
         datatype_uri = namespaces.get_rdf_namespace("xsd").int.uri
 
-	for class_uri_k, class_uri_v in self.usage_count.iteritems():
-		class_partitions_node = RDF.Node()
+        for class_uri_k, class_uri_v in self.usage_count.items():
+                class_partitions_node = RDF.Node()
 
-		statement_class_uri = RDF.Statement(class_partitions_node, namespaces.get_rdf_namespace("void")['class'],
-					RDF.Node(uri_string=class_uri_k))
-		statement_class_triples_value = RDF.Statement(class_partitions_node, namespaces.get_rdf_namespace("void").entities,
-					RDF.Node(literal=str(class_uri_v), datatype=datatype_uri))
-		statement = RDF.Statement(dataset, namespaces.get_rdf_namespace("void").classPartition, class_partitions_node)
-		void_model.append(statement)
-		void_model.append(statement_class_uri)
-		void_model.append(statement_class_triples_value)
+                statement_class_uri = RDF.Statement(class_partitions_node, namespaces.get_rdf_namespace("void")['class'],
+                                        RDF.Node(uri_string=class_uri_k))
+                statement_class_triples_value = RDF.Statement(class_partitions_node, namespaces.get_rdf_namespace("void").entities,
+                                        RDF.Node(literal=str(class_uri_v), datatype=datatype_uri))
+                statement = RDF.Statement(dataset, namespaces.get_rdf_namespace("void").classPartition, class_partitions_node)
+                void_model.append(statement)
+                void_model.append(statement_class_uri)
+                void_model.append(statement_class_triples_value)
 
     def postproc(self):
-	self.count = self.results['count'] = len(self.usage_count)
+        self.count = self.results['count'] = len(self.usage_count)
 
     def sparql(sparql, endpoint):
         pass

@@ -4,7 +4,7 @@ import filecmp
 
 from lodstats.util.archiveextractor import ArchiveExtractor
 
-from helpers import resources_path
+from .helpers import resources_path
 
 original = resources_path+'heb-original.rdf'
 original_head = resources_path+'heb-head-original.nt'

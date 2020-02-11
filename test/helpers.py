@@ -1,5 +1,5 @@
-import SimpleHTTPServer
-import SocketServer
+import http.server
+import socketserver
 import threading
 from random import randint
 from os import path, chdir
@@ -9,8 +9,8 @@ resources_path = path.dirname(__file__)+'/resources/'
 def webserver(directory):
     chdir(directory)
     port = randint(1025, 2**16-1)
-    httpd = SocketServer.TCPServer(("localhost", port),
-        SimpleHTTPServer.SimpleHTTPRequestHandler)
+    httpd = socketserver.TCPServer(("localhost", port),
+        http.server.SimpleHTTPRequestHandler)
     # quick hack to stop http request logging
     httpd.RequestHandlerClass.log_message = lambda *args: None
     httpd_thread = threading.Thread(target=httpd.serve_forever)

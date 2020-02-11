@@ -16,7 +16,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with LODStats.  If not, see <http://www.gnu.org/licenses/>.
 """
-from RDFStatInterface import RDFStatInterface
+from .RDFStatInterface import RDFStatInterface
 
 class PropertyHierarchyDepth(RDFStatInterface):
     """gather hierarchy of classes seen"""
@@ -40,7 +40,7 @@ class PropertyHierarchyDepth(RDFStatInterface):
 
     def postproc(self):
         final_depth = 0
-        for root_object, root_subject in self.results['graph'].iteritems():
+        for root_object, root_subject in self.results['graph'].items():
             depth = 0
             objects_encountered = []
             new_depth = self.get_depth(root_subject, self.results['graph'], depth, objects_encountered)
@@ -53,7 +53,7 @@ class PropertyHierarchyDepth(RDFStatInterface):
             TODO: recursive! check if it scales
         """
         new_depth = depth
-        for object, subject in graph.iteritems():
+        for object, subject in graph.items():
             if(object == root_subject):
                 new_depth += 1
                 objects_encountered.append(object)

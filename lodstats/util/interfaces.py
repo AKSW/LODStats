@@ -1,5 +1,5 @@
 import datetime
-import urlparse
+import urllib.parse
 
 import logging
 
@@ -103,20 +103,18 @@ class UriParserInterface(object):
             return True
 
     def get_scheme(self, uri):
-        parsed_uri = urlparse.urlparse(uri)
+        parsed_uri = urllib.parse.urlparse(uri)
         return parsed_uri.scheme
 
     def fix_uri(self, uri):
-        fixed_uri = uri
         scheme = self.get_scheme(uri)
-        if(scheme == "http" or
-           scheme == "https"):
-            return fixed_uri
-        elif(scheme == ""):
+        if scheme == "http" or scheme == "https":
+            return uri
+        elif scheme == "":
             import os
-            abs_path = os.path.abspath(fixed_uri)
+            abs_path = os.path.abspath(uri)
             return "file://%s"%abs_path
-        elif(scheme == "file"):
+        elif scheme == "file":
             return uri
 
     def get_file_extension(self, filename=None):

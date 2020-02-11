@@ -3,7 +3,7 @@ import unittest
 import lodstats
 from lodstats.util.rdfparser import RdfParser
 
-import helpers
+from . import helpers
 
 class RdfParserTest(unittest.TestCase):
 

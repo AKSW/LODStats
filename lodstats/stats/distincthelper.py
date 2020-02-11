@@ -18,7 +18,7 @@ along with LODStats.  If not, see <http://www.gnu.org/licenses/>.
 """
 import bitarray
 from hashlib import md5
-from LimitedSizeDict import LimitedSizeDict
+from .LimitedSizeDict import LimitedSizeDict
 
 # FIXME: does it help to build some small "md5-cache" for the last 1, 2, 3 strings?!
 
@@ -31,7 +31,7 @@ def query_distinct_subject(s, num_id):
         s_hash = md5(s).digest()
     else:
         s_hash = s
-    if distinct_subjects.has_key(s_hash):
+    if s_hash in distinct_subjects:
         return distinct_subjects[s_hash][num_id]
     else:
         return False
@@ -41,7 +41,7 @@ def set_distinct_subject(subject, num_id):
         s_hash = md5(subject).digest()
     else:
         s_hash = subject
-    if distinct_subjects.has_key(s_hash):
+    if s_hash in distinct_subjects:
         distinct_subjects[s_hash][num_id] = True
     else:
         b_array = bitarray.bitarray(8)
@@ -57,7 +57,7 @@ def query_distinct_spo(spo, num_id):
         spo_hash = md5(spo).digest()
     else:
         spo_hash = spo
-    if distinct_spo.has_key(spo_hash):
+    if spo_hash in distinct_spo:
         return distinct_spo[spo_hash][num_id]
     else:
         return False
@@ -67,7 +67,7 @@ def set_distinct_spo(spo, num_id):
         spo_hash = md5(spo).digest()
     else:
         spo_hash = spo
-    if distinct_spo.has_key(spo_hash):
+    if spo_hash in distinct_spo:
         distinct_spo[spo_hash][num_id] = True
     else:
         b_array = bitarray.bitarray(8)

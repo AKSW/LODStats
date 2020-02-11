@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with LODStats.  If not, see <http://www.gnu.org/licenses/>.
 """
 import lodstats.util.rdf_namespaces
-from RDFStatInterface import RDFStatInterface
+from .RDFStatInterface import RDFStatInterface
 import RDF
 
 class DistinctObjects(RDFStatInterface):

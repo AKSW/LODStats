@@ -16,8 +16,8 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with LODStats.  If not, see <http://www.gnu.org/licenses/>.
 """
-from RDFStatInterface import RDFStatInterface
-import md5
+from .RDFStatInterface import RDFStatInterface
+from hashlib import md5
 
 class PropertyUsageDistinctPerSubject(RDFStatInterface):
     """count properties that show up as predicate, works in combination with properties_histogram

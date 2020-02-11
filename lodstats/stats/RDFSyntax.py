@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with LODStats.  If not, see <http://www.gnu.org/licenses/>.
 """
 from os.path import dirname
-from ParsedVocabulary import ParsedVocabulary
+from .ParsedVocabulary import ParsedVocabulary
 
 class RDFSyntax(ParsedVocabulary):
     """count usage of everything that #isDefinedBy some vocabulary"""

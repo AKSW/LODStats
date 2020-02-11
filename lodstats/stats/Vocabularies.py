@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with LODStats.  If not, see <http://www.gnu.org/licenses/>.
 """
 import RDF
-from RDFStatInterface import RDFStatInterface
+from .RDFStatInterface import RDFStatInterface
 from lodstats.util.namespace import get_namespace, ns_void
 
 class Vocabularies(RDFStatInterface):
@@ -41,7 +41,7 @@ class Vocabularies(RDFStatInterface):
         #         self.results[base_uri] = self.results.get(base_uri, 0) + 1
     
     def voidify(self, void_model, dataset):
-        for base_uri,result in self.results.iteritems():
+        for base_uri,result in self.results.items():
             if result > 0:
                 void_model.append(RDF.Statement(dataset, ns_void.vocabulary, RDF.Uri(base_uri)))
     

@@ -16,44 +16,44 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with LODStats.  If not, see <http://www.gnu.org/licenses/>.
 """
-from UsedClasses import UsedClasses
-from ClassesDefined import ClassesDefined
-from ClassHierarchyDepth import *
-from PropertyUsage import PropertyUsage
-from PropertiesDefined import PropertiesDefined
-from PropertyUsageDistinctPerSubject import PropertyUsageDistinctPerSubject
-from PropertyUsageDistinctPerObject import PropertyUsageDistinctPerObject
-from PropertiesPerEntity import PropertiesPerEntity
-from Outdegree import Outdegree
-from Indegree import Indegree
-from PropertyHierarchyDepth import PropertyHierarchyDepth
-from SubclassUsage import SubclassUsage
-from Entities import Entities
-from Literals import Literals
-from BlanksAsSubject import BlanksAsSubject
-from BlanksAsObject import BlanksAsObject
-from Datatypes import Datatypes
-from Languages import Languages
-from StringLength import StringLength
-from TypedSubjects import TypedSubjects
-from LabeledSubjects import LabeledSubjects
-from SameAs import SameAs
-from Links import Links
+from .UsedClasses import UsedClasses
+from .ClassesDefined import ClassesDefined
+from .ClassHierarchyDepth import *
+from .PropertyUsage import PropertyUsage
+from .PropertiesDefined import PropertiesDefined
+from .PropertyUsageDistinctPerSubject import PropertyUsageDistinctPerSubject
+from .PropertyUsageDistinctPerObject import PropertyUsageDistinctPerObject
+from .PropertiesPerEntity import PropertiesPerEntity
+from .Outdegree import Outdegree
+from .Indegree import Indegree
+from .PropertyHierarchyDepth import PropertyHierarchyDepth
+from .SubclassUsage import SubclassUsage
+from .Entities import Entities
+from .Literals import Literals
+from .BlanksAsSubject import BlanksAsSubject
+from .BlanksAsObject import BlanksAsObject
+from .Datatypes import Datatypes
+from .Languages import Languages
+from .StringLength import StringLength
+from .TypedSubjects import TypedSubjects
+from .LabeledSubjects import LabeledSubjects
+from .SameAs import SameAs
+from .Links import Links
 # max per property
 # avg per property
-from Vocabularies import Vocabularies, VocabulariesPerNode
+from .Vocabularies import Vocabularies, VocabulariesPerNode
 
 #Void specific
-from DistinctSubjects import DistinctSubjects
-from DistinctObjects import DistinctObjects
+from .DistinctSubjects import DistinctSubjects
+from .DistinctObjects import DistinctObjects
 
-from basics import LiteralsList
-from CookieCounter import *
+from .basics import LiteralsList
+from .CookieCounter import *
 
 #vocabulary count
-from RDFSyntax import RDFSyntax
-from RDFSchema import RDFSchema
-from Owl import Owl
+from .RDFSyntax import RDFSyntax
+from .RDFSchema import RDFSchema
+from .Owl import Owl
 
 # test
 test_stats = [PropertyUsageDistinctPerSubject]

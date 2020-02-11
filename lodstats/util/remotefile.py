@@ -1,7 +1,6 @@
 import tempfile
 import os
 import requests
-import exceptions
 import datetime
 import uuid
 
@@ -9,6 +8,7 @@ import logging
 logger = logging.getLogger("lodstats")
 
 import lodstats.config
+import lodstats.exceptions as exceptions
 from lodstats.util.interfaces import CallbackInterface
 from lodstats.util.interfaces import UriParserInterface
 
@@ -78,7 +78,7 @@ class RemoteFile(CallbackInterface, UriParserInterface):
         if last_modified is not None:
             last_modified = datetime.datetime.strptime(last_modified, '%a, %d %b %Y %H:%M:%S %Z')
             if self.if_modified_since is not None and last_modified == self.if_modified_since:
-                raise exceptions.NotModified, 'resource has not been modified'
+                raise exceptions.NotModified('resource has not been modified')
 
         content_length = r.headers.get('content-length', 0)
         if content_length is not 0:
@@ -86,12 +86,12 @@ class RemoteFile(CallbackInterface, UriParserInterface):
 
         free_diskspace = self.get_local_free_diskspace()
         if self.content_length > free_diskspace:
-            raise Exception, "file too large (> free space)"
+            raise Exception("file too large (> free space)")
 
         if self.callback_function is not None:
             self.callback_function(self)
 
-	#Check if file is accessible
+        #Check if file is accessible
 
         #Download file
         output_file = tempfile.NamedTemporaryFile(prefix='lodstats',

@@ -16,7 +16,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with LODStats.  If not, see <http://www.gnu.org/licenses/>.
 """
-from RDFStatInterface import RDFStatInterface
+from .RDFStatInterface import RDFStatInterface
 import lodstats.util.rdf_namespaces
 import RDF
 
@@ -38,19 +38,19 @@ class PropertyUsage(RDFStatInterface):
                                         namespaces.get_rdf_namespace("void").properties,
                                         number_of_distinct_properties_node))
 
-	for property_uri_k, property_uri_v in self.usage_count.iteritems():
-		property_partitions_node = RDF.Node()
-		
-		statement_property_uri = RDF.Statement(property_partitions_node, namespaces.get_rdf_namespace("void").property,
-					RDF.Node(uri_string=property_uri_k))
-		statement_property_triples_value = RDF.Statement(property_partitions_node, namespaces.get_rdf_namespace("void").triples,
-					RDF.Node(literal=str(property_uri_v), datatype=datatype_uri))
-		statement = RDF.Statement(dataset, namespaces.get_rdf_namespace("void").propertyPartition, property_partitions_node)
-		void_model.append(statement)
-		void_model.append(statement_property_uri)
-		void_model.append(statement_property_triples_value)
-	
-	
-    		    
+        for property_uri_k, property_uri_v in self.usage_count.items():
+                property_partitions_node = RDF.Node()
+                
+                statement_property_uri = RDF.Statement(property_partitions_node, namespaces.get_rdf_namespace("void").property,
+                                        RDF.Node(uri_string=property_uri_k))
+                statement_property_triples_value = RDF.Statement(property_partitions_node, namespaces.get_rdf_namespace("void").triples,
+                                        RDF.Node(literal=str(property_uri_v), datatype=datatype_uri))
+                statement = RDF.Statement(dataset, namespaces.get_rdf_namespace("void").propertyPartition, property_partitions_node)
+                void_model.append(statement)
+                void_model.append(statement_property_uri)
+                void_model.append(statement_property_triples_value)
+        
+        
+                        
     def sparql(self, endpoint):
         pass

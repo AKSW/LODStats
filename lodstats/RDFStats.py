@@ -19,7 +19,7 @@ along with LODStats.  If not, see <http://www.gnu.org/licenses/>.
 """Parse RDF and do some stats"""
 import datetime
 import os
-import urlparse
+import urllib.parse
 import lodstats.stats
 import lodstats.util.archiveextractor
 import lodstats.util.rdfparser

@@ -81,7 +81,7 @@ class ArchiveExtractor(CallbackInterface, UriParserInterface):
         if self.rdf_format == "sparql" or self.rdf_format == "sitemap":
             return [uri]
 
-        f = open(filepath, 'rU')
+        f = open(filepath, 'r')
         if compression_format is None:
             extracted_file_uri = [uri]
         elif compression_format == 'gz':

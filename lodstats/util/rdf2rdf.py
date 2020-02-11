@@ -28,12 +28,15 @@ class RDF2RDF(CallbackInterface, UriParserInterface):
     def convert_ttl_to_nt(self, uri=None):
         if(uri is None):
             uri = self.uri
+        
+        # test for any23 presence
+        subprocess.check_call('any23 --help', shell=True)
 
         input_file_path = uri[7:]
         output_file_path = input_file_path+".nt"
 
         command = "any23 rover -e rdf-turtle -f ntriples -o %s %s" % (output_file_path, input_file_path)
-	print command
+        print(command)
 
         pipe = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         (stdout, stderr) = pipe.stdout, pipe.stderr

@@ -18,7 +18,7 @@ along with LODStats.  If not, see <http://www.gnu.org/licenses/>.
 """
 import RDF
 from os.path import realpath, dirname
-from RDFStatInterface import RDFStatInterface
+from .RDFStatInterface import RDFStatInterface
 from lodstats.util.rdffile import RdfFile
 from lodstats.util.namespace import ns_xs, ns_void, ns_rdf, ns_stats, ns_qb
 
@@ -57,19 +57,19 @@ class ParsedVocabulary(RDFStatInterface, RdfFile):
             self.schema = RDF.Uri("file://%s" % model)
     
     def count(self, s, p, o, s_blank, o_l, o_blank, statement):
-        if self.results['s'].has_key(s):
+        if s in self.results['s']:
             self.results['s'][s] += 1
             self.results['sum'][s] += 1
-        if self.results['p'].has_key(p):
+        if p in self.results['p']:
             self.results['p'][p] += 1
             self.results['sum'][p] += 1
-        if self.results['o'].has_key(o):
+        if o in self.results['o']:
             self.results['o'][o] += 1
             self.results['sum'][o] += 1
     
     def voidify(self, void_model, dataset):
         # usage as property
-        for property_uri,result in self.results['sum'].iteritems():
+        for property_uri,result in self.results['sum'].items():
             if result == 0:
                 continue
             observation = RDF.Node()

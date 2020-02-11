@@ -18,6 +18,7 @@ You should have received a copy of the GNU General Public License
 along with LODStats.  If not, see <http://www.gnu.org/licenses/>.
 """
 
+
 import os
 import sys
 import datetime
@@ -78,7 +79,7 @@ elif options.specific_stats:
         st = eval('lodstats.stats.'+stat)
         stats.append(st)
     new_stats = []
-    print stats
+    print(stats)
 else:
     stats = []
     new_stats = []
@@ -125,9 +126,9 @@ def callback_function_statistics(rdf_file):
         sys.stdout.flush()
         if not options.count and options.intermediate_stats and rdf_file.no_of_statements % 100000 == 0:
             print("Results (from custom code):")
-            for stat_name,stat_dict in rdf_file.stats_results.iteritems():
+            for stat_name,stat_dict in rdf_file.stats_results.items():
                 print("\t%s" % stat_name)
-                for subname, result in stat_dict.iteritems():
+                for subname, result in stat_dict.items():
                     if type(result) == dict or type(result) == list:
                         print("\t\tlen(%s): %d" % (subname, len(result)))
                     else:
@@ -162,13 +163,13 @@ if not options.void:
     print("Basic stats: %s triples, %s warnings" % (rdf_stats.get_no_of_triples(), rdf_stats.get_no_of_warnings()))
     if not options.count:
         print("Results (from custom code):")
-        for stat_name,stat_dict in rdf_stats.get_stats_results().iteritems():
+        for stat_name,stat_dict in rdf_stats.get_stats_results().items():
             print("\t%s" % stat_name)
-            for subname, result in stat_dict.iteritems():
+            for subname, result in stat_dict.items():
                 if type(result) == dict or type(result) == list:
                     if subname in ('usage_count'):
                         print("\t\t%s:" % subname)
-                        for subsubname, subresult in result.iteritems():
+                        for subsubname, subresult in result.items():
                             #if subresult > 0:
                             print("\t\t\t%s: %s" % (subsubname, subresult))
                     else:

@@ -9,19 +9,19 @@ rdf_test_file_name_head_ttl = virtenv_path + 'heb-head-original.ttl'
 rdf_test_file_name_tail = virtenv_path + 'heb-tail-original.nt'
 
 def callback_function_archive_extraction(object):
-    print object.bytes_extracted
+    print(object.bytes_extracted)
 
 def callback_function_download(object):
-    print object.bytes_downloaded
+    print(object.bytes_downloaded)
 
 def callback_function_statistics(object):
-    print object.get_no_of_triples()
+    print(object.get_no_of_triples())
 
 def callback_function_conversion(object):
-    print object.bytes_converted
+    print(object.bytes_converted)
 
 import logging
-logging.basicConfig(format = u'%(filename)s[LINE:%(lineno)d]# %(levelname)-8s [%(asctime)s]  %(message)s',
+logging.basicConfig(format = '%(filename)s[LINE:%(lineno)d]# %(levelname)-8s [%(asctime)s]  %(message)s',
                 level = logging.DEBUG)
 
 def enable_debug():

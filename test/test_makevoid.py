@@ -4,7 +4,7 @@ from os import path
 import lodstats
 from lodstats.util.makevoid import MakeVoid
 
-import helpers
+from . import helpers
 
 http_base = helpers.webserver(helpers.resources_path)
 

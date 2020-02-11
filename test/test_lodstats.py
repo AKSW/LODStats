@@ -1,11 +1,13 @@
 import unittest
 
+from requests.exceptions import HTTPError
+
 import lodstats
 from lodstats import RDFStats
 
 from requests import HTTPError
 
-import helpers
+from . import helpers
 
 http_base = helpers.webserver(helpers.resources_path)
 testfile_path = helpers.resources_path
@@ -48,6 +50,5 @@ class LodstatsTest(unittest.TestCase):
         rdfstats = RDFStats(uri, format="nt")
         rdfstats.start_statistics()
         assert(len(rdfstats.voidify("turtle")) > 5)
-
 
 # FIXME add test for sitemaps
