@@ -71,10 +71,8 @@ class RemoteFile(CallbackInterface, UriParserInterface):
         if(self.rdf_format == "sparql" or self.rdf_format == "sitemap"):
             return self.uri
 
-	try:
-	    r = requests.get(self.uri, stream=True, timeout=5)
-        except requests.exceptions.Timeout as e:
-            raise e
+        r = requests.get(self.uri, stream=True, timeout=5)
+        r.raise_for_status()
 
         last_modified = r.headers.get('last-modified')
         if last_modified is not None:

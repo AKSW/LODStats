@@ -1,6 +1,7 @@
 import unittest
 from os.path import exists
 import filecmp
+from requests.exceptions import HTTPError
 
 import lodstats
 from lodstats.util.remotefile import RemoteFile
@@ -25,6 +26,6 @@ class RemoteFileTest(unittest.TestCase):
 
     def test_remotefile_404(self):
         remote_file = RemoteFile(http_base + 'DOESNOTEXIST.rdf')
-        # FIXME with self.assertRaises(SomeException):
-        file_uri = remote_file.get_downloaded_file_uri()
-        self.assertFalse(exists(file_uri[7:]), 'nonexistent file should not exist')
+        with self.assertRaises(HTTPError):
+            file_uri = remote_file.get_downloaded_file_uri()
+

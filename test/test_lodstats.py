@@ -3,6 +3,8 @@ import unittest
 import lodstats
 from lodstats import RDFStats
 
+from requests import HTTPError
+
 import helpers
 
 http_base = helpers.webserver(helpers.resources_path)
@@ -37,14 +39,13 @@ class LodstatsTest(unittest.TestCase):
     def test_404_remote_tar_gz(self):
         import tarfile
         uri = http_base + 'DOESNOTEXIST.nt.tgz'
-        # FIXME this should probably be some different exception
-        with self.assertRaises(tarfile.ReadError):
+        with self.assertRaises(HTTPError):
             rdfstats = RDFStats(uri)
             rdfstats.start_statistics()
 
     def test_remote_not_usual_extension(self):
-        uri = "https://data.kingcounty.gov/api/views/jqei-rbgf/rows.rdf?accessType=DOWNLOAD"
-        rdfstats = RDFStats(uri, format="rdf")
+        uri = http_base + "heb.nt.tgz?accessType=DOWNLOAD"
+        rdfstats = RDFStats(uri, format="nt")
         rdfstats.start_statistics()
         assert(len(rdfstats.voidify("turtle")) > 5)
 
